@@ -1,0 +1,51 @@
+{
+	"menu": [
+        {
+            "header": "",
+            "subheader":[
+                {
+                    "id":"1",
+                    "title":"home",
+                    "link": "modul-blank-public.php",
+                    "target" : "_blank",
+                    "icon_class":"mdi mdi-home"
+                },
+                {
+                    "id":"2",
+                    "title":"about",
+                    "link": "#",
+                    "icon_class":"mdi mdi-help-circle-outline"
+                },
+                {
+                    "id":"3",
+                    "title":"blog",
+                    "link": "#",
+                    "icon_class":"mdi mdi-rss"
+                },
+                {
+                    "id":"4",
+                    "title":"contact",
+                    "link": "#",
+                    "icon_class":"mdi mdi-email"
+                }
+            ]
+		},
+		{
+			"header": "app",
+            "subheader":[
+                {
+                    "id":"5",
+                    "title":"login",
+                    "link": "modul-login.php",
+                    "icon_class":"mdi mdi-login"
+                },
+                {
+                    "id":"6",
+                    "title":"register",
+                    "link": "modul-register.php",
+                    "icon_class":"mdi mdi-human-male-female"
+                }
+            ]
+		}
+	]
+}

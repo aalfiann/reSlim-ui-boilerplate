@@ -1,0 +1,79 @@
+{
+	"menu": [
+        {
+            "header": "app",
+            "subheader":[
+                {
+                    "id":"1",
+                    "title":"dashboard",
+                    "icon_class":"mdi mdi-gauge",
+                    "label_class":"label label-rouded label-themecolor pull-right",
+                    "menus": [{
+                            "title": "system",
+    			        	"link": "modul-dashboard.php"
+    				    }
+        		    ]
+                },
+                {
+                    "id":"2",
+                    "title":"user",
+                    "icon_class":"mdi mdi-account",
+                    "label_class":"",
+                    "menus": [{
+                            "title": "data",
+    			        	"link": "modul-data-user.php"
+    				    },
+        				{   
+	            			"title": "profile",
+			                "link": "modul-user-profile.php"
+                        },
+                        {   
+		        		    "title": "access",
+    			    	    "link": "modul-user-access.php"
+                        }
+        		    ]
+                },
+                {
+                    "id":"3",
+                    "title":"File Cloud",
+                    "icon_class":"mdi mdi-weather-cloudy",
+                    "label_class":"",
+                    "link":"modul-file-cloud.php"
+                },
+                {
+                    "id":"4",
+                    "title":"api",
+                    "icon_class":"mdi mdi-bullseye",
+                    "label_class":"",
+                    "link":"modul-data-api.php"
+                },
+                {
+                    "id":"5",
+                    "title":"maintenance",
+                    "icon_class":"mdi mdi-settings",
+                    "label_class":"",
+                    "menus": [{
+                        "title": "settings",
+                        "link": "modul-settings.php"
+                    },
+                    {   
+                        "title": "error log",
+                        "link": "modul-error-log.php"
+                    }
+                ]
+                }
+            ]
+		},
+		{
+			"header": "extension",
+            "subheader":[
+                {
+                    "id":"1",
+                    "title":"pages",
+                    "icon_class":"mdi mdi-file",
+                    "link":"modul-data-page.php"
+                }
+            ]
+		}
+	]
+}

@@ -1,0 +1,112 @@
+{
+    "_comment":"This is only example structure json to modify the menu page. You have to create the menu by yourself.",
+	"menu": [
+        {
+            "header": "personal",
+            "subheader":[
+                {
+                    "id":"1",
+                    "title":"dashboard",
+                    "icon_class":"mdi mdi-gauge",
+                    "label_class":"label label-rouded label-themecolor pull-right",
+                    "menus": [{
+                            "title": "minimal",
+    			        	"link": "index.html"
+    				    },
+        				{   
+	            			"title": "analytical",
+			                "link": "index2.html"
+                        },
+                        {   
+		        		    "title": "demographical",
+    			    	    "link": "index3.html"
+                        },
+                        {   
+		                	"title": "modern",
+			            	"link": "index4.html"
+        		        }
+        		    ]
+                },
+                {
+                    "id":"2",
+                    "title":"apps",
+                    "icon_class":"mdi mdi-bullseye",
+                    "label_class":"",
+                    "menus": [{
+                            "title": "calendar",
+    			        	"link": "app-calendar.html"
+    				    },
+        				{   
+	            			"title": "chat app",
+			                "link": "app-chat.html"
+                        },
+                        {   
+		        		    "title": "support ticket",
+    			    	    "link": "app-ticket.html"
+                        },
+                        {   
+		                	"title": "contact / employee",
+			            	"link": "app-contact.html"
+                        },
+                        {   
+		                	"title": "contact grid",
+			            	"link": "app-contact2.html"
+        		        },
+                        {   
+		                	"title": "contact detail",
+			            	"link": "app-contact-detail.html"
+        		        }
+        		    ]
+                },
+                {
+                    "id":"3",
+                    "title":"inbox",
+                    "icon_class":"mdi mdi-email",
+                    "label_class":"",
+                    "menus": [{
+                            "title": "mailbox",
+    			        	"link": "app-email.html"
+    				    },
+        				{   
+	            			"title": "mailbox detail",
+			                "link": "app-email-detail.html"
+                        },
+                        {   
+		        		    "title": "compose mail",
+    			    	    "link": "app-compose.html"
+                        }
+        		    ]
+                }
+            ]
+		},
+		{
+			"header": "widget",
+            "subheader":[
+                {
+                    "id":"3",
+                    "title":"forms",
+                    "icon_class":"mdi mdi-file",
+                    "menus": [{
+                            "title": "basic forms",
+                            "link": "basic-forms/",
+                            "label_class":"label label-rounded label-success",
+                            "submenus": [{
+                                    "title": "sub basic forms",
+                                    "link": "sub-basic-forms/"
+                                },
+                                {
+                                    "title": "sub form layout",
+                                    "link": "sub-form-layout/"
+                                }
+                            ]
+				        },
+	    			    {
+                            "title": "form layout",
+    			    		"link": "form-layout/"
+	    			    }
+		    	    ]
+                }
+            ]
+		}
+	]
+}

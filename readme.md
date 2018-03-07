@@ -12,6 +12,7 @@ System Requirements
 1. Web server with URL rewriting
 2. Web server with mcrypt extension
 3. PHP 5.5 or newer
+4. You already have reSlim rest api running
 
 
 Getting Started
@@ -23,7 +24,7 @@ Getting Started
     $config['email'] = 'your default email address';<br>
     $config['basepath'] = 'url location of base path of this app'; //it should be http://localhost:1337/reSlim-ui-boilerplate/src/app<br>
     $config['homepath'] = 'url location of front path';<br>
-    $config['api'] = 'url location of base path of api';<br>
+    $config['api'] = 'url location of base path of reslim rest api';<br>
     $config['apikey'] = 'your api key, you can leave this blank and fill this later';<br><br>
     That is enough, you can set it later from admin panel
 3. Visit yourserver/reSlim-ui-boilerplate/src/app<br>
