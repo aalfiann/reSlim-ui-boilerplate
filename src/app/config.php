@@ -1,12 +1,12 @@
 <?php 
             //Configurations
-            $config['title'] = 'reSlim'; //Your title website
+            $config['title'] = 'reSlim UI Boilerplate'; //Your title website
             $config['keyword'] = 'Backend, Rest, API, UI'; //Your keyword website
             $config['description'] = 'Make your project reSlim with use restful api. reSlim is based on Slim3'; //Your description website
-            $config['email'] = 'aalfiann@gmail.com'; //Your default email
+            $config['email'] = 'youremail@gmail.com'; //Your default email
             $config['basepath'] = 'http://localhost:1337/reslim-ui-boilerplate/src/app'; //Your folder website
             $config['homepath'] = 'http://localhost:1337/reslim-ui-boilerplate/src/app'; //Your folder frontend website
-            $config['api'] = 'http://server.cap-express.co.id/api'; //Your folder rest api
+            $config['api'] = 'http://your-reslim/api'; //Your folder rest api
             $config['apikey'] = ''; //Your api key, you can leave this blank and fill this later
             $config['disqus'] = ''; //Your disqus username, you can leave this blank and fill this later
             $config['sharethis'] = ''; //Your sharethis key, you can leave this blank and fill this later
