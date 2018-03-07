@@ -62,6 +62,8 @@ if (empty($datalogin)){
         $datamenu = file_get_contents('menu.admin.json');
     } else if($usergroup == '3'){
         $datamenu = file_get_contents('menu.member.json');
+    } else {
+        $datamenu = "";
     }
 }
 
