@@ -7,14 +7,16 @@ AddDefaultCharset UTF-8
 	RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 	RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-	# Force to 443 if use SSL Full
+	# Force to 443 if use SSL
 	#RewriteCond %{SERVER_PORT} ^80$
 	#RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
 
 	# Force to use SSL Flexible if using cloudflare
 	#RewriteCond %{HTTP:CF-Visitor} '"scheme":"http"'
-	#RewriteCond %{REQUEST_URI} !^/tv-online\.php$ 				#Example for exclude spesific page
 	#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+	
+	# Handle not found
+	ErrorDocument 404 "<script>window.location.href='/pages-error.php?code=404';</script>"
 </IfModule>
 
 <IfModule mod_php5.c>
@@ -40,7 +42,7 @@ AddDefaultCharset UTF-8
 	ExpiresByType application/pdf "access 1 month"
 	ExpiresByType application/x-shockwave-flash "access 1 month"
 	ExpiresByType application/xhtml+xml "access 1 month"
-	ExpiresByType text/html "access plus 86400 seconds"
+	ExpiresByType text/html "access plus 7200 seconds"
 	ExpiresDefault "access 1 month"
 </IfModule>
 
@@ -65,12 +67,9 @@ AddDefaultCharset UTF-8
 
 	# Set content-sniffing protection
 	Header set X-Content-Type-Options nosniff
-
-	# Turn off iframe options security
-	Header always unset X-Frame-Options
 	
 	# 480 weeks
-	<FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|js|css|swf|svg)$">
+	<FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|js|css|swf)$">
 		Header set Cache-Control "max-age=290304000, public"
 	</FilesMatch>
 	
@@ -78,15 +77,15 @@ AddDefaultCharset UTF-8
 	<FilesMatch "\.(xml|txt)$">
 		Header set Cache-Control "max-age=172800, public, must-revalidate"
 	</FilesMatch>
-
-	# 1 DAY
-	<FilesMatch "\.(html|htm)$">
-		Header set Cache-Control "max-age=86400, must-revalidate"
-	</FilesMatch>
 	
 	# 12 HOURS
 	<FilesMatch "\.(pdf)$">
 		Header set Cache-Control "max-age=43200, public, must-revalidate"
+	</FilesMatch>
+
+	# 2 HOURS
+	<FilesMatch "\.(html|htm)$">
+		Header set Cache-Control "max-age=7200, must-revalidate"
 	</FilesMatch>
 
   	<FilesMatch "\.(js|css|xml|gz)$">
