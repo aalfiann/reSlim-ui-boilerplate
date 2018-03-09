@@ -87,20 +87,22 @@ $datalogin = Core::checkSessions();?>
                                         <label class="form-control-label"><b><?php echo Core::lang('content')?></b></label>
                                         <textarea id="content" rows="5" style="resize: vertical;" class="form-control summernote" placeholder="<?php echo Core::lang('input_content_page')?>" maxlength="10000" required></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label"><b><?php echo Core::lang('status')?></b></label>
-                                        <select id="status" type="text" class="form-control" style='max-height:200px; overflow-y:scroll; overflow-x:hidden; width:100%;background-color:white;'>
-                                        </select>
-                                    </div>
-                                    <div class="text-center">
-                                        
-                                    </div>
+                                    <?php if(Core::getUserGroup()<3){
+                                        echo '<div class="form-group">
+                                                <label class="form-control-label"><b>'.Core::lang('status').'</b></label>
+                                                <select id="status" type="text" class="form-control" style="max-height:200px; overflow-y:scroll; overflow-x:hidden; width:100%;background-color:white;">
+                                                </select>
+                                        </div>';
+                                    }?>
+                                    
                                     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
                                         <div class="btn-group mr-2" role="group" aria-label="First group">
                                             <button type="submit" class="btn btn-success"><?php echo Core::lang('update_page')?></button>
                                         </div>
                                         <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                            <button onclick="deletedata('<?php echo $_GET['pageid']?>');return false;" type="submit" class="btn btn-danger"><?php echo Core::lang('delete').' '.Core::lang('page')?></button>
+                                            <?php if(Core::getUserGroup()<3){
+                                                echo '<button onclick="deletedata(\''.$_GET['pageid'].'\');return false;" type="submit" class="btn btn-danger">'.Core::lang('delete').' '.Core::lang('page').'</button>';
+                                            }?>
                                         </div>
                                     </div>
                                 </form>    
@@ -154,7 +156,7 @@ $datalogin = Core::checkSessions();?>
 	        			document.getElementById("title").value=data.result[0].Title;
 				    	document.getElementById("description").value=data.result[0].Description;
                         $(".summernote").summernote("code", data.result[0].Content);
-                        getStatusOption(data.result[0].StatusID);
+                        <?php echo ((Core::getUserGroup()<3)?'getStatusOption(data.result[0].StatusID);':'')?>
 					} else {
 						document.getElementById("image").value='';
                         document.getElementById("tags").value='';
@@ -178,28 +180,72 @@ $datalogin = Core::checkSessions();?>
             /* Get data page end */
         });
 
-        /* Get status option start */
-        function getStatusOption(statusvalue){
-            $(function(){
-                $.ajax({
-				    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/status/'.$datalogin['token'])?>")+"?_="+randomText(60),
-	    	    	dataType: 'json',
-	    	    	type: 'GET',
-		    		ifModified: true,
-    		        success: function(data,status) {
-    			    	if (status === "success") {
-					    	if (data.status == "success"){
-                                $.each(data.results, function(i, item) {
-                                    $("#status").append("<option value=\""+data.results[i].StatusID+"\" "+((statusvalue == data.results[i].StatusID) ? "selected" : "")+">"+data.results[i].Status+"</option>");
-                                });
-    				    	}
-    	    			}
-	    		    },
-                	error: function(x, e) {}
-    	    	});
-            });
-        }
-        /* Get status option end */
+        <?php if(Core::getUserGroup() < 3){
+            echo '/* Get status option start */
+            function getStatusOption(statusvalue){
+                $(function(){
+                    $.ajax({
+                        url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/page/data/status/'.$datalogin['token']).'")+"?_="+randomText(60),
+                        dataType: "json",
+                        type: "GET",
+                        ifModified: true,
+                        success: function(data,status) {
+                            if (status === "success") {
+                                if (data.status == "success"){
+                                    $.each(data.results, function(i, item) {
+                                        $("#status").append("<option value=\""+data.results[i].StatusID+"\" "+((statusvalue == data.results[i].StatusID) ? "selected" : "")+">"+data.results[i].Status+"</option>");
+                                    });
+                                }
+                            }
+                        },
+                        error: function(x, e) {}
+                    });
+                });
+            }
+            /* Get status option end */
+            
+            /* Delete data start */
+            function deletedata(dataid){
+                $(function() {
+                    console.log("Process delete data...");
+                    var div = document.getElementById("report-updatedata");
+
+                    $.ajax({
+                        url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/page/data/delete').'"),
+                        data : {
+                            Username: "'.$datalogin['username'].'",
+                            Token: "'.$datalogin['token'].'",
+                            PageID: dataid
+                        },
+                        dataType: "json",
+                        type: "POST",
+                        success: function(data) {
+                            div.innerHTML = "";
+                            if (data.status == "success"){
+                                div.innerHTML = messageHtml("success","'.Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_success').'");
+                                console.log("'.Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_success').'");
+                                /* clear from */
+                                $("#updatedata")
+                                .find("input,textarea,select")
+                                .val("")
+                                .end()
+                                .find("input[type=checkbox]")
+                                .prop("checked", "")
+                                .end()
+                                .find("button[type=submit]")
+	    					    .attr("disabled", "disabled")
+    			    			.end();
+                                $(".summernote").summernote("code", "");
+                            } else {
+                                div.innerHTML = messageHtml("danger","'.Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_failed').'",data.message);
+                            }
+                        },
+                        error: function(x, e) {}
+                    });
+                });
+            }
+            /* Delete data end */';
+        }?>
 
         /* Update data start */
         $("#updatedata").on("submit",sendnewdata);
@@ -211,7 +257,7 @@ $datalogin = Core::checkSessions();?>
             var div = document.getElementById("report-updatedata");
 
                 $.ajax({
-                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/update')?>"),
+                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/update'.((Core::getUserGroup() >2)?'/draft':''))?>"),
                     data : {
                         Username: "<?php echo $datalogin['username']?>",
                         Token: "<?php echo $datalogin['token']?>",
@@ -220,7 +266,7 @@ $datalogin = Core::checkSessions();?>
                         Description: $("#description").val(),
                         Content: $("#content").val(),
                         Tags: $("#tags").val(),
-                        StatusID: $("#status").val(),
+                        <?php echo ((Core::getUserGroup()<3)?'StatusID: $("#status").val(),':'')?>
                         PageID: "<?php echo $_GET['pageid']?>"
                     },
                     dataType: "json",
@@ -240,48 +286,6 @@ $datalogin = Core::checkSessions();?>
                 });
         }
         /* Update data end */
-
-        /* Delete data start */
-        function deletedata(dataid){
-            $(function() {
-                console.log("Process delete data...");
-                var div = document.getElementById("report-updatedata");
-
-                $.ajax({
-                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/delete')?>"),
-                    data : {
-                        Username: "<?php echo $datalogin['username']?>",
-                        Token: "<?php echo $datalogin['token']?>",
-                        PageID: dataid
-                    },
-                    dataType: "json",
-                    type: "POST",
-                    success: function(data) {
-                        div.innerHTML = "";
-                        if (data.status == "success"){
-                            div.innerHTML = messageHtml("success","<?php echo Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_success')?>");
-                            console.log("<?php echo Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_success')?>");
-                            /* clear from */
-                            $("#updatedata")
-                            .find("input,textarea,select")
-                            .val("")
-                            .end()
-                            .find("input[type=checkbox]")
-                            .prop("checked", "")
-                            .end()
-                            .find("button[type=submit]")
-	    					.attr("disabled", "disabled")
-			    			.end();
-                            $(".summernote").summernote("code", "");
-                        } else {
-                            div.innerHTML = messageHtml("danger","<?php echo Core::lang('core_process_delete').' '.Core::lang('page').' '.Core::lang('status_failed')?>",data.message);
-                        }
-                    },
-                    error: function(x, e) {}
-                });
-            });
-        }
-        /* Delete data end */
     </script>
 </body>
 
