@@ -467,10 +467,10 @@
                 if ($data->{'status'} == "success"){
                     echo self::getMessage('success',self::lang('core_upload_success'));
                 } else {
-                    echo self::getMessage('danger',self::lang('core_update_failed'),$data->{'message'});
+                    echo self::getMessage('danger',self::lang('core_upload_failed'),$data->{'message'});
                 }
             } else {
-                echo self::getMessage('danger',self::lang('core_update_failed'),self::lang('core_not_connected'));
+                echo self::getMessage('danger',self::lang('core_upload_failed'),self::lang('core_not_connected'));
             }
         }
         
@@ -489,10 +489,10 @@
                     echo self::reloadPage(0);
                     exit;
                 } else {
-                    echo self::getMessage('danger',self::lang('core_update_failed'),$data->{'message'});
+                    echo self::getMessage('danger',self::lang('core_upload_failed'),$data->{'message'});
                 }
             } else {
-                echo self::getMessage('danger',self::lang('core_update_failed'),self::lang('core_not_connected'));
+                echo self::getMessage('danger',self::lang('core_upload_failed'),self::lang('core_not_connected'));
             }
 	    }
 
