@@ -34,6 +34,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('app')?></a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('dashboard')?></a></li>
                         <li class="breadcrumb-item active">System</li>
                     </ol>
