@@ -151,7 +151,7 @@
                                     Phone: "",
                                     Aboutme: "",
                                     Avatar: "",
-                                    Role: "3"
+                                    Role: Crypto.decode("'.base64_encode('5').'")
                                 },
                                 dataType: "json",
                                 type: "POST",
