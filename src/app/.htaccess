@@ -12,11 +12,11 @@ AddDefaultCharset UTF-8
 	#RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
 
 	# Force to use SSL Flexible if using cloudflare
-	#RewriteCond %{HTTP:CF-Visitor} '"scheme":"http"'
-	#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+	RewriteCond %{HTTP:CF-Visitor} '"scheme":"http"'
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
 	
 	# Handle not found
-	ErrorDocument 404 "<script>window.location.href='/pages-error.php?code=404';</script>"
+	ErrorDocument 404 "<script>window.location.href='pages-error.php?code=404';</script>"
 </IfModule>
 
 <IfModule mod_php5.c>
