@@ -1,0 +1,32 @@
+{
+	"menu": [
+        {
+            "header": "app",
+            "subheader":[
+                {
+                    "id":"1",
+                    "title":"user",
+                    "icon_class":"mdi mdi-account",
+                    "label_class":"",
+                    "menus": [
+        				{   
+	            			"title": "profile",
+			                "link": "modul-user-profile.php"
+                        },
+                        {   
+		        		    "title": "access",
+    			    	    "link": "modul-user-access.php"
+                        }
+        		    ]
+                },
+                {
+                    "id":"2",
+                    "title":"api",
+                    "icon_class":"mdi mdi-bullseye",
+                    "label_class":"",
+                    "link":"modul-data-api.php"
+                }
+            ]
+		}
+	]
+}
