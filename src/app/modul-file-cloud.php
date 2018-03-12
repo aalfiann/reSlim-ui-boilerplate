@@ -605,7 +605,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                         div.innerHTML = "";
                         if (data.status == "success"){
                             div.innerHTML = messageHtml("success","<?php echo Core::lang('core_process_update').' '.Core::lang('file').' '.Core::lang('status_success')?>");
-                            console.log("<?php echo Core::lang('core_process_update').' '.Core::lang('api_keys').' '.Core::lang('status_success')?>");
+                            console.log("<?php echo Core::lang('core_process_update').' '.Core::lang('file').' '.Core::lang('status_success')?>");
                             $('#datafile').DataTable().ajax.reload(); /* reload data table */
                             $('.'+dataid).modal('hide');
                         } else {
@@ -638,7 +638,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                         div.innerHTML = "";
                         if (data.status == "success"){
                             div.innerHTML = messageHtml("success","<?php echo Core::lang('core_process_delete').' '.Core::lang('file').' '.Core::lang('status_success')?>");
-                            console.log("<?php echo Core::lang('core_process_delete').' '.Core::lang('api_keys').' '.Core::lang('status_success')?>");
+                            console.log("<?php echo Core::lang('core_process_delete').' '.Core::lang('file').' '.Core::lang('status_success')?>");
                             $('#datafile').DataTable().ajax.reload(); /* reload data table */
                             $('.'+dataid).modal('hide');
                         } else {
