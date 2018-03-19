@@ -30,13 +30,13 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">System</h3>
+                    <h3 class="text-themecolor"><?php echo Core::lang('system')?></h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('app')?></a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('dashboard')?></a></li>
-                        <li class="breadcrumb-item active">System</li>
+                        <li class="breadcrumb-item active"><?php echo Core::lang('system')?></li>
                     </ol>
                 </div>
                 <div>

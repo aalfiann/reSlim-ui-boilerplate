@@ -36,6 +36,8 @@ $lang = [
     'core_process_delete' => 'Process Delete',
     //development
     'app' => 'App',
+    'system' => 'System',
+    'master' => 'Master',
     'maintenance' => 'Maintenance',
     'extension' => 'Extension',
     'develop_process_title' => 'Under Constructions',
@@ -111,6 +113,8 @@ $lang = [
     'update_page' => 'Update Page',
     'save_page' => 'Publish Page',
     'form_editor' => 'Form Editor',
+    //data branch
+    'branch' => 'Branch',
     //helper page
     'helper_page_image' => 'Image url will be used for SEO Opengraph.',
     'helper_page_tags' => 'Tags is will make easy to reader to read related content.',

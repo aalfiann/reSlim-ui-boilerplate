@@ -36,6 +36,8 @@ $lang = [
     'core_process_delete' => 'Proses Hapus',
     //development
     'app' => 'Aplikasi',
+    'system' => 'Sistem',
+    'master' => 'Master',
     'maintenance' => 'Perawatan',
     'extension' => 'Extension',
     'develop_process_title' => 'Proses Pembangunan',
@@ -111,6 +113,8 @@ $lang = [
     'update_page' => 'Perbaharui Halaman',
     'save_page' => 'Publikasikan Halaman',
     'form_editor' => 'Form Editor',
+    //data branch
+    'branch' => 'Cabang',
     //helper page
     'helper_page_image' => 'Url gambar akan digunakan untuk tujuan SEO Opengraph.',
     'helper_page_tags' => 'Tags berguna untuk memudahkan pembaca dalam membaca konten terkait.',
