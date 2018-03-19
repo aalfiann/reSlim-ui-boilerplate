@@ -325,6 +325,7 @@ $lang = [
     'input_direct_link' => 'The url direct link of your file...',
     'input_base_path' => 'Please input url folder of Your website...',
     'input_url_api' => 'Please input url folder of Your Rest API...',
+    'input_required' => 'This field must be filled!',
     //general modal
     'modal_terms' => '<p>You agree, through your use of this service, that you will not use this
     application to post any material which is knowingly false and/or defamatory,
