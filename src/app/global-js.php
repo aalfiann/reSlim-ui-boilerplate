@@ -140,44 +140,56 @@
                     var key = parseInt($("#post-key").val());
                     if ((bbb + aaa) == key){
                         if ($("#password1").val() === $("#password2").val()){
-                            $.ajax({
-                                url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/user/register').'"),
-                                data : {
-                                    Username: $("#username").val(),
-                                    Email: $("#email").val(),
-                                    Password: $("#password2").val(),
-                                    Fullname: $("#username").val(),
-                                    Address: "",
-                                    Phone: "",
-                                    Aboutme: "",
-                                    Avatar: "",
-                                    Role: Crypto.decode("'.base64_encode('5').'")
-                                },
-                                dataType: "json",
-                                type: "POST",
-                                success: function(data) {
-                                    div.innerHTML = "";
-                                    if (data.status == "success"){
-                                        div.innerHTML = messageHtml("success","'.Core::lang('core_register_success').'");
-                                        /* clear from */
-                                        $("#register")
-                                        .find("input,textarea,select")
-                                        .val("")
-                                        .end()
-                                        .find("input[type=checkbox]")
-                                        .prop("checked", "")
-                                        .end()
-                                        .find("button[type=submit]")
-                                        .attr("disabled", "disabled")
-                                        .end();
-                                        console.log("Process sending register success! Thank you...");
-                                    } else {
-                                        div.innerHTML = messageHtml("danger","'.Core::lang('core_register_failed').'",data.message);
-                                        that.on("submit", sendingregister); /* add handler back after ajax */
-                                    }
-                                },
-                                error: function(x, e) {}
-                            });
+                            var usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
+					        var rgx = $("#username").val();
+					        if (usernameRegex.test(rgx) == false) {
+                                div.innerHTML = messageHtml("danger","'.Core::lang('core_register_failed').'","'.Core::lang('username_check_format').'");
+                                that.on("submit", sendingregister); /* add handler back after ajax */
+                            } else {
+                                $.ajax({
+                                    url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/user/register').'"),
+                                    data : {
+                                        Username: $("#username").val(),
+                                        Email: $("#email").val(),
+                                        Password: $("#password2").val(),
+                                        Fullname: $("#username").val(),
+                                        Address: "",
+                                        Phone: "",
+                                        Aboutme: "",
+                                        Avatar: "",
+                                        Role: Crypto.decode("'.base64_encode('5').'")
+                                    },
+                                    dataType: "json",
+                                    type: "POST",
+                                    success: function(data) {
+                                        div.innerHTML = "";
+                                        if (data.status == "success"){
+                                            div.innerHTML = messageHtml("success","'.Core::lang('core_register_success').'");
+                                            /* clear from */
+                                            $("#register")
+                                            .find("input,textarea,select")
+                                            .val("")
+                                            .end()
+                                            .find("input[type=checkbox]")
+                                            .prop("checked", "")
+                                            .end()
+                                            .find("button[type=submit]")
+                                            .attr("disabled", "disabled")
+                                            .end();
+                                            $("#usercheck").html("");
+                                            $("#emailcheck").html("");
+                                            $("#passwordcheck1").html("");
+                                            $("#passwordcheck2").html("");
+                                            $("#securitycheck").html("");
+                                            console.log("Process sending register success! Thank you...");
+                                        } else {
+                                            div.innerHTML = messageHtml("danger","'.Core::lang('core_register_failed').'",data.message);
+                                            that.on("submit", sendingregister); /* add handler back after ajax */
+                                        }
+                                    },
+                                    error: function(x, e) {}
+                                });
+                            }
                         } else {
                             div.innerHTML = messageHtml("danger","'.Core::lang('not_match_password').'");
                             that.on("submit", sendingregister); /* add handler back after ajax */
