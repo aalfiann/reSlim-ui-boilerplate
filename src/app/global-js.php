@@ -74,9 +74,9 @@
         /* Write message jQuery */
         function writeMessage(selector,type,message1,message2=""){$(function() { return $(selector).html('<div class="col-lg-12"><div class="alert alert-'+type+' alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button><strong>'+message1+'</strong> '+message2+'</div></div>'); });}
         /* Message html string */
-        function messageHtml(type,message1,message2=""){
-            return '<div class="col-lg-12"><div class="alert alert-'+type+' alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button><strong>'+message1+'</strong> '+message2+'</div></div>'; 
-        }
+        function messageHtml(type,message1,message2=""){return '<div class="col-lg-12"><div class="alert alert-'+type+' alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button><strong>'+message1+'</strong> '+message2+'</div></div>'; }
+        /* Validation Regex. Default is alphanumeric. */
+        function validationRegex(a,b="alphanumeric",c=!1){b="alphanumeric"===b?/^[a-zA-Z0-9]+$/:"alphabet"===b?/^[a-zA-Z]+$/:"numeric"===b?/^[0-9]+$/:"username"===b?/^[a-zA-Z0-9]{3,20}$/:"email"===b?/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/:b;var d="";return d=c?document.getElementById(a).value:a,!1!=b.test(d)}
         /* Request Fullscreen Global */
         function toggleFullScreen() {
             if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
@@ -140,12 +140,7 @@
                     var key = parseInt($("#post-key").val());
                     if ((bbb + aaa) == key){
                         if ($("#password1").val() === $("#password2").val()){
-                            var usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
-					        var rgx = $("#username").val();
-					        if (usernameRegex.test(rgx) == false) {
-                                div.innerHTML = messageHtml("danger","'.Core::lang('core_register_failed').'","'.Core::lang('username_check_format').'");
-                                that.on("submit", sendingregister); /* add handler back after ajax */
-                            } else {
+                            if (validationRegex("username","username",true)){
                                 $.ajax({
                                     url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/user/register').'"),
                                     data : {
@@ -189,6 +184,9 @@
                                     },
                                     error: function(x, e) {}
                                 });
+                            } else {
+                                div.innerHTML = messageHtml("danger","'.Core::lang('core_register_failed').'","'.Core::lang('username_check_format').'");
+                                that.on("submit", sendingregister); /* add handler back after ajax */
                             }
                         } else {
                             div.innerHTML = messageHtml("danger","'.Core::lang('not_match_password').'");

@@ -110,11 +110,7 @@ $aaa=rand(0,5);$bbb=rand(3,9);?>
                 if (!$.trim($('#username').val()).length){
                     $("#usercheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
                 } else {
-                    var usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
-					var rgx = $('#username').val();
-					if (usernameRegex.test(rgx) == false) {
-                        $("#usercheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('username_check_format')?></span>');
-                    } else {
+                    if (validationRegex("username","username",true)){
                         $("#usercheck").html('');
                         if (x) { x.abort() } // If there is an existing XHR, abort it.
                         clearTimeout(timer); // Clear the timer so we don't end up with dupes.
@@ -135,6 +131,10 @@ $aaa=rand(0,5);$bbb=rand(3,9);?>
                                 }
                             }); // run ajax request and store in x variable (so we can cancel)
                         }, 3000); // 3000ms delay, tweak for faster/slower
+                    } else {
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        $("#usercheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('username_check_format')?></span>');
                     }
                 }
             });
@@ -145,11 +145,7 @@ $aaa=rand(0,5);$bbb=rand(3,9);?>
                 if (!$.trim($('#email').val()).length){
                     $("#emailcheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
                 } else {
-                    var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-					var rgx = $('#email').val();
-					if (emailRegex.test(rgx) == false) {
-                        $("#emailcheck").html('<span class="help-block text-danger name"><i class="mdi mdi-close"></i> <?php echo Core::lang('email_check_invalid')?></span>');
-                    } else {
+                    if (validationRegex("email","email",true)){
                         if (x) { x.abort() } // If there is an existing XHR, abort it.
                         clearTimeout(timer); // Clear the timer so we don't end up with dupes.
                         timer = setTimeout(function() { // assign timer a new timeout 
@@ -168,7 +164,11 @@ $aaa=rand(0,5);$bbb=rand(3,9);?>
                                     $("#emailcheck").html('');
                                 }
                             });
-                        }, 3000); // 3000ms delay, tweak for faster/slower     
+                        }, 3000); // 3000ms delay, tweak for faster/slower
+                    } else {
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        $("#emailcheck").html('<span class="help-block text-danger name"><i class="mdi mdi-close"></i> <?php echo Core::lang('email_check_invalid')?></span>');
                     }
                 }
             });

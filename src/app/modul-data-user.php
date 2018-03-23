@@ -84,24 +84,28 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                             <label class="col-md-12"><?php echo Core::lang('tb_username')?></label>
                                                              <div class="col-md-12">
                                                                 <input id="username" type="text" class="form-control form-control-line" required>
+                                                                <div id="usercheck"></div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('email_address')?></label>
                                                             <div class="col-md-12">
                                                                 <input id="email" type="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" class="form-control form-control-line" required>
+                                                                <div id="emailcheck"></div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('password')?></label>
                                                             <div class="col-md-12">
                                                                 <input id="password1" type="password" class="form-control form-control-line" required>
+                                                                <div id="passwordcheck1"></div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('confirm_password')?></label>
                                                             <div class="col-md-12">
                                                                 <input id="password2" type="password" class="form-control form-control-line" required>
+                                                                <div id="passwordcheck2"></div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
@@ -501,49 +505,160 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
             that.off("submit"); /* remove handler */
             var div = document.getElementById("report-newdata");
             if ($("#password1").val() === $("#password2").val()){
-                $.ajax({
-                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/register')?>"),
-                    data : {
-                        Username: $("#username").val(),
-                        Email: $("#email").val(),
-                        Password: $("#password2").val(),
-                        Fullname: $("#username").val(),
-                        Address: "",
-                        Phone: "",
-                        Aboutme: "",
-                        Avatar: "",
-                        Role: selectedRole()
-                    },
-                    dataType: "json",
-                    type: "POST",
-                    success: function(data) {
-                        div.innerHTML = "";
-                        if (data.status == "success"){
-                            div.innerHTML = messageHtml("success","<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_success')?>");
-                            /* clear from */
-                            $("#addnewdata")
-                            .find("input,textarea")
-                            .val("")
-                            .end()
-                            .find("input[type=checkbox]")
-                            .prop("checked", "")
-                            .end();
-                            console.log("<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_success')?>");
-                            $('#datauser').DataTable().ajax.reload(); /* reload data table */
-                            that.on("submit", sendnewdata); /* add handler back after ajax */
-                        } else {
-                            div.innerHTML = messageHtml("danger","<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_failed')?>",data.message);
-                            that.on("submit", sendnewdata); /* add handler back after ajax */
-                        }
-                    },
-                    error: function(x, e) {}
-                });   
+                if (validationRegex("username","username",true)){
+                    $.ajax({
+                        url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/register')?>"),
+                        data : {
+                            Username: $("#username").val(),
+                            Email: $("#email").val(),
+                            Password: $("#password2").val(),
+                            Fullname: $("#username").val(),
+                            Address: "",
+                            Phone: "",
+                            Aboutme: "",
+                            Avatar: "",
+                            Role: selectedRole()
+                        },
+                        dataType: "json",
+                        type: "POST",
+                        success: function(data) {
+                            div.innerHTML = "";
+                            if (data.status == "success"){
+                                div.innerHTML = messageHtml("success","<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_success')?>");
+                                /* clear from */
+                                $("#addnewdata")
+                                .find("input,textarea")
+                                .val("")
+                                .end()
+                                .find("input[type=checkbox]")
+                                .prop("checked", "")
+                                .end();
+                                console.log("<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_success')?>");
+                                $('#datauser').DataTable().ajax.reload(); /* reload data table */
+                                that.on("submit", sendnewdata); /* add handler back after ajax */
+                            } else {
+                                div.innerHTML = messageHtml("danger","<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_failed')?>",data.message);
+                                that.on("submit", sendnewdata); /* add handler back after ajax */
+                            }
+                        },
+                        error: function(x, e) {}
+                    }); 
+                } else {
+                    div.innerHTML = messageHtml("danger","<?php echo Core::lang('core_register_failed')?>","<?php echo Core::lang('username_check_format')?>");
+                    that.on("submit", sendnewdata); /* add handler back after ajax */
+                }
+                  
             } else {
                 div.innerHTML = messageHtml("danger","<?php echo Core::lang('not_match_password')?>");
                 that.on("submit", sendnewdata); /* add handler back after ajax */
             }
         }
         /* Add new data end */
+
+        $(function() {
+            var timer;
+            var x;
+            /* Check user registered start */
+            $('#username').on('keyup', function() {
+                if (!$.trim($('#username').val()).length){
+                    $("#usercheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
+                } else {
+                    if (validationRegex("username","username",true)){
+                        $("#usercheck").html('');
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        timer = setTimeout(function() { // assign timer a new timeout 
+                            x = $.ajax({
+                                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/verify/register/')?>")+encodeURIComponent($('#username').val())+"?_="+randomText(1),
+                                dataType: "json",
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.status == "success"){
+                                        $("#usercheck").html('<span class="help-block text-danger name"><i class="mdi mdi-close"></i> <?php echo Core::lang('username_check_not_found')?></span>');
+                                    } else {
+                                        $("#usercheck").html('<span class="help-block text-success name"><i class="mdi mdi-check"></i> <?php echo Core::lang('username_check_ok')?></span>');
+                                    }
+                                },
+                                error: function(x, e) {
+                                    $("#usercheck").html('');
+                                }
+                            }); // run ajax request and store in x variable (so we can cancel)
+                        }, 3000); // 3000ms delay, tweak for faster/slower
+                    } else {
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        $("#usercheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('username_check_format')?></span>');
+                    }
+                }
+            });
+            /* Check user registered end */
+
+            /* Check user email start */
+            $('#email').on('keyup', function() {
+                if (!$.trim($('#email').val()).length){
+                    $("#emailcheck").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
+                } else {
+                    if (validationRegex("email","email",true)){
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        timer = setTimeout(function() { // assign timer a new timeout 
+                            x = $.ajax({
+                                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/verify/email/')?>")+encodeURIComponent($('#email').val())+"?_="+randomText(1),
+                                dataType: "json",
+                                type: "GET",
+                                success: function(data) {
+                                    if (data.status == "success"){
+                                        $("#emailcheck").html('<span class="help-block text-danger name"><i class="mdi mdi-close"></i> <?php echo Core::lang('email_check_no')?></span>');
+                                    } else {
+                                        $("#emailcheck").html('<span class="help-block text-success name"><i class="mdi mdi-check"></i> <?php echo Core::lang('email_check_ok')?></span>');
+                                    }
+                                },
+                                error: function(x, e) {
+                                    $("#emailcheck").html('');
+                                }
+                            });
+                        }, 3000); // 3000ms delay, tweak for faster/slower
+                    } else {
+                        if (x) { x.abort() } // If there is an existing XHR, abort it.
+                        clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                        $("#emailcheck").html('<span class="help-block text-danger name"><i class="mdi mdi-close"></i> <?php echo Core::lang('email_check_invalid')?></span>');
+                    }
+                }
+            });
+            /* Check user email end */
+
+            /* Check password start */
+            $('#password1').on('keyup', function() {
+			    var a = $('#password1').val();
+    			var b = $('#password2').val();
+                if (!$.trim($('#password1').val()).length){
+                    $("#passwordcheck1").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
+                } else {
+                    if (a != b) {
+                        $("#passwordcheck1").html('<span class="help-block text-success"><i class="mdi mdi-check"></i> <?php echo Core::lang('pass_check_ok')?></span>');
+                        $("#passwordcheck2").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('pass_check_no')?></span>');
+        			} else {
+                        $("#passwordcheck1").html('<span class="help-block text-success"><i class="mdi mdi-check"></i> <?php echo Core::lang('pass_check_ok')?></span>');
+                        $("#passwordcheck2").html('<span class="help-block text-success"><i class="mdi mdi-check"></i> <?php echo Core::lang('pass_check_match')?></span>');
+		    	    }
+                }
+    		});
+	    	$('#password2').on('keyup', function() {
+		    	var a = $('#password1').val();
+			    var b = $('#password2').val();
+    			if (!$.trim($('#password2').val()).length){
+	    			$("#passwordcheck2").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('input_required')?></span>');
+		    	} else {
+                    if (a != b) {
+                        $("#passwordcheck2").html('<span class="help-block text-danger"><i class="mdi mdi-close"></i> <?php echo Core::lang('pass_check_no')?></span>');
+				    } else {
+                        $("#passwordcheck1").html('<span class="help-block text-success"><i class="mdi mdi-check"></i> <?php echo Core::lang('pass_check_ok')?></span>');
+                        $("#passwordcheck2").html('<span class="help-block text-success"><i class="mdi mdi-check"></i> <?php echo Core::lang('pass_check_match')?></span>');
+	    			}
+    			}
+	    	});
+            /* Check password end */
+        });
     </script>
 </body>
 
