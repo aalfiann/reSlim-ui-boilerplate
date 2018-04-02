@@ -66,6 +66,10 @@ $lang = [
     //login
     'login' => 'Masuk',
     'form_login' => 'Form Masuk',
+    //validation
+    'val_numeric_html' => 'Input menggunakan karakter angka!',
+    'val_alphanumeric_html' => 'Input menggunakan karakter huruf dan angka!',
+    'val_email_html' => 'Input sesuai dengan format alamat email!',
     //register
     'register' => 'Pendaftaran',
     'form_register' => 'Form Pendaftaran',

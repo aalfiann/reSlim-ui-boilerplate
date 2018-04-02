@@ -66,6 +66,10 @@ $lang = [
     //login
     'login' => 'Login',
     'form_login' => 'Form Login',
+    //validation
+    'val_numeric_html' => 'Input with numeric chars only!',
+    'val_alphanumeric_html' => 'Input with alphanumeric chars only!',
+    'val_email_html' => 'Input according to email address format!',
     //register
     'register' => 'Register',
     'form_register' => 'Form Register',
