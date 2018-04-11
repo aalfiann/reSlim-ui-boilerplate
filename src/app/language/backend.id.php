@@ -67,7 +67,9 @@ $lang = [
     'login' => 'Masuk',
     'form_login' => 'Form Masuk',
     //validation
-    'val_numeric_html' => 'Input menggunakan karakter angka!',
+    'val_numeric_html' => 'Input menggunakan karakter angka saja!',
+    'val_decimal_html' => 'Input menggunakan karakter desimal! Angka dan titik saja!',
+    'val_double_html' => 'Input menggunakan karakter numerik!',
     'val_alphanumeric_html' => 'Input menggunakan karakter huruf dan angka!',
     'val_email_html' => 'Input sesuai dengan format alamat email!',
     //register
