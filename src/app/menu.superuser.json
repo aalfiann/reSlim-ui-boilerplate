@@ -59,6 +59,14 @@
                     {   
                         "title": "error log",
                         "link": "modul-error-log.php"
+                    },
+                    {   
+                        "title": "cache",
+                        "link": "modul-cache.php"
+                    },
+                    {   
+                        "title": "terminal",
+                        "link": "modul-terminal.php"
                     }
                 ]
                 }
