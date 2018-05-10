@@ -51,7 +51,7 @@ if(Core::getUserGroup() > '1') {Core::goToPage('modul-user-profile.php');exit;}?
                 <!-- ============================================================== -->
                 <div id="terminal" class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="console.php" allowfullscreen></iframe>
-                    <div style="width: 20px; height: 20px; position: absolute; opacity: 100; right: 8px; top: 5px; font-size:20px;"><i onclick="setFullscreen('terminal')" class="ti-fullscreen"  data-toggle="tooltip" title="<?php echo Core::lang('fullscreen')?>"></i></div>
+                    <div style="width: 20px; height: 20px; position: absolute; opacity: 100; right: 25px; top: 5px; font-size:20px;"><i onclick="setFullscreen('terminal')" class="ti-fullscreen"  data-toggle="tooltip" title="<?php echo Core::lang('fullscreen')?>"></i></div>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Page Content -->
