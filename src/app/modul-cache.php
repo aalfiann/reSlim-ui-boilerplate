@@ -46,12 +46,6 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div class="row page-titles">
-                    <div class="col-md-12 col-12 align-self-center">
-                        <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('cache_title')?></h3>
-                        <p class="text-muted"><?php echo Core::lang('cache_description')?></p>
-                    </div>
-                </div>
                 <div class="row">
                     <!-- Column -->
                     <div class="col-md-4">
@@ -142,7 +136,8 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                         <b><?php echo Core::lang('cache_status')?> <span id="cachestatus" class="pull-right badge badge-success"></span></b>
                                     </div>
                                     <div class="card-body">
-                                        <p id="cachedescription"></p>
+                                        <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('cache_title')?></h3>
+                                        <p class="text-muted"><?php echo Core::lang('cache_description')?></p>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +200,6 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                         
                                 document.getElementById("cachedatasize").innerHTML=data.size.cache.use;
                                 document.getElementById("cachestatus").innerHTML=ucwords(data.info.status);
-                                document.getElementById("cachedescription").innerHTML=data.info.description;
                                 document.getElementById("folderdata").innerHTML=data.info.folder;
                                 document.getElementById("cachedatatotal").innerHTML=data.info.files;
                                 document.getElementById("cachedatapercent").innerHTML=data.percent.cache.use;
