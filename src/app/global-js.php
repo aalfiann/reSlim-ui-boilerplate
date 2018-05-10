@@ -103,6 +103,27 @@
                 }  
             }  
         }
+        /* Request Fullscreen on some element id */
+        function setFullscreen(elementid){
+            var el = document.getElementById(elementid);
+            if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+                if (el.requestFullscreen) {
+                    el.requestFullscreen();
+                } else if (el.mozRequestFullScreen) {
+                    el.mozRequestFullScreen();
+                } else if (el.webkitRequestFullscreen) {
+                    el.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.cancelFullScreen) {  
+                    document.cancelFullScreen();  
+                } else if (document.mozCancelFullScreen) {  
+                    document.mozCancelFullScreen();  
+                } else if (document.webkitCancelFullScreen) {  
+                    document.webkitCancelFullScreen();  
+                }
+            }
+        }
         $(function() { 
             $("head").append("<style>.lazyload {opacity: 0;} .lazyloading {opacity: 1;transition: opacity 300ms;background: #f7f7f7 url(../assets/images/blank.gif) no-repeat center;}</style>");
             $('iframe').attr('data-src', function() { return $(this).attr('src'); }).removeAttr('src').addClass("lazyload");
