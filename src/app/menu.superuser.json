@@ -67,6 +67,10 @@
                     {   
                         "title": "terminal",
                         "link": "modul-terminal.php"
+                    },
+                    {   
+                        "title": "phpinfo",
+                        "link": "modul-phpinfo.php"
                     }
                 ]
                 }

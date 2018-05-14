@@ -5,7 +5,7 @@ if(Core::getUserGroup() > '1') {Core::goToPage('modul-user-profile.php');exit;}?
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
     <?php include_once 'global-meta.php';?>    
-    <title><?php echo Core::lang('terminal')?> - <?php echo Core::getInstance()->title?></title>
+    <title>PHPInfo - <?php echo Core::getInstance()->title?></title>
 </head>
 
 <body class="fix-sidebar fix-header card-no-border">
@@ -25,13 +25,13 @@ if(Core::getUserGroup() > '1') {Core::goToPage('modul-user-profile.php');exit;}?
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><?php echo Core::lang('terminal')?></h3>
+                    <h3 class="text-themecolor">PHPInfo</h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('system')?></a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo Core::lang('maintenance')?></a></li>
-                        <li class="breadcrumb-item active"><?php echo Core::lang('terminal')?></li>
+                        <li class="breadcrumb-item active">PHPInfo</li>
                     </ol>
                 </div>
                 <div>
@@ -45,13 +45,16 @@ if(Core::getUserGroup() > '1') {Core::goToPage('modul-user-profile.php');exit;}?
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div class="col-lg-12"><?php echo Core::getMessage('danger',Core::lang('terminal_notice'),Core::lang('terminal_notice_message'))?></div>
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div id="terminal" class="embed-responsive embed-responsive-1by1">
-                    <iframe class="embed-responsive-item" src="console.php" allowfullscreen></iframe>
-                    <div style="width: 20px; height: 20px; position: absolute; opacity: 100; right: 25px; top: 5px; font-size:20px;"><i onclick="setFullscreen('terminal')" class="ti-fullscreen"  data-toggle="tooltip" title="<?php echo Core::lang('fullscreen')?>"></i></div>
+                <div class="card">
+                    <div class="card-body">
+                        <div id="phpinfo" class="embed-responsive embed-responsive-1by1">
+                            <iframe class="embed-responsive-item" src="phpinfo.php" allowfullscreen></iframe>
+                            <div style="width: 20px; height: 20px; position: absolute; opacity: 100; right: 25px; top: 5px; font-size:20px;"><i onclick="setFullscreen('phpinfo')" class="ti-fullscreen"  data-toggle="tooltip" title="<?php echo Core::lang('fullscreen')?>"></i></div>
+                        </div>
+                    </div>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Page Content -->
