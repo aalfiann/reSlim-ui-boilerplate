@@ -78,7 +78,7 @@
         var $pathcache = 'cache-files';
         var $minifycache = true;
 
-        var $version = '1.9.0';
+        var $version = '1.10.0';
 
         private static $instance;
         
