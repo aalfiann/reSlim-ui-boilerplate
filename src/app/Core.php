@@ -88,7 +88,7 @@
             $langs = glob(dirname(__FILE__) .'/language/*.'.$this->setlang.'.php');
             foreach ($langs as $langname) {require $langname;}
             $lang = array();
-            foreach($rah as $key=>$value){$lang = array_merge($lang,$vocabularies[$key]);}
+            foreach($vocabularies as $key=>$value){$lang = array_merge($lang,$vocabularies[$key]);}
             // set language
             $this->datalang = $lang;
             // set variable
