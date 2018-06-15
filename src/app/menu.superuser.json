@@ -79,6 +79,10 @@
                     {   
                         "title": "packager",
                         "link": "modul-packager.php"
+                    },
+                    {   
+                        "title": "flexible config",
+                        "link": "modul-flexible-config.php"
                     }
                 ]
                 }
