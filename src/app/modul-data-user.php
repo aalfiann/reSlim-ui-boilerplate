@@ -141,7 +141,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                 <th><?php echo Core::lang('status')?></th>
                                                 <th><?php echo Core::lang('tb_created_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_at')?></th>
-                                                <th><?php echo Core::lang('manage')?></th>
+                                                <th class="not-export-col"><?php echo Core::lang('manage')?></th>
                                                 <th><?php echo Core::lang('about_me')?></th>
                                             	<th><?php echo Core::lang('avatar')?></th>
                                             </tr>
@@ -158,7 +158,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                 <th><?php echo Core::lang('status')?></th>
                                                 <th><?php echo Core::lang('tb_created_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_at')?></th>
-                                                <th><?php echo Core::lang('manage')?></th>
+                                                <th class="not-export-col"><?php echo Core::lang('manage')?></th>
                                                 <th><?php echo Core::lang('about_me')?></th>
                                             	<th><?php echo Core::lang('avatar')?></th>
                                             </tr>
@@ -413,35 +413,35 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                             text: "<i class=\"mdi mdi-content-copy\"></i> Copy",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "csv",
                             text: "<i class=\"mdi mdi-file-document\"></i> CSV",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "excel",
                             text: "<i class=\"mdi mdi-file-excel\"></i> Excel",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "pdf",
                             text: "<i class=\"mdi mdi-file-pdf\"></i> PDF",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "print",
                             text: "<i class=\"mdi mdi-printer\"></i> Print",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: 'colvis',

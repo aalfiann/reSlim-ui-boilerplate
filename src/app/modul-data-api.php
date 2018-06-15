@@ -112,7 +112,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                 <th><?php echo Core::lang('tb_created_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_by')?></th>
-                                                <th><?php echo Core::lang('manage')?></th>
+                                                <th class="not-export-col"><?php echo Core::lang('manage')?></th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -125,7 +125,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                 <th><?php echo Core::lang('tb_created_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_at')?></th>
                                                 <th><?php echo Core::lang('tb_updated_by')?></th>
-                                                <th><?php echo Core::lang('manage')?></th>
+                                                <th class="not-export-col"><?php echo Core::lang('manage')?></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -435,35 +435,35 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                             text: "<i class=\"mdi mdi-content-copy\"></i> Copy",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "csv",
                             text: "<i class=\"mdi mdi-file-document\"></i> CSV",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "excel",
                             text: "<i class=\"mdi mdi-file-excel\"></i> Excel",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "pdf",
                             text: "<i class=\"mdi mdi-file-pdf\"></i> PDF",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: "print",
                             text: "<i class=\"mdi mdi-printer\"></i> Print",
                             className: "bg-theme",
                             exportOptions: {
-                                columns: selectCol
+                                columns: ':visible:not(.not-export-col)'
                             }
                         }, {
                             extend: 'colvis',
