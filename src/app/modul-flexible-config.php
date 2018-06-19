@@ -93,13 +93,13 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('flexibleconfig_value')?></label>
                                                              <div class="col-md-12">
-                                                                <input id="value" type="text" class="form-control form-control-line" required>
+                                                                <textarea id="value" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" maxlength="10000" required></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('flexibleconfig_desc')?></label>
                                                              <div class="col-md-12">
-                                                                <input id="description" type="text" class="form-control form-control-line" required>
+                                                                <textarea id="description" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" maxlength="250" required></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -384,13 +384,13 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                         <div class="form-group">\
                                                             <label class="col-md-12"><?php echo Core::lang('flexibleconfig_value')?></label>\
                                                              <div class="col-md-12">\
-                                                                <input id="value'+row.key+'" type="text" class="form-control form-control-line" value="'+row.value+'" required>\
+                                                                <textarea id="value'+row.key+'" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" maxlength="10000" required>'+row.value+'</textarea>\
                                                             </div>\
                                                         </div>\
                                                         <div class="form-group">\
                                                             <label class="col-md-12"><?php echo Core::lang('flexibleconfig_desc')?></label>\
                                                              <div class="col-md-12">\
-                                                                <textarea id="description'+row.key+'" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" required>'+row.description+'</textarea>\
+                                                                <textarea id="description'+row.key+'" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" maxlength="250" required>'+row.description+'</textarea>\
                                                             </div>\
                                                         </div>\
                                                     </div>\
