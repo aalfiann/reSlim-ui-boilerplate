@@ -182,23 +182,34 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
 
         function removePackage(namespace,dataid=''){
             $(function() {
-                $.ajax({
-                    type: "GET",
-                    url: "<?php echo Core::getInstance()->api.'/packager/uninstall/'.$datalogin['username'].'/'.$datalogin['token'].'/?lang='.Core::getInstance()->setlang.'&namespace='?>"+encodeURIComponent(namespace),
-                    dataType: "json",
-                    cache: false,
-                    success: function (data, textstatus) {
-                        if (data.status == "success"){
-                            writeMessage("#reportmsg","success",data.message);
-                            $('#datamain').DataTable().ajax.reload();
-                            if(dataid != '') $('.'+dataid).modal('hide');
-                        } else {
+                swal({   
+                    title: "<?php echo Core::lang('are_u_sure')?>",   
+                    text: "<?php echo Core::lang('packager_uninstall_warning')?>",
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#DD6B55",   
+                    confirmButtonText: "<?php echo Core::lang('packager_uninstall_ok')?>",
+                    cancelButtonText: "<?php echo Core::lang('cancel')?>",
+                    closeOnConfirm: false 
+                }, function(){
+                    $.ajax({
+                        type: "GET",
+                        url: "<?php echo Core::getInstance()->api.'/packager/uninstall/'.$datalogin['username'].'/'.$datalogin['token'].'/?lang='.Core::getInstance()->setlang.'&namespace='?>"+encodeURIComponent(namespace),
+                        dataType: "json",
+                        cache: false,
+                        success: function (data, textstatus) {
+                            if (data.status == "success"){
+                                writeMessage("#reportmsg","success",data.message);
+                                $('#datamain').DataTable().ajax.reload();
+                                if(dataid != '') $('.'+dataid).modal('hide');
+                            } else {
+                                writeMessage("#reportmsg","danger",data.message);
+                            }
+                        },
+                        error: function (data, textstatus) {
                             writeMessage("#reportmsg","danger",data.message);
                         }
-                    },
-                    error: function (data, textstatus) {
-                        writeMessage("#reportmsg","danger",data.message);
-                    }
+                    });
                 });
             });
         }

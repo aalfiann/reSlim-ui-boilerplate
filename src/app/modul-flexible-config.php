@@ -581,7 +581,8 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                     type: "warning",   
                     showCancelButton: true,   
                     confirmButtonColor: "#DD6B55",   
-                    confirmButtonText: "<?php echo Core::lang('delete_yes')?>",   
+                    confirmButtonText: "<?php echo Core::lang('delete_yes')?>",
+                    cancelButtonText: "<?php echo Core::lang('cancel')?>",
                     closeOnConfirm: false 
                 }, function(){
                     $.ajax({

@@ -165,7 +165,8 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     type: "warning",   
                     showCancelButton: true,   
                     confirmButtonColor: "#DD6B55",   
-                    confirmButtonText: "<?php echo Core::lang('delete_yes')?>",   
+                    confirmButtonText: "<?php echo Core::lang('delete_yes')?>",
+                    cancelButtonText: "<?php echo Core::lang('cancel')?>",
                     closeOnConfirm: false 
                 }, function(){    
                     $.ajax({
@@ -194,20 +195,6 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                 });
             });
         }
-
-        $('#sa-warning').click(function(){
-            swal({   
-                title: "Are you sure?",   
-                text: "You will not be able to recover this imaginary file!",   
-                type: "warning",   
-                showCancelButton: true,   
-                confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Yes, delete it!",   
-                closeOnConfirm: false 
-            }, function(){   
-                swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
-            });
-        });
 
         $(function() {
             var selectCol = [ 0, 1, 2, 3, 4 ];
