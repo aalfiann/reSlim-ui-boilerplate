@@ -9,5 +9,5 @@ $vocabularies[] = [
     'flexibleconfig_key' => 'Key',
     'flexibleconfig_value' => 'Value',
     'flexibleconfig_desc' => 'Description',
-    'flexibleconfig_delete_warning' => 'Be Careful! Deleting flexible config may broke your app.'
+    'flexibleconfig_delete_warning' => 'Be Careful! Deleting Flexible Config causing damage to app!'
 ];
