@@ -331,6 +331,14 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                             </div>\
                                                             <div class="col-md-12">\
                                                                 <div class="form-group">\
+                                                                    <label class="col-md-12"><?php echo Core::lang('package_dependency')?></label>\
+                                                                    <div class="col-md-12">\
+                                                                        <input id="dependency" type="text" class="form-control form-control-line" value="'+row.dependency.message+'" readonly>\
+                                                                    </div>\
+                                                                </div>\
+                                                            </div>\
+                                                            <div class="col-md-12">\
+                                                                <div class="form-group">\
                                                                     <label class="col-md-12"><?php echo Core::lang('package_author')?></label>\
                                                                     <div class="col-md-12">\
                                                                         <input id="author" type="text" class="form-control form-control-line" value="'+row.package.author.name+'" readonly>\
@@ -345,14 +353,6 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                                     </div>\
                                                                 </div>\
                                                             </div>\
-                                                            <div class="col-md-12">\
-                                                                <div class="form-group">\
-                                                                    <label class="col-md-12"><?php echo Core::lang('package_link_fork')?></label>\
-                                                                    <div class="col-md-12">\
-                                                                        <input id="fork" type="text" class="form-control form-control-line" value="'+row.package.url+'" readonly>\
-                                                                    </div>\
-                                                                </div>\
-                                                            </div>\
                                                         </div>\
                                                     </div>\
                                                     <div class="modal-footer">\
@@ -364,7 +364,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                         }
                                                         a += '</div>\
                                                             <div class="btn-group mr-2" role="group" aria-label="Second group">\
-                                                                <button type="button" class="btn btn-default waves-effect text-left mr-2" data-dismiss="modal"><?php echo Core::lang('close')?></button>\
+                                                                <button type="button" class="btn btn-default waves-effect text-left mr-2" onclick="window.open(\''+row.package.url+'\',\'_blank\')"><?php echo Core::lang('package_link_fork')?></button>\
                                                                 <button type="button" class="btn btn-success waves-effect text-left mr-2" onclick="window.open(\''+row.readme.url+'\',\'_blank\')"><?php echo Core::lang('package_readme')?></button>\
                                                             </div>\
                                                         </div>\

@@ -273,6 +273,7 @@ $vocabularies[] = [
     'package_link' => 'Kunjungi Proyek',
     'package_link_fork' => 'Fork Project',
     'package_compatible' => 'Kompatibel',
+    'package_dependency' => 'Dependency',
     'package_author' => 'Author',
     'package_license' => 'Lisensi',
     'package_readme' => 'README.md',
