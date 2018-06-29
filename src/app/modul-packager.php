@@ -168,13 +168,16 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                             .val("")
                             .end();
                             writeMessage("#reportmsg","success",data.message);
+                            swal("<?php echo Core::lang('packager_install_success')?>", data.message, "success");
                             $('#datamain').DataTable().ajax.reload();
                         } else {
                             writeMessage("#reportmsg","danger",data.message);
+                            swal("<?php echo Core::lang('packager_install_failed')?>", data.message, "error");
                         }
                     },
                     error: function (data, textstatus) {
                         writeMessage("#reportmsg","danger",data.message);
+                        swal("<?php echo Core::lang('packager_install_failed')?>", data.message, "error");
                     }
                 });
             });
@@ -200,14 +203,17 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                         success: function (data, textstatus) {
                             if (data.status == "success"){
                                 writeMessage("#reportmsg","success",data.message);
+                                swal("<?php echo Core::lang('packager_uninstall_success')?>", data.message, "success");
                                 $('#datamain').DataTable().ajax.reload();
                                 if(dataid != '') $('.'+dataid).modal('hide');
                             } else {
                                 writeMessage("#reportmsg","danger",data.message);
+                                swal("<?php echo Core::lang('packager_uninstall_failed')?>", data.message, "error");
                             }
                         },
                         error: function (data, textstatus) {
                             writeMessage("#reportmsg","danger",data.message);
+                            swal("<?php echo Core::lang('packager_uninstall_failed')?>", data.message, "error");
                         }
                     });
                 });
