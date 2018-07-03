@@ -377,7 +377,7 @@ $vocabularies[] = [
     'dt_table_empty' => 'Data tidak ditemukan',
     'dt_loading' => '<i class=\"fa fa-circle-o-notch fa-spin\"></i> Memuat data...',
     'dt_process' => '<i class=\"fa fa-cog fa-spin\"></i> Mengambil data...',
-    'dt_search' => 'Cari:',
+    'dt_search' => 'Filter:',
     'dt_thousands' => '.',
     'dt_first' => '<i class="mdi mdi-skip-backward"></i>',
     'dt_last' => '<i class="mdi mdi-skip-forward"></i>',

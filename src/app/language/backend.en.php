@@ -377,7 +377,7 @@ $vocabularies[] = [
     'dt_table_empty' => 'No records found',
     'dt_loading' => '<i class=\"fa fa-circle-o-notch fa-spin\"></i> Loading...',
     'dt_process' => '<i class=\"fa fa-cog fa-spin\"></i> Processing...',
-    'dt_search' => 'Search:',
+    'dt_search' => 'Filter:',
     'dt_thousands' => ',',
     'dt_first' => '<i class="mdi mdi-skip-backward"></i>',
     'dt_last' => '<i class="mdi mdi-skip-forward"></i>',
