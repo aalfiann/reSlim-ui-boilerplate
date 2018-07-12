@@ -79,14 +79,14 @@ $datalogin = Core::checkSessions();?>
                                         </tfoot>
                                     </table>
                                 </div>
-                                <div class="text-center"><button onclick="revokeAllCall();" class="btn btn-danger btn-fill btn-wd"><i class="mdi mdi-key-remove"></i> <?php echo Core::lang('revoke_access_all')?></button></div>
+                                <div class="text-center"><button id="deletebtnall" onclick="revokeAllCall();" class="btn btn-danger btn-fill btn-wd"><i class="mdi mdi-key-remove"></i> <?php echo Core::lang('revoke_access_all')?></button></div>
                             </div>
                         </div>
                         
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
@@ -107,6 +107,8 @@ $datalogin = Core::checkSessions();?>
     <script>
         function revokeCall(token){
             $(function() {
+                var btn = "deletebtn"+token;
+                disableClickButton(btn);
                 $.ajax({
                     type: "POST",
                     url: "<?php echo Core::getInstance()->api.'/user/token/delete'?>",
@@ -124,6 +126,9 @@ $datalogin = Core::checkSessions();?>
                             writeMessage("#reportrevoke","danger","<?php echo Core::lang('core_delete_failed')?>",datarevoked.message);
                         }
                     },
+                    complete: function(){
+                        disableClickButton(btn,false);
+                    },
                     error: function (datarevoked, textstatus) {
                         writeMessage("#reportrevoke","danger","<?php echo Core::lang('core_delete_failed')?>",datarevoked.message);
                     }
@@ -133,6 +138,8 @@ $datalogin = Core::checkSessions();?>
 
         function revokeAllCall(){
             $(function() {
+                var btn = "deletebtnall";
+                disableClickButton(btn);
                 $.ajax({
                     type: "POST",
                     url: "<?php echo Core::getInstance()->api.'/user/token/delete/all'?>",
@@ -148,6 +155,9 @@ $datalogin = Core::checkSessions();?>
                         } else {
                             writeMessage("#reportrevoke","danger","<?php echo Core::lang('core_delete_failed')?>",datarevoked.message);
                         }
+                    },
+                    complete: function(){
+                        disableClickButton(btn,false);
                     },
                     error: function (datarevoked, textstatus) {
                         writeMessage("#reportrevoke","danger","<?php echo Core::lang('core_delete_failed')?>",datarevoked.message);
@@ -182,7 +192,7 @@ $datalogin = Core::checkSessions();?>
                     { data: "Created" },
                     { data: "Expired" },
                     { "render": function(data,type,row,meta) {
-                            var a = '<button onclick="revokeCall(\''+row.RS_Token+'\');" class="btn btn-danger btn-fill btn-wd"><?php echo Core::lang('revoke_access')?></button>';
+                            var a = '<button id="deletebtn'+row.RS_Token+'" onclick="revokeCall(\''+row.RS_Token+'\');" class="btn btn-danger btn-fill btn-wd"><?php echo Core::lang('revoke_access')?></button>';
                             if (row.RS_Token == "<?php echo $datalogin['token']?>"){
                                 return '<b class="text-success"><?php echo Core::lang('active_access')?></b>';
                             } else {
