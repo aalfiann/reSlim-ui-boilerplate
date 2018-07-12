@@ -85,7 +85,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><?php echo Core::lang('cancel')?></button>
-                                                        <button type="button" class="btn btn-success" onclick="installPackage($('#source').val(),$('#namespace').val())"><?php echo Core::lang('packager_install')?></button>
+                                                        <button id="submitbtn" type="button" class="btn btn-success" onclick="installPackage($('#source').val(),$('#namespace').val())"><?php echo Core::lang('packager_install')?></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -131,7 +131,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
@@ -155,6 +155,8 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
     <script>
         function installPackage(source,namespace){
             $(function() {
+                var btn = "submitbtn";
+                disableClickButton(btn);
                 $.ajax({
                     type: "GET",
                     url: "<?php echo Core::getInstance()->api.'/packager/install/zip/safely/'.$datalogin['username'].'/'.$datalogin['token'].'/?lang='.Core::getInstance()->setlang.'&source='?>"+encodeURIComponent(source)+"&namespace="+encodeURIComponent(namespace),
@@ -174,6 +176,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                             writeMessage("#reportmsg","danger",data.message);
                             swal("<?php echo Core::lang('packager_install_failed')?>", data.message, "error");
                         }
+                    },
+                    complete: function() {
+                        disableClickButton(btn,false);
                     },
                     error: function (data, textstatus) {
                         writeMessage("#reportmsg","danger",data.message);
@@ -195,6 +200,8 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     cancelButtonText: "<?php echo Core::lang('cancel')?>",
                     closeOnConfirm: false 
                 }, function(){
+                    var btn = "deletebtn"+dataid;
+                    disableClickButton(btn);
                     $.ajax({
                         type: "GET",
                         url: "<?php echo Core::getInstance()->api.'/packager/uninstall/'.$datalogin['username'].'/'.$datalogin['token'].'/?lang='.Core::getInstance()->setlang.'&namespace='?>"+encodeURIComponent(namespace),
@@ -210,6 +217,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                 writeMessage("#reportmsg","danger",data.message);
                                 swal("<?php echo Core::lang('packager_uninstall_failed')?>", data.message, "error");
                             }
+                        },
+                        complete: function(){
+                            disableClickButton(btn,false);
                         },
                         error: function (data, textstatus) {
                             writeMessage("#reportmsg","danger",data.message);
@@ -366,7 +376,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">\
                                                         <div class="btn-group mr-2" role="group" aria-label="First group">';
                                                         if (row.namespace != 'modules/packager'){
-                                                            a += '<button type="button" onclick="removePackage(\''+row.namespace+'\',\''+row.namespace.replace('/','_')+'\');return false;" class="btn btn-danger"><?php echo Core::lang('packager_uninstall')?></button>';
+                                                            a += '<button id="deletebtn'+row.namespace.replace('/','_')+'" type="button" onclick="removePackage(\''+row.namespace+'\',\''+row.namespace.replace('/','_')+'\');return false;" class="btn btn-danger"><?php echo Core::lang('packager_uninstall')?></button>';
                                                         }
                                                         a += '</div>\
                                                             <div class="btn-group mr-2" role="group" aria-label="Second group">\

@@ -118,7 +118,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><?php echo Core::lang('cancel')?></button>
-                                                        <button type="submit" class="btn btn-success"><?php echo Core::lang('submit')?></button>
+                                                        <button id="submitbtn" type="submit" class="btn btn-success"><?php echo Core::lang('submit')?></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -174,7 +174,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
@@ -502,6 +502,8 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
             var div = document.getElementById("report-newdata");
             if ($("#password1").val() === $("#password2").val()){
                 if (validationRegex("username","username",true)){
+                    var btn = "submitbtn";
+                    disableClickButton(btn);
                     $.ajax({
                         url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/register')?>"),
                         data : {
@@ -536,6 +538,9 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                 div.innerHTML = messageHtml("danger","<?php echo Core::lang('core_process_add').' '.Core::lang('user').' '.Core::lang('status_failed')?>",data.message);
                                 that.on("submit", sendnewdata); /* add handler back after ajax */
                             }
+                        },
+                        complete: function(){
+                            disableClickButton(btn,false);
                         },
                         error: function(x, e) {}
                     }); 

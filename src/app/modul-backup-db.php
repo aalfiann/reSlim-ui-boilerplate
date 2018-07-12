@@ -56,7 +56,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                 <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('backup_db')?></h3><hr>
                                 <h6 class="card-subtitle"><?php echo Core::lang('backup_info')?></h6>
                                 <div class="table-responsive m-t-40">
-                                    <button type="button" class="btn btn-inverse" onclick="backupNow()"><i class="mdi mdi-backup-restore"></i> <?php echo Core::lang('backup_now')?></button>
+                                    <button id="submitbtn" type="button" class="btn btn-inverse" onclick="backupNow()"><i class="mdi mdi-backup-restore"></i> <?php echo Core::lang('backup_now')?></button>
                                     <table id="datamain" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -80,14 +80,14 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                         </tfoot>
                                     </table>
                                 </div>
-                                <div class="text-center"><button type="button" onclick="backupDeleteAll();" class="btn btn-danger btn-fill btn-wd"><i class="mdi mdi-close"></i> <?php echo Core::lang('delete').' '.Core::lang('all')?></button></div>
+                                <div class="text-center"><button id="deletebtnall" type="button" onclick="backupDeleteAll();" class="btn btn-danger btn-fill btn-wd"><i class="mdi mdi-close"></i> <?php echo Core::lang('delete').' '.Core::lang('all')?></button></div>
                             </div>
                         </div>
                         
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
@@ -111,6 +111,8 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
     <script>
         function backupNow(){
             $(function() {
+                var btn = "submitbtn";
+                disableClickButton(btn);
                 $.ajax({
                     type: "GET",
                     url: "<?php echo Core::getInstance()->api.'/backup/all/'.$datalogin['username'].'/'.$datalogin['token']?>",
@@ -124,6 +126,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                             writeMessage("#reportmsg","danger","<?php echo Core::lang('backup_failed')?>",data.message);
                         }
                     },
+                    complete: function(){
+                        disableClickButton(btn,false);
+                    },
                     error: function (data, textstatus) {
                         writeMessage("#reportmsg","danger","<?php echo Core::lang('backup_failed')?>",data.message);
                     }
@@ -133,6 +138,8 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
 
         function backupDelete(filename){
             $(function() {
+                var btn = "deletebtn"+filename;
+                disableClickButton(btn);
                 $.ajax({
                     type: "POST",
                     url: "<?php echo Core::getInstance()->api.'/backup/delete'?>",
@@ -149,6 +156,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                         } else {
                             writeMessage("#reportmsg","danger","<?php echo Core::lang('core_delete_failed')?>",data.message);
                         }
+                    },
+                    complete: function(){
+                        disableClickButton(btn,false);
                     },
                     error: function (data, textstatus) {
                         writeMessage("#reportmsg","danger","<?php echo Core::lang('core_delete_failed')?>",data.message);
@@ -168,7 +178,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     confirmButtonText: "<?php echo Core::lang('delete_yes')?>",
                     cancelButtonText: "<?php echo Core::lang('cancel')?>",
                     closeOnConfirm: false 
-                }, function(){    
+                }, function(){
+                    var btn = "deletebtnall";
+                    disableClickButton(btn);
                     $.ajax({
                         type: "POST",
                         url: "<?php echo Core::getInstance()->api.'/backup/delete/all'?>",
@@ -187,6 +199,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                 swal("<?php echo Core::lang('core_delete_failed')?>", data.message, "error");
                                 writeMessage("#reportmsg","danger","<?php echo Core::lang('core_delete_failed')?>",data.message);
                             }
+                        },
+                        complete: function(){
+                            disableClickButton(btn,false);
                         },
                         error: function (data, textstatus) {
                             writeMessage("#reportmsg","danger","<?php echo Core::lang('core_delete_failed')?>",data.message);
@@ -222,7 +237,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     { data: "size" },
                     { data: "date" },
                     { "render": function(data,type,row,meta) {
-                            var a = '<a class="btn btn-success btn-fill btn-wd" href="'+row.url+'" download><i class="mdi mdi-cloud-download"></i> <?php echo Core::lang('download')?></a> <button type="button" class="btn btn-danger btn-fill btn-wd" onclick="backupDelete(\''+row.name+'\')"><i class="mdi mdi-close"></i> <?php echo Core::lang('delete')?></button>';
+                            var a = '<a class="btn btn-success btn-fill btn-wd" href="'+row.url+'" download><i class="mdi mdi-cloud-download"></i> <?php echo Core::lang('download')?></a> <button id="deletebtn'+row.name+'" type="button" class="btn btn-danger btn-fill btn-wd" onclick="backupDelete(\''+row.name+'\')"><i class="mdi mdi-close"></i> <?php echo Core::lang('delete')?></button>';
                             return a;
                         } 
                     }

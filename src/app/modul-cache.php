@@ -97,7 +97,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                     <div id="dataprogress" class="progress-bar bg-info" role="progressbar" style="width: 0%; height: 6px;"></div>
                                                 </div>
                                                 <br>
-                                                <button type="button" class="btn btn-secondary" onclick="clearCacheData()"><?php echo Core::lang('cache_clear')?></button>
+                                                <button id="cleardatabtn" type="button" class="btn btn-secondary" onclick="clearCacheData()"><?php echo Core::lang('cache_clear')?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                     <div id="keyprogress" class="progress-bar bg-success" role="progressbar" style="width: 0%; height: 6px;"></div>
                                                 </div>
                                                 <br>
-                                                <button type="button" class="btn btn-secondary" onclick="clearCacheKey()"><?php echo Core::lang('cache_clear')?></button>
+                                                <button id="clearkeybtn" type="button" class="btn btn-secondary" onclick="clearCacheKey()"><?php echo Core::lang('cache_clear')?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -245,6 +245,8 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
 
         function clearCacheData(){
             $(function(){
+                var btn = "cleardatabtn";
+                disableClickButton(btn);
                 $.ajax({ /* Get user statistic start */
 		        	    type: "GET",
         				url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/maintenance/cache/data/delete/'.$datalogin['username'].'/'.$datalogin['token'])?>"),
@@ -271,6 +273,9 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                 );
 				        	}
         				},
+                        complete: function(){
+                            disableClickButton(btn,false);
+                        },
 		        		error: function( xhr, textStatus, error ) {
 				            console.log("XHR: " + xhr.statusText);
         					console.log("STATUS: "+textStatus);
@@ -283,6 +288,8 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
 
         function clearCacheKey(){
             $(function(){
+                var btn = "clearkeybtn";
+                disableClickButton(btn);
                 $.ajax({ /* Get user statistic start */
 		        	    type: "GET",
         				url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/maintenance/cache/apikey/delete/'.$datalogin['username'].'/'.$datalogin['token'])?>"),
@@ -309,6 +316,9 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                 );
 				        	}
         				},
+                        complete: function(){
+                            disableClickButton(btn,false);
+                        },
 		        		error: function( xhr, textStatus, error ) {
 				            console.log("XHR: " + xhr.statusText);
         					console.log("STATUS: "+textStatus);

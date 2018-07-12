@@ -1,9 +1,6 @@
 <?php spl_autoload_register(function ($classname) {require ( $classname . ".php");});
 $datalogin = Core::checkSessions();
-if(Core::getUserGroup() > '4') {Core::goToPage('modul-user-profile.php');exit;}
-// Data Status
-$urlstatus = Core::getInstance()->api.'/user/status/'.$datalogin['token'];
-$datastatus = json_decode(Core::execGetRequest($urlstatus));?>
+if(Core::getUserGroup() > '4') {Core::goToPage('modul-user-profile.php');exit;}?>
 <!DOCTYPE html>
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
@@ -105,7 +102,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default waves-effect text-left" data-dismiss="modal"><?php echo Core::lang('cancel')?></button>
-                                                        <button type="submit" class="btn btn-success"><?php echo Core::lang('submit')?></button>
+                                                        <button id="submitbtn" type="submit" class="btn btn-success"><?php echo Core::lang('submit')?></button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -152,7 +149,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
@@ -398,11 +395,11 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                         <div class="col-sm-12">\
                                                         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">\
                                                             <div class="btn-group mr-2" role="group" aria-label="First group">\
-                                                                <button type="submit" onclick="deletedata(\''+row.key+'\');return false;" class="btn btn-danger"><?php echo Core::lang('delete')?></button>\
+                                                                <button id="deletebtn'+row.key+'" type="submit" onclick="deletedata(\''+row.key+'\');return false;" class="btn btn-danger"><?php echo Core::lang('delete')?></button>\
                                                             </div>\
                                                             <div class="btn-group mr-2" role="group" aria-label="Second group">\
                                                                 <button type="button" class="btn btn-default waves-effect text-left mr-2" data-dismiss="modal"><?php echo Core::lang('cancel')?></button>\
-                                                                <button type="submit" onclick="updatedata(\''+row.key+'\');return false;" class="btn btn-success"><?php echo Core::lang('update')?></button>\
+                                                                <button id="updatebtn'+row.key+'" type="submit" onclick="updatedata(\''+row.key+'\');return false;" class="btn btn-success"><?php echo Core::lang('update')?></button>\
                                                             </div>\
                                                         </div>\
                                                         </div>\
@@ -497,7 +494,8 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
             var that = $(this);
             that.off("submit"); /* remove handler */
             var div = document.getElementById("report-newdata");
-
+            var btn = "submitbtn";
+            disableClickButton(btn);
                 $.ajax({
                     url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/flexibleconfig/add')?>"),
                     data : {
@@ -529,6 +527,9 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                             that.on("submit", sendnewdata); /* add handler back after ajax */
                         }
                     },
+                    complete: function(){
+                        disableClickButton(btn,false);
+                    },
                     error: function(x, e) {}
                 });   
             
@@ -540,7 +541,8 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
             $(function() {
                 console.log("Process update data...");
                 var div = document.getElementById("report-updatedata");
-
+                var btn = "updatebtn"+dataid;
+                disableClickButton(btn);
                 $.ajax({
                     url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/flexibleconfig/update')?>"),
                     data : {
@@ -564,6 +566,9 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                             $('.'+dataid).modal('hide');
                         }
                     },
+                    complete: function(){
+                        disableClickButton(btn,false);
+                    },
                     error: function(x, e) {}
                 });
             });
@@ -585,6 +590,8 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                     cancelButtonText: "<?php echo Core::lang('cancel')?>",
                     closeOnConfirm: false 
                 }, function(){
+                    var btn = "deletebtn"+dataid;
+                    disableClickButton(btn);
                     $.ajax({
                         url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/flexibleconfig/delete')?>"),
                         data : {
@@ -607,6 +614,9 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                 swal("<?php echo Core::lang('core_delete_failed')?>", data.message, "error");
                                 $('.'+dataid).modal('hide');
                             }
+                        },
+                        complete: function(){
+                            disableClickButton(btn,false);
                         },
                         error: function(x, e) {}
                     });
