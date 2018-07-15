@@ -4,12 +4,110 @@ $pageid = filter_var((empty($_GET['id'])?'1':$_GET['id']),FILTER_SANITIZE_STRING
 //Get data pages
 $url = Core::getInstance()->api.'/page/data/public/read/'.$pageid.'/?lang='.Core::getInstance()->setlang.'&apikey='.Core::getInstance()->apikey;
 $data = json_decode(Core::execGetRequest($url));
+
+if (!empty($data)){
+    if ($data->{'status'} == "success"){
+        $title = $data->result[0]->Title.' | '.Core::getInstance()->title;
+        $description = $data->result[0]->Description;
+        $keyword = $data->result[0]->Tags_inline;
+        $datepublish = date_format(date_create($data->result[0]->Created_at),"Y-m-d");
+        $datemodified = date_format(date_create($data->result[0]->Updated_at),"Y-m-d");
+        $author = $data->result[0]->User;
+        $image = (!empty($data->result[0]->Image)?$data->result[0]->Image:'');
+        $imagecompany = ((!empty(Core::getInstance()->assetspath))?Core::getInstance()->assetspath.'/images/background/megamenubg.jpg':'');
+    } else {
+        $title = '404 - '.Core::lang('not_found').' | '.Core::getInstance()->title;
+        $description = Core::lang('pages_meta_desc_page_not_found');
+        $keyword = Core::getInstance()->keyword;
+        $datepublish = '';
+        $datemodified = '';
+        $author = Core::getInstance()->title.' Team';
+        $image = '';
+        $imagecompany = ((!empty(Core::getInstance()->assetspath))?Core::getInstance()->assetspath.'/images/background/megamenubg.jpg':'');
+    }
+} else {
+    $title = '404 - '.Core::lang('not_found').' | '.Core::getInstance()->title;
+    $description = Core::lang('pages_meta_desc_page_not_found');
+    $keyword = Core::getInstance()->keyword;
+    $datepublish = '';
+    $datemodified = '';
+    $author = Core::getInstance()->title.' Team';
+    $image = '';
+    $imagecompany = ((!empty(Core::getInstance()->assetspath))?Core::getInstance()->assetspath.'/images/background/megamenubg.jpg':'');
+}
+
+//Data twitter
+if (!empty(Core::getInstance()->twitter)){
+    $twittersite = Core::getInstance()->twitter;
+    $twitterarray = explode('/',$twittersite);
+    $twitterusername = end($twitterarray);
+}
+$created = date('Y-m-d',filemtime(basename(__FILE__)));
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
     <?php include_once 'global-meta.php';?>    
     <title><?php echo Core::lang('post')?> - <?php echo Core::getInstance()->title?></title>
+    <meta name="description" content="<?php echo $description;?>">
+    <meta name="keyword" content="<?php echo $keyword;?>">
+    <meta name="author" content="<?php echo $author;?>">
+    
+    <!-- Open Graphs -->
+    <link rel="author" href="<?php echo ((!empty(Core::getInstance()->gplus))?Core::getInstance()->gplus:'')?>"/>
+    <link rel="publisher" href="<?php echo ((!empty(Core::getInstance()->gpub))?Core::getInstance()->gpub:'')?>"/>
+    <meta itemprop="name" content="<?php echo $title?>">
+    <meta itemprop="description" content="<?php echo $description?>">
+    <meta itemprop="image" content="<?php echo $image?>">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<?php echo $title?>" />
+    <meta name="twitter:description" content="<?php echo $description?>" />
+    <meta name="twitter:image" content="<?php echo $image?>" />
+    <meta name="twitter:image:alt" content="<?php echo $title?>" />
+    <meta name="twitter:site" content="<?php echo ((!empty(Core::getInstance()->twitter))?'@'.$twitterusername:'')?>">
+    <meta name="twitter:creator" content="<?php echo ((!empty(Core::getInstance()->twitter))?'@'.$twitterusername:'')?>">
+    <meta property="og:title" content="<?php echo $title?>" />
+    <meta property="og:description" content="<?php echo $description?>" />
+    <meta property="og:url" content="<?php echo ((Core::isHttpsButtflare()) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>" />
+    <meta property="og:image" content="<?php echo $image?>" />
+    <meta property="og:site_name" content="<?php echo Core::getInstance()->title?>" />
+    <meta property="og:type" content="website" />
+
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "<?php echo ((Core::isHttpsButtflare()) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']?>"
+        },
+        "headline": "<?php echo $title ?>",
+        "datePublished": "<?php echo $datepublish ?>",
+        "dateModified": "<?php echo $datemodified ?>",
+        "author": {
+            "@type": "Person",
+            "name": "<?php echo $author?>"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "<?php echo Core::getInstance()->title?>",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "<?php echo $imagecompany?>"
+            }
+        },
+        "description": "<?php echo $description?>",
+        "image": {
+            "@type": "ImageObject",
+            "url": "<?php echo $image?>"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "<?php echo Core::getInstance()->homepath?>/modul-blog.php?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
 </head>
 
 <body class="fix-sidebar fix-header card-no-border">
