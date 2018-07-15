@@ -27,6 +27,9 @@
         // Set home path example project
         var $homepath;
 
+        // Set assets path example project
+        var $assetspath;
+
         // Set base api reslim
         var $api;
 
@@ -98,6 +101,7 @@
             $this->email = $config['email'];
             $this->basepath = $config['basepath'];
             $this->homepath = $config['homepath'];
+            $this->assetspath = $config['assetspath'];
             $this->api = $config['api'];
             $this->apikey = $config['apikey'];
             $this->disqus = $config['disqus'];
@@ -393,7 +397,7 @@
                 	}
             }
             unset($_SESSION['groupid']); //user group session menu
-        	header("Location: ".self::getInstance()->basepath."/modul-login.php");
+        	header("Location: ".self::getInstance()->basepath."/modul-blog.php");
         }
 
         /**
@@ -740,7 +744,7 @@
                     $out['username'] = null;
                     $out['token'] = null;
                     unset($_SESSION['groupid']); //user group session menu
-                    header("Location: ".self::getInstance()->basepath."/modul-login.php");
+                    header("Location: ".self::getInstance()->basepath."/modul-blog.php");
                 }
                 else
                 {
@@ -751,7 +755,7 @@
                         $out['username'] = null;
                         $out['token'] = null;
                         unset($_SESSION['groupid']); //user group session menu
-                        header("Location: ".self::getInstance()->basepath."/modul-login.php");
+                        header("Location: ".self::getInstance()->basepath."/modul-blog.php");
                     }                     
                 }
             }
@@ -764,7 +768,7 @@
                     $out['username'] = null;
                     $out['token'] = null;
                     unset($_SESSION['groupid']); //user group session menu
-                    header("Location: ".self::getInstance()->basepath."/modul-login.php");
+                    header("Location: ".self::getInstance()->basepath."/modul-blog.php");
                 }
     	    }
 	        return $out;
@@ -861,6 +865,7 @@
             $config[\'email\'] = \''.$post_array['Email'].'\'; //Your default email
             $config[\'basepath\'] = \''.$post_array['Basepath'].'\'; //Your folder website
             $config[\'homepath\'] = \''.$post_array['Homepath'].'\'; //Your folder frontend website
+            $config[\'assetspath\'] = \''.$post_array['Assetspath'].'\'; //Your folder assets website
             $config[\'api\'] = \''.$post_array['Api'].'\'; //Your folder rest api
             $config[\'apikey\'] = \''.$post_array['ApiKey'].'\'; //Your api key, you can leave this blank and fill this later
             $config[\'disqus\'] = \''.$post_array['Disqus'].'\'; //Your disqus username, you can leave this blank and fill this later

@@ -60,6 +60,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                     'Email' => $_POST['email'],
                                     'Basepath' => $_POST['basepath'],
                                     'Homepath' => $_POST['homepath'],
+                                    'Assetspath' => $_POST['assetspath'],
                                     'Api' => $_POST['api'],
                                     'ApiKey' => $_POST['apikey'],
                                     'Disqus' => $_POST['disqus'],
@@ -121,6 +122,11 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                         <label class="form-control-label"><b><?php echo Core::lang('base_path')?></b></label>
                                         <input name="basepath" type="text" placeholder="<?php echo Core::lang('input_base_path')?>" class="form-control" value="<?php echo Core::getInstance()->basepath?>" required>
                                         <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_basepath')?></small></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label"><b><?php echo Core::lang('assets_path')?></b></label>
+                                        <input name="assetspath" type="text" placeholder="<?php echo Core::lang('input_assets_path')?>" class="form-control" value="<?php echo Core::getInstance()->assetspath?>" required>
+                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_assetspath')?></small></span>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label"><b><?php echo Core::lang('url_api')?></b></label>
@@ -193,7 +199,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     </div>
                 </div>
                 <!-- ============================================================== -->
-                <!-- End PAge Content -->
+                <!-- End Page Content -->
                 <!-- ============================================================== -->
                 <?php include_once 'sidebar-right.php';?>
             </div>
