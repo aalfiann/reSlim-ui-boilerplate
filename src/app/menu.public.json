@@ -7,7 +7,6 @@
                     "id":"1",
                     "title":"home",
                     "link": "modul-blank-public.php",
-                    "target" : "_blank",
                     "icon_class":"mdi mdi-home"
                 },
                 {
@@ -19,13 +18,14 @@
                 {
                     "id":"3",
                     "title":"blog",
-                    "link": "#",
+                    "link": "modul-blog.php",
                     "icon_class":"mdi mdi-rss"
                 },
                 {
                     "id":"4",
                     "title":"contact",
                     "link": "#",
+                    "target": "_blank",
                     "icon_class":"mdi mdi-email"
                 }
             ]
