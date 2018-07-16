@@ -23,6 +23,8 @@ Getting Started
     $config['description'] = 'Make your project reSlim with use restful api. reSlim is based on Slim3';<br>
     $config['email'] = 'your default email address';<br>
     $config['basepath'] = 'url location of base path of this app'; //it should be http://localhost:1337/reSlim-ui-boilerplate/src/app<br>
+    $config['homepath'] = 'url location of home path of this app'; //it should be http://localhost:1337/reSlim-ui-boilerplate/src/app<br>
+    $config['assetspath'] = 'url location of assets path of this app'; //it should be http://localhost:1337/reSlim-ui-boilerplate/src/assets<br>
     $config['homepath'] = 'url location of front path';<br>
     $config['api'] = 'url location of base path of reslim rest api';<br>
     $config['apikey'] = 'your api key, you can leave this blank and fill this later';<br><br>
