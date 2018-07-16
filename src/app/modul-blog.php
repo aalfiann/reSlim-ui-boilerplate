@@ -24,6 +24,7 @@ if (empty($search)){
 <!DOCTYPE html>
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
+    <base href="<?php echo Core::getInstance()->basepath?>/">
     <?php include_once 'global-meta.php';?>    
     <title><?php echo $title?></title>
     <meta name="description" content="<?php echo $description?>">
@@ -49,7 +50,7 @@ if (empty($search)){
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><a href="modul-blog.php"><?php echo Core::lang('blog')?></a></h3>
+                    <h3 class="text-themecolor"><a href="blog"><?php echo Core::lang('blog')?></a></h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -86,12 +87,12 @@ if (empty($search)){
                                                     foreach ($data->results as $name => $value) {
                                                         echo '<li class="media">
                                                             <div class="media-body">
-                                                                <h3 class="mt-0 mb-1"><a href="modul-blog-post.php?id='.$value->PageID.'&slug='.Core::convertToSlug($value->Title).'">'.$value->Title.'</a></h3>
+                                                                <h3 class="mt-0 mb-1"><a href="post/'.$value->PageID.'/'.Core::convertToSlug($value->Title).'">'.$value->Title.'</a></h3>
                                                                 <p class="text-muted">';
                                                                 
                                                                 $datatag = "";
                                                                 foreach ($value->Tags as $namelabel => $valuelabel) {
-                                                                    $datatag .= '<a href="modul-blog.php?search='.$valuelabel.'" title="'.Core::lang('pages_search_label').' '.$valuelabel.'">#'.$valuelabel.'</a>, ';
+                                                                    $datatag .= '<a href="blog/'.$valuelabel.'" title="'.Core::lang('pages_search_label').' '.$valuelabel.'">#'.$valuelabel.'</a>, ';
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;
@@ -107,7 +108,7 @@ if (empty($search)){
                                                                         <p>
                                                                             '.$value->Description.'
                                                                         </p>
-                                                                        <p><a href="modul-blog-post.php?id='.$value->PageID.'&slug='.Core::convertToSlug($value->Title).'">'.Core::lang('pages_readmore').'</a></p>
+                                                                        <p><a href="post/'.$value->PageID.'/'.Core::convertToSlug($value->Title).'">'.Core::lang('pages_readmore').'</a></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -130,7 +131,7 @@ if (empty($search)){
                                 <?php
                                     if (!empty($data) && ($data->{'status'} == "success")){
                                         $pagination = new Pagination;
-                                        echo $pagination->makePagination($data,$_SERVER['PHP_SELF'].'?search='.rawurlencode($search));
+                                        echo $pagination->makePagination($data,Core::getInstance()->basepath.'/blog?search='.rawurlencode($search));
                                     }
                                 ?>
                                 <!-- /.row -->

@@ -18,7 +18,7 @@
                 {
                     "id":"3",
                     "title":"blog",
-                    "link": "modul-blog.php",
+                    "link": "blog",
                     "icon_class":"mdi mdi-rss"
                 },
                 {

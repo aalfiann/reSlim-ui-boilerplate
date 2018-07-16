@@ -6,7 +6,7 @@
             $config['email'] = 'youremail@gmail.com'; //Your default email
             $config['basepath'] = 'http://localhost:1337/reslim-ui-boilerplate/src/app'; //Your folder website
             $config['homepath'] = 'http://localhost:1337/reslim-ui-boilerplate/src/app'; //Your folder frontend website
-            $config['assetspath'] = ''; //Your folder assets website
+            $config['assetspath'] = 'http://localhost:1337/reSlim-ui-boilerplate/src/assets'; //Your folder assets website
             $config['api'] = 'http://your-reslim/api'; //Your folder rest api
             $config['apikey'] = ''; //Your api key, you can leave this blank and fill this later
             $config['disqus'] = ''; //Your disqus username, you can leave this blank and fill this later

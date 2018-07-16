@@ -47,6 +47,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
 <!DOCTYPE html>
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
+    <base href="<?php echo Core::getInstance()->basepath?>/">
     <?php include_once 'global-meta.php';?>    
     <title><?php echo Core::lang('post')?> - <?php echo Core::getInstance()->title?></title>
     <meta name="description" content="<?php echo $description;?>">
@@ -103,7 +104,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
         },
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "<?php echo Core::getInstance()->homepath?>/modul-blog.php?search={search_term_string}",
+            "target": "<?php echo Core::getInstance()->basepath?>/blog/{search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
@@ -127,7 +128,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor"><a href="modul-blog.php"><?php echo Core::lang('blog')?></a></h3>
+                    <h3 class="text-themecolor"><a href="blog"><?php echo Core::lang('blog')?></a></h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -173,7 +174,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                                                                 
                                                                 $datatag = "";
                                                                 foreach ($value->Tags as $namelabel => $valuelabel) {
-                                                                    $datatag .= '<a href="blog.php?search='.$valuelabel.'" title="'.Core::lang('pages_search_label').' '.$valuelabel.'">#'.$valuelabel.'</a>, ';
+                                                                    $datatag .= '<a href="blog/'.$valuelabel.'" title="'.Core::lang('pages_search_label').' '.$valuelabel.'">#'.$valuelabel.'</a>, ';
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;

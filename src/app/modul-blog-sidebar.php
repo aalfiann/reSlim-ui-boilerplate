@@ -1,5 +1,5 @@
 <div class="col-lg-4 col-md-12 col-sm-12 p-20">
-    <form action="modul-blog.php" method="get">
+    <form action="blog" method="get">
         <div class="form-group">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="<?php echo Core::lang('pages_placeholder_search')?>">

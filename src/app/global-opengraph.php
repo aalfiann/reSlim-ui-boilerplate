@@ -40,7 +40,7 @@
   },
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "<?php echo Core::getInstance()->homepath?>/modul-blog.php?search={search_term_string}",
+    "target": "<?php echo Core::getInstance()->basepath?>/blog/{search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }

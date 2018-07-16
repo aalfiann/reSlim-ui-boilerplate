@@ -14,9 +14,48 @@ AddDefaultCharset UTF-8
 	# Force to use SSL Flexible if using cloudflare
 	RewriteCond %{HTTP:CF-Visitor} '"scheme":"http"'
 	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L]
+
+	# Url friendly for modul-blog.php
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^blog$ modul-blog.php [L]
+
+	# Url friendly for modul-blog.php >> search
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^blog/([^/]*)$ modul-blog.php?search=$1 [L]
+
+	# Url friendly for modul-blog.php >> search with page
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^blog/([^/]*)/([^/]*)$ modul-blog.php?search=$1&page=$2 [L]
+	
+	# Url friendly for modul-blog.php >> search with page and itemsperpage
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^blog/([^/]*)/([^/]*)/([^/]*)$ modul-blog.php?search=$1&page=$2&itemsperpage=$3 [L]
+
+	# Url friendly for modul-blog-post.php
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^post/([^/]*)/([^/]*)$ modul-blog-post.php?id=$1&slug=$2 [L]
+
+	# Sitemap.xml
+	RewriteRule ^sitemap.xml$ sitemap.php [L]
+	RewriteRule ^sitemap-menu.xml$ sitemap-menu.php [L]
+	RewriteRule ^sitemap-static.xml$ sitemap-static.php [L]
+	RewriteRule ^sitemap-post.xml$ sitemap-post.php [L]
+	RewriteRule ^sitemap-post-([^/]*).xml$ sitemap-post.php?page=$1 [L]
+
+	# Robots.txt
+	RewriteRule ^robots.txt$ robots.php [L]
 	
 	# Handle not found
-	ErrorDocument 404 "<script>window.location.href='pages-error.php?code=404';</script>"
+	# Example if the path of your app is "yourdomain.com/app" then 
+	# ErrorDocument 404 "<script>window.location.href='/app/pages-error.php?code=404';</script>"
+	#
+	# This below is just for development and only works in local xampp
+	ErrorDocument 404 "<script>window.location.href='/reslim-ui-boilerplate/src/app/pages-error.php?code=404';</script>"
 </IfModule>
 
 <IfModule mod_php5.c>

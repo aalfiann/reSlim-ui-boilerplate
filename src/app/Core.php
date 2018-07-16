@@ -397,7 +397,7 @@
                 	}
             }
             unset($_SESSION['groupid']); //user group session menu
-        	header("Location: ".self::getInstance()->basepath."/modul-blog.php");
+        	header("Location: ".self::getInstance()->basepath."/blog");
         }
 
         /**
@@ -744,7 +744,7 @@
                     $out['username'] = null;
                     $out['token'] = null;
                     unset($_SESSION['groupid']); //user group session menu
-                    header("Location: ".self::getInstance()->basepath."/modul-blog.php");
+                    header("Location: ".self::getInstance()->basepath."/blog");
                 }
                 else
                 {
@@ -755,7 +755,7 @@
                         $out['username'] = null;
                         $out['token'] = null;
                         unset($_SESSION['groupid']); //user group session menu
-                        header("Location: ".self::getInstance()->basepath."/modul-blog.php");
+                        header("Location: ".self::getInstance()->basepath."/blog");
                     }                     
                 }
             }
@@ -768,7 +768,7 @@
                     $out['username'] = null;
                     $out['token'] = null;
                     unset($_SESSION['groupid']); //user group session menu
-                    header("Location: ".self::getInstance()->basepath."/modul-blog.php");
+                    header("Location: ".self::getInstance()->basepath."/blog");
                 }
     	    }
 	        return $out;
