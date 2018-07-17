@@ -13,7 +13,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);position: fixed !important;">
             <div class="login-box card">>
                 <?php
                     if (isset($_POST['submitnewpassword'])){
@@ -43,12 +43,12 @@
                         </div>
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button name="submitnewpassword" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('submit_reset_password')?></button>
+                                <button name="submitnewpassword" class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('submit_reset_password')?></button>
                             </div>
                         </div>
                         <div class="form-group m-b-0">
                             <div class="col-sm-12 text-center">
-                                <div><?php echo Core::lang('have_account')?> <a href="modul-login.php" class="text-info m-l-5"><b><?php echo Core::lang('login')?></b></a></div>
+                                <div><?php echo Core::lang('have_account')?> <a href="modul-login.php" class="text-themecolor m-l-5"><b><?php echo Core::lang('login')?></b></a></div>
                             </div>
                         </div>
                     </form>

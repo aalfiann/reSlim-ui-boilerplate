@@ -13,7 +13,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);position: fixed !important;">
             <div class="login-box card">
                 <div class="card-body">
                     <?php 
@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button name="submitlogin" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('login')?></button>
+                                <button name="submitlogin" class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('login')?></button>
                             </div>
                         </div>
                     </form>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button name="submitforgot" class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('submit')?></button>
+                                <button name="submitforgot" class="btn btn-themecolor btn-lg btn-block text-uppercase waves-effect waves-light" type="submit"><?php echo Core::lang('submit')?></button>
                             </div>
                         </div>
                     </form>
