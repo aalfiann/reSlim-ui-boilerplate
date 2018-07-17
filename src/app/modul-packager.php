@@ -54,7 +54,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('packager')?></h3><hr>
-                                <h6 class="card-subtitle"><?php echo Core::lang('packager_desc')?></h6>
+                                <h6 class="card-subtitle"><?php echo Core::lang('packager_desc')?><br><?php echo Core::lang('packager_uninstall_desc')?></h6>
                                 <div class="table-responsive m-t-40">
                                     <button type="button" class="btn btn-inverse" data-toggle="modal" data-target=".addnew"><i class="mdi mdi-package-down"></i> <?php echo Core::lang('packager_install')?></button>
                                     <!-- terms modal content -->
@@ -123,8 +123,17 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <b><?php echo Core::lang('packager_dev_1')?></b><br>
-                                <?php echo Core::lang('packager_dev_2')?>
+                                <div class="col-sm-12">
+                                    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            <p><b><?php echo Core::lang('packager_dev_1')?></b><br>
+                                            <?php echo Core::lang('packager_dev_2')?></p>
+                                        </div>
+                                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                            <button type="button" onclick="window.open('https://github.com/aalfiann/reslim-modules','_blank')" class="btn btn-lg btn-themecolor pull-right"><?php echo Core::lang('packager_get_started')?></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         

@@ -257,6 +257,7 @@ $vocabularies[] = [
     'packager_install_date' => 'Tanggal Pasang',
     'packager_zip_source' => 'Source Zip Archive',
     'packager_uninstall' => 'Lepas Modul',
+    'packager_uninstall_desc' => '* Melepas modul hanya akan menghapus script di server saja.',
     'packager_uninstall_warning' => 'Melepas Modul mengakibatkan kerusakan pada aplikasi!\nPastikan Anda telah mengetahui resiko ini.',
     'packager_uninstall_success' => 'Berhasil Melepas Modul',
     'packager_uninstall_failed' => 'Gagal Melepas Modul',
@@ -267,6 +268,7 @@ $vocabularies[] = [
     'packager_help_1' => 'Namespace harus diinput dengan benar.',
     'packager_help_2' => 'Source zip archive harus direct link.',
     'packager_running' => 'Digunakan untuk halaman ini!',
+    'packager_get_started' => 'Get Started',
     //package
     'package' => 'Package',
     'package_version' => 'Versi',

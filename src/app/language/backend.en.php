@@ -257,6 +257,7 @@ $vocabularies[] = [
     'packager_install_date' => 'Install Date',
     'packager_zip_source' => 'Source Zip Archive',
     'packager_uninstall' => 'Uninstall Module',
+    'packager_uninstall_desc' => '* Uninstalling module will only delete the script on the server.',
     'packager_uninstall_warning' => 'Uninstall Module causing damage to application!\nMake sure you are aware of this risk.',
     'packager_uninstall_success' => 'Uninstall Module Success',
     'packager_uninstall_failed' => 'Uninstall Module Failed',
@@ -267,6 +268,7 @@ $vocabularies[] = [
     'packager_help_1' => 'Namespace must be written correctly.',
     'packager_help_2' => 'Source zip archive must be direct link.',
     'packager_running' => 'Used for this page!',
+    'packager_get_started' => 'Get Started',
     //package
     'package' => 'Package',
     'package_version' => 'Version',
