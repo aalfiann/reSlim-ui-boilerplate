@@ -130,7 +130,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                             <?php echo Core::lang('packager_dev_2')?></p>
                                         </div>
                                         <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                            <button type="button" onclick="window.open('https://github.com/aalfiann/reslim-modules','_blank')" class="btn btn-lg btn-themecolor pull-right"><?php echo Core::lang('packager_get_started')?></button>
+                                            <button type="button" onclick="window.open('https://github.com/aalfiann/reslim-modules','_blank')" class="btn btn-lg btn-themecolor pull-right"><?php echo Core::lang('packager_list_modules')?></button>
                                         </div>
                                     </div>
                                 </div>

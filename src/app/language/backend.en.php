@@ -264,11 +264,12 @@ $vocabularies[] = [
     'packager_uninstall_ok' => 'OK, Uninstall Now!',
     'packager_desc' => 'Packager is a module to help you to manage third party application.',
     'packager_dev_1' => 'How to create new your own module package?',
-    'packager_dev_2' => 'You can start to learn from very simple source code <a href="https://github.com/aalfiann/reSlim-modules-first_mod" target="_blank">here</a>.',
+    'packager_dev_2' => 'You can start to learn from documentation <a href="https://github.com/aalfiann/reslim/wiki" target="_blank">here</a> or from very simple source code <a href="https://github.com/aalfiann/reSlim-modules-first_mod" target="_blank">here</a>.',
     'packager_help_1' => 'Namespace must be written correctly.',
     'packager_help_2' => 'Source zip archive must be direct link.',
     'packager_running' => 'Used for this page!',
     'packager_get_started' => 'Get Started',
+    'packager_list_modules' => 'reslim modules',
     //package
     'package' => 'Package',
     'package_version' => 'Version',

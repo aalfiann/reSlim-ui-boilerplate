@@ -264,11 +264,12 @@ $vocabularies[] = [
     'packager_uninstall_ok' => 'OK, Lepas Sekarang!',
     'packager_desc' => 'Packager adalah sebuah modul untuk membantu mengelola aplikasi pihak ketiga.',
     'packager_dev_1' => 'Bagaimana cara membuat package modul baru milikku?',
-    'packager_dev_2' => 'Anda dapat memulai belajar dari kode sumber paling sederhana <a href="https://github.com/aalfiann/reSlim-modules-first_mod" target="_blank">disini</a>.',
+    'packager_dev_2' => 'Anda dapat memulai belajar dari dokumentasi <a href="https://github.com/aalfiann/reslim/wiki" target="_blank">disini</a> atau dari kode sumber paling sederhana <a href="https://github.com/aalfiann/reSlim-modules-first_mod" target="_blank">disini</a>.',
     'packager_help_1' => 'Namespace harus diinput dengan benar.',
     'packager_help_2' => 'Source zip archive harus direct link.',
     'packager_running' => 'Digunakan untuk halaman ini!',
     'packager_get_started' => 'Get Started',
+    'packager_list_modules' => 'reslim modules',
     //package
     'package' => 'Package',
     'package_version' => 'Versi',
