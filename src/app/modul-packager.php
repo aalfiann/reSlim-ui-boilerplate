@@ -268,7 +268,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                     { data: "compatible.status"},
                     { "render": function(data,type,row,meta) {
                             var a = '<button type="button" class="btn btn-primary btn-fill btn-wd" data-toggle="modal" data-target=".'+row.namespace.replace('/','_')+'"><i class="mdi mdi-package"></i> <?php echo Core::lang('packager_detail')?></button>';
-                            var b = ' <button type="button" class="btn btn-danger btn-fill btn-wd" onclick="removePackage(\''+row.namespace+'\')"><i class="mdi mdi-close"></i> <?php echo Core::lang('packager_uninstall')?></button>';
+                            var b = ' <button type="button" class="btn btn-danger btn-fill btn-wd" onclick="removePackage(\''+row.namespace+'\',\''+row.namespace.replace('/','_')+'\')"><i class="mdi mdi-close"></i> <?php echo Core::lang('packager_uninstall')?></button>';
                             var c = ' <span class="label label-inverse"><?php echo Core::lang('packager_running')?></span>';
                             if (row.namespace != 'modules/packager'){
                                 a += b;
