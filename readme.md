@@ -1,7 +1,7 @@
 reSlim UI Boilerplate
 =======
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
-[![Version](https://img.shields.io/badge/stable-1.12.0-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
+[![Version](https://img.shields.io/badge/stable-1.14.0-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate/blob/master/license.md)
 
 Basic UI template for production use with [reSlim](https://github.com/aalfiann/reSlim).<br>
@@ -12,7 +12,7 @@ System Requirements
 1. Web server with URL rewriting
 2. Web server with mcrypt extension
 3. PHP 5.5 or newer
-4. You already have reSlim rest api version >= 1.10.0 running
+4. You already have reSlim rest api version >= 1.14.0 running
 
 
 Getting Started

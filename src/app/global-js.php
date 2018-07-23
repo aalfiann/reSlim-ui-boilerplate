@@ -176,7 +176,7 @@
                         if ($("#password1").val() === $("#password2").val()){
                             if (validationRegex("username","username",true)){
                                 $.ajax({
-                                    url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/user/register').'"),
+                                    url: Crypto.decode("'.base64_encode(Core::getInstance()->api.'/user/register/public').'"),
                                     data : {
                                         Username: $("#username").val(),
                                         Email: $("#email").val(),

@@ -508,6 +508,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                         url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/register')?>"),
                         data : {
                             Username: $("#username").val(),
+                            Token: '<?php echo $datalogin['token']?>',
                             Email: $("#email").val(),
                             Password: $("#password2").val(),
                             Fullname: $("#username").val(),
