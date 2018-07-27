@@ -111,6 +111,7 @@ $vocabularies[] = [
     'user_profile' => 'Profil Pengguna',
     'my_profile' => 'Profilku',
     'view_profile' => 'Lihat Profil',
+    'no_description_profile' => 'Tidak ada deskripsi apapun pada profil ini...',
     //explore file
     'explore_file' => 'Jelajah File',
     'file_cloud' => 'File Cloud',
@@ -298,6 +299,8 @@ $vocabularies[] = [
     'pages_meta_desc_search_not_found' => 'Data tidak tersedia! Silahkan coba gunakan kata kunci pencarian lainnya.',
     'pages_meta_desc_page_not_found' => '404 - Tidak ditemukan! Maaf, Halaman yang Anda cari tidak ada, telah dihapus atau mungkin telah di pindahkan.',
     //general
+    'placeholder_global_search' => 'Cari & Enter',
+    'loadmore' => 'Loadmore',
     'post' => 'Post',
     'blog' => 'Blog',
     'deleted' => 'Terhapus!',

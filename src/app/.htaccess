@@ -40,6 +40,11 @@ AddDefaultCharset UTF-8
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^post/([^/]*)/([^/]*)$ modul-blog-post.php?id=$1&slug=$2 [L]
 
+	# Url friendly for modul-view-user.php >> view user
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^user/([^/]*)$ modul-view-user.php?username=$1 [L]
+
 	# Sitemap.xml
 	RewriteRule ^sitemap.xml$ sitemap.php [L]
 	RewriteRule ^sitemap-menu.xml$ sitemap-menu.php [L]

@@ -96,7 +96,7 @@ if (empty($search)){
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;
-                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> '.$value->User.'</p>
+                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a></p>
                                                                 <hr>
                                                                 <div class="row">
                                                                     <div class="col-lg">

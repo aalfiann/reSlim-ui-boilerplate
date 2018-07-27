@@ -10,8 +10,8 @@ if (!empty($data)){
         $title = $data->result[0]->Title.' | '.Core::getInstance()->title;
         $description = $data->result[0]->Description;
         $keyword = $data->result[0]->Tags_inline;
-        $datepublish = date_format(date_create($data->result[0]->Created_at),"Y-m-d");
-        $datemodified = date_format(date_create($data->result[0]->Updated_at),"Y-m-d");
+        $datepublish = $data->result[0]->Created_at;
+        $datemodified = (!empty($data->result[0]->Updated_at)?$data->result[0]->Updated_at:$datepublish);
         $author = $data->result[0]->User;
         $image = (!empty($data->result[0]->Image)?$data->result[0]->Image:'');
         $imagecompany = ((!empty(Core::getInstance()->assetspath))?Core::getInstance()->assetspath.'/images/background/megamenubg.jpg':'');
@@ -169,7 +169,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                                                     foreach ($data->result as $name => $value) {
                                                         echo '<li class="media">
                                                             <div class="media-body">
-                                                                <h1 class="mt-0 mb-1"><a href="#">'.$value->Title.'</a></h1>
+                                                                <h1 class="mt-0 mb-1"><a href="'.((Core::isHttpsButtflare()) ? 'https' : 'http') . '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'" title="'.$value->Title.'">'.$value->Title.'</a></h1>
                                                                 <p class="text-muted">';
                                                                 
                                                                 $datatag = "";
@@ -178,7 +178,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;
-                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> '.$value->User.'</p>
+                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a></p>
                                                                 <hr>
                                                                 '.$value->Content.'
                                                                 '.(!empty(Core::getInstance()->disqus)?'<hr>

@@ -83,11 +83,18 @@ $datalogin = Core::checkSessions();?>
                                         </div>
                                         <div>
                                             <hr> </div>
-                                        <div class="card-body"> <small class="text-muted">'.Core::lang('email_address').' </small>
-                                            <h6>'.$data->result[0]->Email.'</h6> <small class="text-muted p-t-30 db">'.Core::lang('phone').'</small>
-                                            <h6>'.$data->result[0]->Phone.'</h6> <small class="text-muted p-t-30 db">'.Core::lang('address').'</small>
-                                            <h6>'.$data->result[0]->Address.'</h6>
+                                        <div class="card-body">
+                                            <small class="text-muted">'.Core::lang('email_address').' </small>
+                                            <h6>'.$data->result[0]->Email.'</h6>
                                             
+                                            <small class="text-muted p-t-10 db">'.Core::lang('phone').'</small>
+                                            <h6>'.$data->result[0]->Phone.'</h6>
+                                            
+                                            <small class="text-muted p-t-10 db">'.Core::lang('address').'</small>
+                                            <h6>'.$data->result[0]->Address.'</h6>
+                                            <hr>
+                                            <small class="text-muted">'.Core::lang('total').' '.Core::lang('post').' : </small>
+                                            <h4 id="totalpost" class="pull-right">0</h4> 
                                         </div>
                                     </div>
                                 </div>
@@ -226,6 +233,26 @@ $datalogin = Core::checkSessions();?>
 
                                         </div>
                                     </div>
+
+                                    <div class="card">
+                                         <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs profile-tab" role="tablist">
+                                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#mypost" role="tab">'.Core::lang('post').'</a> </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <!--first tab-->
+                                            <div class="tab-pane active" id="mypost" role="tabpanel">
+                                                <div class="card-body">
+                                                    <ul id="mylist" class="list-unstyled">
+                                                        
+                                                    </ul>
+                                                    <center><button id="loadbtn" type="button" class="btn btn-themecolor" onclick="loadPost();">'.Core::lang('loadmore').'</button></center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <!-- Column -->
                             </div>
@@ -314,6 +341,95 @@ $datalogin = Core::checkSessions();?>
             }
         }
         /* Change password end */
+
+        /* Custom Format Date */
+        function customFormatDate(date='',delimiterdate='-',displaytime=false,midspace=' ',delimitertime=':') {
+        if (date == '' || date == null){
+    		date = new Date();
+	    } else {
+		    date = new Date(date);	
+    	}
+  
+        var monthNames = [
+            "Jan", "Feb", "Mar",
+            "Apr", "May", "Jun", "Jul",
+            "Aug", "Sep", "Oct",
+            "Nov", "Dec"
+        ];
+
+        var dd = date.getDate().toString();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+  
+        var hh = date.getHours().toString();
+        var mm = date.getMinutes().toString();
+        var ss = date.getSeconds().toString();
+  
+        var ddChars = dd.split('');
+        var hhChars = hh.split('');
+        var mmChars = mm.split('');
+        var ssChars = ss.split('');
+        if (displaytime==false){
+            return (ddChars[1]?dd:"0"+ddChars[0]) + delimiterdate + monthNames[monthIndex] + delimiterdate + year;		
+        }
+        return (ddChars[1]?dd:"0"+ddChars[0]) + delimiterdate + monthNames[monthIndex] + delimiterdate + year + midspace +(hhChars[1]?hh:"0"+hhChars[0])+delimitertime+(mmChars[1]?mm:"0"+mmChars[0])+delimitertime+(ssChars[1]?ss:"0"+ssChars[0]);
+    }
+
+        /* Initial page for loadmore */
+        var pages = 1;
+        /* Initial item for loadmore */
+        var items = 3;
+
+        /* Load more Post */
+        function loadPost(){
+            $(function(){
+                var btn = "loadbtn";
+                disableClickButton(btn);
+                $.ajax({
+                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/written/'.$datalogin['username'].'/'.$datalogin['token'].'/'.$datalogin['username'])?>")+"/"+pages+"/"+items+"/desc/?query=&_="+randomText(10),
+                    dataType: "json",
+                    type: "GET",
+                    success: function(data) {
+                        if (data.status == "success"){
+                            if(pages == 1) $('#totalpost').html(data.metadata.records_total);
+                            if( pages <= data.metadata.page_total){
+                                $.each(data.results, function(index, value){
+                                    var tags = value.Tags.split(',');
+                                    var datatags = "";
+                                    $.each(tags, function(indextag, valuetag){
+                                        datatags += '<a href="blog/'+slugify(valuetag)+'" title="<?php echo Core::lang('pages_search_label')?> '+$.trim(valuetag)+'" target="_blank">#'+$.trim(valuetag)+'</a>, ';
+                                    });
+                                    $('#mylist').append('<li class="media">\
+                                            <div class="media-body">\
+                                                <h3 class="mt-0 mb-1"><a href="post/'+value.PageID+'/'+slugify(value.Title)+'" title="'+value.Title+'" target="_blank">'+value.Title+'</a></h3>\
+                                                <p class="text-muted">\
+                                                    '+datatags.slice(0,-2)+' | <i class="mdi mdi-calendar-clock"></i> '+customFormatDate(value.Created_at,' ',true,', ')+'\
+                                                </p><hr>\
+                                                '+value.Description+'\
+                                            </div>\
+                                        </li>');
+                                });
+                                if(pages == data.metadata.page_total) $('#loadbtn').hide();
+                                pages = pages+1;
+                            }                                                     
+                        } else {
+                            $('#mylist').append('<li class="media">\
+                                    <div class="media-body">\
+                                        <h3 class="mt-0 mb-1">'+data.message+'</h3>\
+                                    </div>\
+                                </li>');
+                            $('#loadbtn').hide();
+                        }
+                    },
+                    complete: function(){
+                        disableClickButton(btn,false);
+                    },
+                    error: function(x, e) {}
+                });
+            });
+        }
+        /* Load Post */
+        loadPost(pages,items);
     </script>
 </body>
 

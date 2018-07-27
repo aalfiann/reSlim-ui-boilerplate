@@ -111,6 +111,7 @@ $vocabularies[] = [
     'user_profile' => 'User Profile',
     'my_profile' => 'My Profile',
     'view_profile' => 'View Profile',
+    'no_description_profile' => 'There is no any description on this profile...',
     //explore file
     'explore_file' => 'Explore File',
     'file_cloud' => 'File Cloud',
@@ -298,6 +299,8 @@ $vocabularies[] = [
     'pages_meta_desc_search_not_found' => 'Data is not available! You can try to use another keyword.',
     'pages_meta_desc_page_not_found' => '404 - Not Found! Sorry the page you are looking for, does not exist, has been deleted or may have been moved.',
     //general
+    'placeholder_global_search' => 'Search & Enter',
+    'loadmore' => 'Loadmore',
     'post' => 'Post',
     'blog' => 'Blog',
     'deleted' => 'Deleted!',
