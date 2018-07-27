@@ -10,9 +10,8 @@ System Requirements
 ---------------
 
 1. Web server with URL rewriting
-2. Web server with mcrypt extension
-3. PHP 5.5 or newer
-4. You already have reSlim rest api version >= 1.14.0 running
+2. PHP 5.5 or newer
+3. You already have reSlim rest api version >= 1.14.0 running
 
 
 Getting Started
