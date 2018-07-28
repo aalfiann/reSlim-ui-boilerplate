@@ -251,13 +251,15 @@
         
         <?php if(empty($datalogin)) {
                 echo '/* Global Search */
-                    document.querySelector("#globalsearch").addEventListener("keypress", function (e) {
-                    var key = e.which || e.keyCode;
-                    if (key === 13) {
-                        window.location.href = "blog/"+document.getElementById("globalsearch").value;
-                        // code for enter
-                    }
-                });';
+                    var selection = document.querySelector("#globalsearch") !== null;
+                    if(selection){
+                        document.querySelector("#globalsearch").addEventListener("keypress", function (e) {
+                            var key = e.which || e.keyCode;
+                            if (key === 13) {
+                                window.location.href = "blog/"+document.getElementById("globalsearch").value;
+                            }
+                        });
+                    }';
             }
         ?>
     </script>

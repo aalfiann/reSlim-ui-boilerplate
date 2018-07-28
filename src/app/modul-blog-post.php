@@ -49,7 +49,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
 <head>
     <base href="<?php echo Core::getInstance()->basepath?>/">
     <?php include_once 'global-meta.php';?>    
-    <title><?php echo Core::lang('post')?> - <?php echo Core::getInstance()->title?></title>
+    <title><?php echo $title?></title>
     <meta name="description" content="<?php echo $description;?>">
     <meta name="keyword" content="<?php echo $keyword;?>">
     <meta name="author" content="<?php echo $author;?>">
@@ -178,7 +178,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;
-                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a></p>
+                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a> | <i class="mdi mdi-eye"></i> '.$value->Viewer.'</p>
                                                                 <hr>
                                                                 '.$value->Content.'
                                                                 '.(!empty(Core::getInstance()->disqus)?'<hr>
@@ -265,6 +265,29 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
             }
             echo '</script>';
          }?>
+        <script>
+            $(function(){
+                /* Auto set img responsive on content post */
+                $(".media-body img").addClass("img-fluid");
+                /* Update data view start */
+                setTimeout(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/view/'.$pageid.'/?apikey='.Core::getInstance()->apikey)?>"),
+                        dataType: "json",
+                        success: function( data ) {
+                            console.log("View: " + data.message);
+                        },
+                        error: function( xhr, textStatus, error ) {
+                            console.log("XHR: " + xhr.statusText);
+                            console.log("STATUS: "+textStatus);
+                            console.log("ERROR: "+error);
+                        }
+                    })
+                }, 30000);
+                /* Update data view end */
+            });
+        </script>
 </body>
 
 </html>

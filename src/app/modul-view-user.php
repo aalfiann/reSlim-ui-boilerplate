@@ -291,7 +291,7 @@ $title = Core::lang('profile').' '.$profilename;
                                             <div class="media-body">\
                                                 <h3 class="mt-0 mb-1"><a href="post/'+value.PageID+'/'+slugify(value.Title)+'" title="'+value.Title+'">'+value.Title+'</a></h3>\
                                                 <p class="text-muted">\
-                                                    '+datatags.slice(0,-2)+' | <i class="mdi mdi-calendar-clock"></i> '+customFormatDate(value.Created_at,' ',true,', ')+'\
+                                                    '+datatags.slice(0,-2)+' | <i class="mdi mdi-calendar-clock"></i> '+customFormatDate(value.Created_at,' ',true,', ')+' | <i class="mdi mdi-eye"></i> '+$value.Viewer+'\
                                                 </p><hr>\
                                                 '+value.Description+'\
                                             </div>\
