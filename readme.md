@@ -11,7 +11,7 @@ System Requirements
 
 1. Web server with URL rewriting
 2. PHP 5.5 or newer
-3. You already have reSlim rest api version >= 1.14.0 running
+3. You already have reSlim rest api version >= 1.14.1 running
 
 
 Getting Started
