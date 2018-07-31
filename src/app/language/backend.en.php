@@ -298,6 +298,10 @@ $vocabularies[] = [
     'pages_meta_search_keyword' => 'Search, Result, Keyword',
     'pages_meta_desc_search_not_found' => 'Data is not available! You can try to use another keyword.',
     'pages_meta_desc_page_not_found' => '404 - Not Found! Sorry the page you are looking for, does not exist, has been deleted or may have been moved.',
+    //pages widget
+    'pages_widget_trendingposts' => 'Trending Posts',
+    'pages_widget_trendingtags' => 'Trending Tags',
+    'pages_widget_sharethis' => 'Share',
     //general
     'placeholder_global_search' => 'Search & Enter',
     'loadmore' => 'Loadmore',

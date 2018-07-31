@@ -298,6 +298,10 @@ $vocabularies[] = [
     'pages_meta_search_keyword' => 'Hasil, Pencarian, Kata Kunci',
     'pages_meta_desc_search_not_found' => 'Data tidak tersedia! Silahkan coba gunakan kata kunci pencarian lainnya.',
     'pages_meta_desc_page_not_found' => '404 - Tidak ditemukan! Maaf, Halaman yang Anda cari tidak ada, telah dihapus atau mungkin telah di pindahkan.',
+    //pages widget
+    'pages_widget_trendingposts' => 'Trending Posts',
+    'pages_widget_trendingtags' => 'Trending Tags',
+    'pages_widget_sharethis' => 'Share This',
     //general
     'placeholder_global_search' => 'Cari & Enter',
     'loadmore' => 'Loadmore',
