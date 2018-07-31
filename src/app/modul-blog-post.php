@@ -155,10 +155,6 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            <?php if(!empty(Core::getInstance()->sharethis)){
-                                echo '<div class="sharethis-inline-share-buttons"></div><hr>';
-                            }
-                            ?>
                                 <div class="row">
                                     <div class="col-lg-8 col-md-12 p-20">
                                         <ul class="list-unstyled">
@@ -224,6 +220,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
+    <script src="../assets/plugins/tagcloud/jquery.tagcloud.js"></script>
     <?php 
         if (!empty($data) && $data->status = "success"){
             echo '<script>';
@@ -265,29 +262,80 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
             }
             echo '</script>';
          }?>
-        <script>
-            $(function(){
-                /* Auto set img responsive on content post */
-                $(".media-body img").addClass("img-fluid");
-                /* Update data view start */
-                setTimeout(function() {
-                    $.ajax({
-                        type: "GET",
-                        url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/view/'.$pageid.'/?apikey='.Core::getInstance()->apikey)?>"),
-                        dataType: "json",
-                        success: function( data ) {
-                            console.log("View: " + data.message);
-                        },
-                        error: function( xhr, textStatus, error ) {
-                            console.log("XHR: " + xhr.statusText);
-                            console.log("STATUS: "+textStatus);
-                            console.log("ERROR: "+error);
-                        }
-                    })
-                }, 30000);
-                /* Update data view end */
+    <script>
+        function getTrendingPosts(limits,show='all'){
+            if(show != 'all') show = 'seasonal';
+            $.ajax({
+                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/taxonomy/page/')?>")+show+'/'+limits+Crypto.decode("<?php echo base64_encode('/?lang='.Core::getInstance()->setlang.'&apikey='.Core::getInstance()->apikey)?>")+"&_="+randomText(60),
+                dataType: "json",
+                type: "GET",
+                success: function(data) {
+                    if (data.status == "success"){
+                        $('#trendingpost').append('<p class="text-muted m-t-5 m-b-5"><?php echo Core::lang('pages_widget_trendingposts')?></p><hr class="m-t-5 m-b-10">');
+                        $.each(data.results, function(index, value){
+                            $('#trendingpost').append('<a href="post/'+value.PageID+'/'+slugify(value.Title)+'" title="'+value.Title+'">'+value.Title+'</a>');
+                            if (index < (data.results.length-1)) $('#trendingpost').append('<hr class="m-t-5 m-b-5">');
+                        });
+                        $('#trendingpost').append('<br><br>');
+                    }
+                },
+                error: function(x, e) {}
+            });  
+        }
+
+        function getTrendingTags(limits,show='all'){
+            if(show != 'all') show = 'seasonal';
+            $.ajax({
+                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/taxonomy/tags/')?>")+show+'/'+limits+Crypto.decode("<?php echo base64_encode('/?lang='.Core::getInstance()->setlang.'&apikey='.Core::getInstance()->apikey)?>")+"&_="+randomText(60),
+                dataType: "json",
+                type: "GET",
+                success: function(data) {
+                    if (data.status == "success"){
+                        $('#tagcloud').append('<p class="text-muted m-t-5 m-b-5"><?php echo Core::lang('pages_widget_trendingtags')?></p><hr class="m-t-5 m-b-10">');
+                        $.each(data.results, function(index, value){
+                            $('#tagcloud').append('<a href="blog/'+value.Tags.toLowerCase()+'" rel="'+value.Total+'">#'+value.Tags+'</a> ');
+                        });
+                        $('#tagcloud').append('<br><br>');
+                    }
+                },
+                complete: function(){
+                    $("#tagcloud a").tagcloud({
+                        size: {start: 12, end: 30, unit: "px"}
+                    });
+                },
+                error: function(x, e) {}
             });
-        </script>
+        }
+        
+        /* onload event */
+        $(function(){
+            /* Auto set img responsive on content post */
+            $(".media-body img").addClass("img-fluid");
+            getTrendingPosts(5);
+            getTrendingTags(15);
+            /* This is for the sticky sidebar */
+            $(".stickyside").stick_in_parent({
+                offset_top: 100
+            });
+            /* Update data view start */
+            setTimeout(function() {
+                $.ajax({
+                    type: "GET",
+                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/data/view/'.$pageid.'/?apikey='.Core::getInstance()->apikey)?>"),
+                    dataType: "json",
+                    success: function( data ) {
+                        console.log("View: " + data.message);
+                    },
+                    error: function( xhr, textStatus, error ) {
+                        console.log("XHR: " + xhr.statusText);
+                        console.log("STATUS: "+textStatus);
+                        console.log("ERROR: "+error);
+                    }
+                })
+            }, 30000);
+            /* Update data view end */
+        });
+    </script>
 </body>
 
 </html>

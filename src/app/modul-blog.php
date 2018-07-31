@@ -87,7 +87,7 @@ if (empty($search)){
                                                     foreach ($data->results as $name => $value) {
                                                         echo '<li class="media">
                                                             <div class="media-body">
-                                                                <h3 class="mt-0 mb-1"><a href="post/'.$value->PageID.'/'.Core::convertToSlug($value->Title).'">'.$value->Title.'</a></h3>
+                                                                <h3 class="mt-0 mb-1"><a href="post/'.$value->PageID.'/'.Core::convertToSlug($value->Title).'" title="'.$value->Title.'">'.$value->Title.'</a></h3>
                                                                 <p class="text-muted">';
                                                                 
                                                                 $datatag = "";
@@ -157,6 +157,62 @@ if (empty($search)){
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
+    <script src="../assets/plugins/tagcloud/jquery.tagcloud.js"></script>
+    <script>
+        function getTrendingPosts(limits,show='all'){
+            if(show != 'all') show = 'seasonal';
+            $.ajax({
+                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/taxonomy/page/')?>")+show+'/'+limits+Crypto.decode("<?php echo base64_encode('/?lang='.Core::getInstance()->setlang.'&apikey='.Core::getInstance()->apikey)?>")+"&_="+randomText(60),
+                dataType: "json",
+                type: "GET",
+                success: function(data) {
+                    if (data.status == "success"){
+                        $('#trendingpost').append('<p class="text-muted m-t-5 m-b-5"><?php echo Core::lang('pages_widget_trendingposts')?></p><hr class="m-t-5 m-b-10">');
+                        $.each(data.results, function(index, value){
+                            $('#trendingpost').append('<a href="post/'+value.PageID+'/'+slugify(value.Title)+'" title="'+value.Title+'">'+value.Title+'</a>');
+                            if (index < (data.results.length-1)) $('#trendingpost').append('<hr class="m-t-5 m-b-5">');
+                        });
+                        $('#trendingpost').append('<br><br>');
+                    }
+                },
+                error: function(x, e) {}
+            });  
+        }
+
+        function getTrendingTags(limits,show='all'){
+            if(show != 'all') show = 'seasonal';
+            $.ajax({
+                url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/page/taxonomy/tags/')?>")+show+'/'+limits+Crypto.decode("<?php echo base64_encode('/?lang='.Core::getInstance()->setlang.'&apikey='.Core::getInstance()->apikey)?>")+"&_="+randomText(60),
+                dataType: "json",
+                type: "GET",
+                success: function(data) {
+                    if (data.status == "success"){
+                        $('#tagcloud').append('<p class="text-muted m-t-5 m-b-5"><?php echo Core::lang('pages_widget_trendingtags')?></p><hr class="m-t-5 m-b-10">');
+                        $.each(data.results, function(index, value){
+                            $('#tagcloud').append('<a href="blog/'+value.Tags.toLowerCase()+'" rel="'+value.Total+'">#'+value.Tags+'</a> ');
+                        });
+                        $('#tagcloud').append('<br><br>');
+                    }
+                },
+                complete: function(){
+                    $("#tagcloud a").tagcloud({
+                        size: {start: 10, end: 25, unit: "px"}
+                    });
+                },
+                error: function(x, e) {}
+            });
+        }
+
+        /* onload event */
+        $(function(){
+            getTrendingPosts(5);
+            getTrendingTags(15);
+            /* This is for the sticky sidebar */
+            $(".stickyside").stick_in_parent({
+                offset_top: 100
+            });
+        });
+    </script>
 </body>
 
 </html>
