@@ -300,7 +300,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                 },
                 complete: function(){
                     $("#tagcloud a").tagcloud({
-                        size: {start: 12, end: 30, unit: "px"}
+                        size: {start: 12, end: 28, unit: "px"}
                     });
                 },
                 error: function(x, e) {}

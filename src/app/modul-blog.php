@@ -196,7 +196,7 @@ if (empty($search)){
                 },
                 complete: function(){
                     $("#tagcloud a").tagcloud({
-                        size: {start: 10, end: 25, unit: "px"}
+                        size: {start: 12, end: 28, unit: "px"}
                     });
                 },
                 error: function(x, e) {}
