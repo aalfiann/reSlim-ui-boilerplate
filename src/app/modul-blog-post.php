@@ -174,7 +174,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
                                                                 }
                                                                 $datatag = substr($datatag, 0, -2);
                                                                 echo $datatag;
-                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a> | <i class="mdi mdi-eye"></i> '.$value->Viewer.'</p>
+                                                                echo ' | <i class="mdi mdi-calendar-clock"></i> '.date_format(date_create($value->Created_at),"d M Y, H:i").' | <i class="mdi mdi-account"></i> <a href="user/'.$value->User.'" title="'.Core::lang('profile').' '.$value->User.'">'.$value->User.'</a> | <i class="mdi mdi-eye"></i> '.number_format($value->Viewer).(!empty(Core::getInstance()->disqus)?' | <i class="mdi mdi-comment-text"></i> <span class="disqus-comment-count" data-disqus-url="'.Core::getInstance()->basepath.'/post/'.$value->PageID.'/'.Core::convertToSlug($value->Title).'"></span>':'').'</p>
                                                                 <hr>
                                                                 '.$value->Content.'
                                                                 '.(!empty(Core::getInstance()->disqus)?'<hr>
@@ -336,6 +336,18 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
             /* Update data view end */
         });
     </script>
+    <?php 
+        if(!empty(Core::getInstance()->disqus)) {
+            echo '<script type="text/javascript">
+                var disqus_shortname = "'.Core::getInstance()->disqus.'";
+                (function () {
+                    var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                    dsq.src = "//" + disqus_shortname + ".disqus.com/count.js";
+                    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                })();
+            </script>';
+        }
+    ?>
 </body>
 
 </html>
