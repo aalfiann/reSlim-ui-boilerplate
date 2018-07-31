@@ -1162,7 +1162,7 @@
          */
         public static function isPageMatch($filename){
             $filename = preg_replace('/\\.[^.\\s]{2,4}$/', '', $filename);
-            if (pathinfo(basename($_SERVER['REQUEST_URI']), PATHINFO_FILENAME) == $filename){
+            if (pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME) == $filename){
                 return true;
             }
             return false;
