@@ -74,6 +74,9 @@ $vocabularies[] = [
     'val_email_html' => 'Input according to email address format!',
     'val_asterisk_required' => 'Fields marked with an asterisk are required!',
     'val_wrong_format' => 'Wrong Format!',
+    'val_failed_recaptcha' => 'Failed to verify reCaptcha!',
+    'val_wrong_input_field' => 'Invalid input field detected!',
+    'val_check_field' => 'Please check again your input on some field!',
     //register
     'register' => 'Register',
     'form_register' => 'Form Register',
@@ -156,6 +159,8 @@ $vocabularies[] = [
     'tools' => 'Tools',
     'settings' => 'Settings',
     'no_have_api' => 'Doesn\'t have any API Keys? You can create at least one API Key at',
+    'require_recaptcha_config' => '<b>reCaptcha Site Key</b> and <b>Secret Key</b> is required to make this work!',
+    'get_recaptcha_config' => 'You can get the Keys at <a href="https://www.google.com/recaptcha" target="_blank">Google reCaptcha v.2.0</a>.',
     //label settings
     'label_settings_keyword' => 'Keyword',
     'label_settings_description' => 'Description',
@@ -172,6 +177,8 @@ $vocabularies[] = [
     'label_settings_googlewebmaster' => 'Google Webmaster',
     'label_settings_bingwebmaster' => 'Bing Webmaster',
     'label_settings_yandexwebmaster' => 'Yandex Webmaster',
+    'label_settings_recaptcha_sitekey' => 'reCaptcha Site Key',
+    'label_settings_recaptcha_secretkey' => 'reCaptcha Secret Key',
     //helper settings
     'helper_settings_title' => 'This is default title name for your website.',
     'helper_settings_keyword' => 'This is default keyword tags for your website.',
@@ -193,6 +200,8 @@ $vocabularies[] = [
     'helper_settings_googlewebmaster' => 'This is for SEO purpose on Google Search Engine.',
     'helper_settings_bingwebmaster' => 'This is for SEO purpose on Bing Search Engine.',
     'helper_settings_yandexwebmaster' => 'This is for SEO purpose on Yandex Search Engine...',
+    'helper_settings_recaptcha_sitekey' => 'This is for get response reCaptcha on html...',
+    'helper_settings_recaptcha_secretkey' => 'This is for verify request reCaptcha on server side...',
     //input settings
     'input_settings_keyword' => 'Please input the keyword of website separated with commas...',
     'input_settings_description' => 'Please input the description of website...',
@@ -209,6 +218,8 @@ $vocabularies[] = [
     'input_settings_googlewebmaster' => 'Please input Your ID Google Webmaster here...',
     'input_settings_bingwebmaster' => 'Please input Your ID Bing Webmaster here...',
     'input_settings_yandexwebmaster' => 'Please input Your ID Yandex Webmaster here...',
+    'input_settings_recaptcha_sitekey' => 'Please input Your reCaptcha Site Key here...',
+    'input_settings_recaptcha_secretkey' => 'Please input Your reCaptcha Secret Key here...',
     //error log
     'error_log' => 'Error Log',
     'error_log_title' => 'Error Log in API Server',
@@ -303,6 +314,7 @@ $vocabularies[] = [
     'pages_widget_trendingtags' => 'Trending Tags',
     'pages_widget_sharethis' => 'Share',
     //general
+    'website' => 'Website',
     'placeholder_global_search' => 'Search & Enter',
     'loadmore' => 'Loadmore',
     'post' => 'Post',

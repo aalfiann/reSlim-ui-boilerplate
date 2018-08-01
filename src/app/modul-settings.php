@@ -74,7 +74,9 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                     'Bingwebmaster' => $_POST['bingwebmaster'],
                                     'Yandexwebmaster' => $_POST['yandexwebmaster'],
                                     'Seopage' => $_POST['seopage'],
-                                    'Seosite' => $_POST['seosite']
+                                    'Seosite' => $_POST['seosite'],
+                                    'Recaptcha_sitekey' => $_POST['recaptcha_sitekey'],
+                                    'Recaptcha_secretkey' => $_POST['recaptcha_secretkey']
                                 );
                                 Core::saveSettings($post_array);
                             } 
@@ -187,6 +189,16 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                         <label class="form-control-label"><b><?php echo Core::lang('label_settings_yandexwebmaster')?></b></label>
                                         <input name="yandexwebmaster" type="text" placeholder="<?php echo Core::lang('input_settings_yandexwebmaster')?>" class="form-control" value="<?php echo Core::getInstance()->yandexwebmaster?>">
                                         <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_yandexwebmaster')?></small></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label"><b><?php echo Core::lang('label_settings_recaptcha_sitekey')?></b></label>
+                                        <input name="recaptcha_sitekey" type="text" placeholder="<?php echo Core::lang('input_settings_recaptcha_sitekey')?>" class="form-control" value="<?php echo Core::getInstance()->recaptcha_sitekey?>">
+                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_recaptcha_sitekey')?></small></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label"><b><?php echo Core::lang('label_settings_recaptcha_secretkey')?></b></label>
+                                        <input name="recaptcha_secretkey" type="text" placeholder="<?php echo Core::lang('input_settings_recaptcha_secretkey')?>" class="form-control" value="<?php echo Core::getInstance()->recaptcha_secretkey?>">
+                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_recaptcha_secretkey')?></small></span>
                                     </div>
                                     <hr>
                                     <div class="form-group">

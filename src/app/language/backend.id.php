@@ -74,6 +74,9 @@ $vocabularies[] = [
     'val_email_html' => 'Input sesuai dengan format alamat email!',
     'val_asterisk_required' => 'Kolom yang diberi tanda bintang harus diisi!',
     'val_wrong_format' => 'Format Salah!',
+    'val_failed_recaptcha' => 'Gagal verifikasi reCaptcha!',
+    'val_wrong_input_field' => 'Invalid input field detected!',
+    'val_check_field' => 'Please check again your input on some field!',
     //register
     'register' => 'Pendaftaran',
     'form_register' => 'Form Pendaftaran',
@@ -156,6 +159,8 @@ $vocabularies[] = [
     'tools' => 'Perkakas',
     'settings' => 'Pengaturan',
     'no_have_api' => 'Tidak punya API Keys? Anda dapat membuatnya',
+    'require_recaptcha_config' => '<b>reCaptcha Site Key</b> dan <b>Secret Key</b> dibutuhkan agar ini berfungsi!',
+    'get_recaptcha_config' => 'Anda bisa mendapatkan Keys di <a href="https://www.google.com/recaptcha" target="_blank">Google reCaptcha v.2.0</a>.',
     //label settings
     'label_settings_keyword' => 'Kata Kunci',
     'label_settings_description' => 'Deskripsi',
@@ -172,6 +177,8 @@ $vocabularies[] = [
     'label_settings_googlewebmaster' => 'Google Webmaster',
     'label_settings_bingwebmaster' => 'Bing Webmaster',
     'label_settings_yandexwebmaster' => 'Yandex Webmaster',
+    'label_settings_recaptcha_sitekey' => 'reCaptcha Site Key',
+    'label_settings_recaptcha_secretkey' => 'reCaptcha Secret Key',
     //helper settings
     'helper_settings_title' => 'Ini adalah default judul website Anda.',
     'helper_settings_keyword' => 'Ini adalah default kata kunci tag website Anda.',
@@ -193,6 +200,8 @@ $vocabularies[] = [
     'helper_settings_googlewebmaster' => 'Ini adalah untuk SEO di Google Search Engine.',
     'helper_settings_bingwebmaster' => 'Ini adalah untuk SEO di Bing Search Engine.',
     'helper_settings_yandexwebmaster' => 'Ini adalah untuk SEO di Yandex Search Engine...',
+    'helper_settings_recaptcha_sitekey' => 'Ini adalah untuk mengambil response reCaptcha pada html...',
+    'helper_settings_recaptcha_secretkey' => 'Ini adalah untuk verifikasi request reCaptcha pada server...',
     //input settings
     'input_settings_keyword' => 'Input dengan kata kunci dan pisahkan dengan koma...',
     'input_settings_description' => 'Input deskripsi website...',
@@ -209,6 +218,8 @@ $vocabularies[] = [
     'input_settings_googlewebmaster' => 'Input ID Google Webmaster Anda disini...',
     'input_settings_bingwebmaster' => 'Input ID Bing Webmaster Anda disini...',
     'input_settings_yandexwebmaster' => 'Input ID Yandex Webmaster Anda disini...',
+    'input_settings_recaptcha_sitekey' => 'Input reCaptcha Site Key Anda disini...',
+    'input_settings_recaptcha_secretkey' => 'Input reCaptcha Secret Key Anda disini...',
     //error log
     'error_log' => 'Error Log',
     'error_log_title' => 'Error Log di API Server',
@@ -303,6 +314,7 @@ $vocabularies[] = [
     'pages_widget_trendingtags' => 'Trending Tags',
     'pages_widget_sharethis' => 'Share This',
     //general
+    'website' => 'Website',
     'placeholder_global_search' => 'Cari & Enter',
     'loadmore' => 'Loadmore',
     'post' => 'Post',

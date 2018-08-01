@@ -21,3 +21,5 @@
             $config['yandexwebmaster'] = ''; //Your yandex webmaster, you can leave this blank and fill this later
             $config['seopage'] = ''; //Keyword for dynamic page, you can leave this blank and fill this later
             $config['seosite'] = ''; //Keyword for competitor site, you can leave this blank and fill this later
+            $config['recaptcha_sitekey'] = ''; //This is for get response reCaptcha on html, you can leave this blank and fill this later
+            $config['recaptcha_secretkey'] = ''; //This is for verify request reCaptcha on server side, you can leave this blank and fill this later
