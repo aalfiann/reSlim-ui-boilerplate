@@ -50,32 +50,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-12 col-sm-12 p-20">
-                                        <div class="stickyside">
-                                        <?php
-                                            echo '<div class="card card-body bg-light">
-                                            <b>'.Core::getInstance()->title.'</b>
-                                            <hr class="m-t-0 m-b-0" style="display:block;height: 1px;border: 0;border-top: 1px solid #ccc;margin: 1em 0;padding: 0;">
-                                            '.Core::getInstance()->description;
-                                            if (!empty(Core::getInstance()->facebook) || !empty(Core::getInstance()->twitter) || !empty(Core::getInstance()->gplus) || !empty(Core::getInstance()->email)){
-                                                echo '<p class="m-t-10 m-b-0">';
-                                                echo (!empty(Core::getInstance()->facebook)?'<a href="'.Core::getInstance()->facebook.'" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>':'');
-                                                echo (!empty(Core::getInstance()->twitter)?' <a href="'.Core::getInstance()->twitter.'" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>':'');
-                                                echo (!empty(Core::getInstance()->gplus)?' <a href="'.Core::getInstance()->gplus.'" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>':'');
-                                                echo (!empty(Core::getInstance()->email)?' <a href="mailto:'.Core::getInstance()->email.'"><i class="fa fa-envelope-square fa-2x"></i></a>':'');
-                                                echo '</p>';
-                                            }
-                                            echo '<small><p class="m-t-10 m-b-5">Powered by - <a href="https://github.com/aalfiann/reslim-ui-boilerplate" target="_blank">reSlim UI Boilerplate</a></p></small>';
-                                            echo '</div>';
-                                        ?>
-                                        </div>
-                                    </div>
 
                                     <div class="col-lg-8 col-md-12 p-20">
-                                        <?php 
-                                            if(empty(Core::getInstance()->recaptcha_sitekey) || empty(Core::getInstance()->recaptcha_secretkey)) echo Core::getMessage('danger',Core::lang('require_recaptcha_config'),'<br>'.Core::lang('get_recaptcha_config'));
-                                        ?>
                                         <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('form_contact_us')?></h3><hr>
+                                        <?php if(empty(Core::getInstance()->recaptcha_sitekey) || empty(Core::getInstance()->recaptcha_secretkey)) echo Core::getMessage('danger',Core::lang('require_recaptcha_config'),'<br>'.Core::lang('get_recaptcha_config'));?>
                                         <div id="reportmsg"></div>
                                         <form class="form-control-line" id="contactForm">
                                             <div class="row">
@@ -121,12 +99,33 @@
                                                 <textarea id="message" type="text" style="resize: vertical;" rows="5" placeholder="" class="form-control" maxlength="500" required></textarea>
                                                 <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_message')?></small></span>
                                             </div>
-                                            <div class="g-recaptcha" data-sitekey="<?php echo Core::getInstance()->recaptcha_sitekey?>" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                            <div id="g-recaptcha" class="g-recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
                                             <hr>
                                             <div class="form-group">
                                                 <button id="submitbtn" type="submit" class="btn btn-themecolor"><?php echo Core::lang('send_message')?> <i class="mdi mdi-send"></i></button>
                                             </div>                                        
                                         </form>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-12 col-sm-12 p-20">
+                                        <div class="stickyside">
+                                        <?php
+                                            echo '<div class="card card-body bg-light">
+                                            <b>'.Core::getInstance()->title.'</b>
+                                            <hr class="m-t-0 m-b-0" style="display:block;height: 1px;border: 0;border-top: 1px solid #ccc;margin: 1em 0;padding: 0;">
+                                            '.Core::getInstance()->description;
+                                            if (!empty(Core::getInstance()->facebook) || !empty(Core::getInstance()->twitter) || !empty(Core::getInstance()->gplus) || !empty(Core::getInstance()->email)){
+                                                echo '<p class="m-t-10 m-b-0">';
+                                                echo (!empty(Core::getInstance()->facebook)?'<a href="'.Core::getInstance()->facebook.'" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>':'');
+                                                echo (!empty(Core::getInstance()->twitter)?' <a href="'.Core::getInstance()->twitter.'" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>':'');
+                                                echo (!empty(Core::getInstance()->gplus)?' <a href="'.Core::getInstance()->gplus.'" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>':'');
+                                                echo (!empty(Core::getInstance()->email)?' <a href="mailto:'.Core::getInstance()->email.'"><i class="fa fa-envelope-square fa-2x"></i></a>':'');
+                                                echo '</p>';
+                                            }
+                                            echo '<small><p class="m-t-10 m-b-5">Powered by - <a href="https://github.com/aalfiann/reslim-ui-boilerplate" target="_blank">reSlim UI Boilerplate</a></p></small>';
+                                            echo '</div>';
+                                        ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -154,51 +153,86 @@
     <!-- Sweet-Alert  -->
     <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
     <script>$(function(){$('head').append('<link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">')});</script>
-    <!-- reCaptcha V.2.0 -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         /* onload event */
         $(function(){
-            /* ajax send mail */
-            var contactForm = $("#contactForm");
-            contactForm.on("submit", function(e) {
-                $("#reportmsg").html('');
-                e.preventDefault();
-                disableClickButton('submitbtn');
-                $.ajax({
-                    type: "POST",
-                    url: "ajax-sendmail.php",
-                    data: {
-                        fullname: $("#fullname").val(),
-                        email: $("#email").val(),
-                        phone: $("#phone").val(),
-                        website: $("#website").val(),
-                        subject: $("#subject").val(),
-                        message: $("#message").val(),
-                        captcha: grecaptcha.getResponse()
-                    },
-                    success: function(data) {
-                        if (data.status == "success"){
-                            /* clear form */
-                            contactForm.find("input,textarea").val("").end();
-                            writeMessage("#reportmsg","success",data.message);
-                            swal(data.message, "","success");
-                        } else {
-                            writeMessage("#reportmsg","danger","<?php echo Core::lang('send_message_failed')?>",data.message);
-                            swal("<?php echo Core::lang('send_message_failed')?>", data.message,"error");
+            <?php 
+                if(!empty(Core::getInstance()->recaptcha_sitekey) && !empty(Core::getInstance()->recaptcha_secretkey)){
+                    echo '/* ajax send mail */
+                    var contactForm = $("#contactForm");
+                    contactForm.on("submit", function(e) {
+                        $("#reportmsg").html("");
+                        e.preventDefault();
+
+                        /* Render the reCaptcha */
+                        var sourceapi = "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit";
+                        var len = $(\'script[src*="\'+sourceapi+\'"]\').length; 
+                        if (len === 0) {
+                            renderRecaptcha(sourceapi);
+                            return false;
+                            if ($(\'script[src*="\'+sourceapi+\'"]\').length === 0) {
+                                renderRecaptcha(sourceapi);
+                                return false;
+                            }
                         }
-                    },
-                    complete: function(){
-                        grecaptcha.reset();
-                        disableClickButton('submitbtn',false);
-                    }
-                });
-            });
+        
+                        disableClickButton("submitbtn");
+                        $.ajax({
+                            type: "POST",
+                            url: "ajax-sendmail.php",
+                            data: {
+                                fullname: $("#fullname").val(),
+                                email: $("#email").val(),
+                                phone: $("#phone").val(),
+                                website: $("#website").val(),
+                                subject: $("#subject").val(),
+                                message: $("#message").val(),
+                                captcha: grecaptcha.getResponse()
+                            },
+                            success: function(data) {
+                                if (data.status == "success"){
+                                    /* clear form */
+                                    contactForm.find("input,textarea").val("").end();
+                                    writeMessage("#reportmsg","success",data.message);
+                                    swal(data.message, "","success");
+                                } else {
+                                    writeMessage("#reportmsg","danger","'.Core::lang('send_message_failed').'",data.message);
+                                    swal("'.Core::lang('send_message_failed').'", data.message,"error");
+                                }
+                            },
+                            complete: function(){
+                                grecaptcha.reset();
+                                disableClickButton("submitbtn",false);
+                            }
+                        });
+                    });';
+                }
+            ?>
+            
             /* This is for the sticky sidebar */
             $(".stickyside").stick_in_parent({
-                offset_top: 100
+                offset_top: 75
             });
         });
+        
+        <?php 
+            if(!empty(Core::getInstance()->recaptcha_sitekey) && !empty(Core::getInstance()->recaptcha_secretkey)){
+                echo '/* Execute render recaptcha */
+                function renderRecaptcha(url){
+                    var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true; dsq.defer = true;
+                    dsq.src = url;
+                    (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                }
+        
+                /* render reCaptcha */
+                var onloadCallback = function() {
+                    grecaptcha.render("g-recaptcha", {
+                        "sitekey" : "'.Core::getInstance()->recaptcha_sitekey.'",
+                        "theme" : "light"
+                    });
+                };';
+            }
+        ?>
     </script>
 </body>
 

@@ -15,7 +15,7 @@ $message = (!empty($_POST["message"])?stripslashes($_POST["message"]):'');
 
 //build mail
 $post_array = [
-    'To'            => 'div.it@tkd.co.id',
+    'To'            => Core::getInstance()->email,
     'Subject'       => $subject,
     'Message'       => '<b>'.Core::lang('fullname').':</b> '.$fullname.'<br><b>'.Core::lang('email').':</b> '.$email.'<br><b>'.Core::lang('phone').':</b> '.$phone.'<br><b>'.Core::lang('website').':</b> '.$website.'<br><b>'.Core::lang('subject').':</b> '.$subject.'<br><b>'.Core::lang('message').':</b><br>'.$message,
     'Html'          => true,
