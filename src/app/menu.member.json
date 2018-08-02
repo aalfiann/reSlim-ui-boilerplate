@@ -43,6 +43,12 @@
                     "icon_class":"mdi mdi-bullseye",
                     "label_class":"",
                     "link":"modul-data-api.php"
+                },
+                {
+                    "id":"5",
+                    "title":"contact",
+                    "link": "modul-contact.php",
+                    "icon_class":"mdi mdi-email"
                 }
             ]
 		},

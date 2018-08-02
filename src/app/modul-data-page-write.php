@@ -85,7 +85,7 @@ $datalogin = Core::checkSessions();?>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label"><b><?php echo Core::lang('content')?></b></label>
-                                        <textarea id="content" rows="5" style="resize: vertical;" class="form-control summernote" placeholder="<?php echo Core::lang('input_content_page')?>" maxlength="10000" required></textarea>
+                                        <textarea id="content" rows="5" style="resize: vertical;" class="form-control summernote" placeholder="<?php echo Core::lang('input_content_page')?>" maxlength="10000"></textarea>
                                     </div>
                                     <div class="text-center">
                                         <button id="submitbtn" type="submit" class="btn btn-success"><?php echo Core::lang('save_page')?></button>
@@ -114,6 +114,17 @@ $datalogin = Core::checkSessions();?>
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
     <script src="../assets/plugins/summernote/dist/summernote.min.js"></script>
+    <?php 
+        $codelang = "";
+        switch(Core::getInstance()->setlang){
+            case 'id':
+                $codelang = 'id-ID';
+                break;
+            default:
+                $codelang = "";
+        }
+        if (!empty($codelang)) echo '<script src="../assets/plugins/summernote/dist/lang/summernote-'.$codelang.'.min.js"></script>';
+    ?>
     <script>
         $(function(){
             $('.summernote').summernote({
@@ -121,6 +132,7 @@ $datalogin = Core::checkSessions();?>
                 minHeight: null, // set minimum height of editor
                 maxHeight: null, // set maximum height of editor
                 focus: false // set focus to editable area after initializing summernote
+                <?php echo (empty($codelang)?'':',lang: "'.$codelang.'"')."\n";?>
             });
         });
         /* Add new data start */
@@ -129,6 +141,10 @@ $datalogin = Core::checkSessions();?>
         function sendnewdata(e){
             console.log("Process add new data...");
             e.preventDefault();
+            
+            /* Validate summernote */
+            if ($(".summernote").summernote("isEmpty")) return false;
+
             var that = $(this);
             that.off("submit"); /* remove handler */
             var div = document.getElementById("report-newdata");

@@ -1,4 +1,5 @@
-<?php spl_autoload_register(function ($classname) {require ( $classname . ".php");});?>
+<?php spl_autoload_register(function ($classname) {require ( $classname . ".php");});
+$datalogin = Core::checkSessions();?>
 <!DOCTYPE html>
 <html lang="<?php echo Core::getInstance()->setlang?>">
 <head>
@@ -58,39 +59,6 @@
                                         <?php if(empty(Core::getInstance()->recaptcha_sitekey) || empty(Core::getInstance()->recaptcha_secretkey)) echo Core::getMessage('danger',Core::lang('require_recaptcha_config'),'<br>'.Core::lang('get_recaptcha_config'));?>
                                         <div id="reportmsg"></div>
                                         <form class="form-control-line" id="contactForm">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label"><b><?php echo Core::lang('fullname')?></b></label>
-                                                        <input id="fullname" placeholder="" class="form-control" maxlength="50" required>
-                                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_name')?></small></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label"><b><?php echo Core::lang('email')?></b></label>
-                                                        <input id="email" type="text" placeholder="" class="form-control" maxlength="50" required>
-                                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_email')?></small></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label"><b><?php echo Core::lang('phone')?></b></label>
-                                                        <input id="phone" placeholder="" class="form-control" maxlength="15" required>
-                                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_phone')?></small></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label"><b><?php echo Core::lang('website')?></b></label>
-                                                        <input id="website" type="text" placeholder="" class="form-control" maxlength="50" value="">
-                                                        <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_domain')?></small></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
                                             <div class="form-group">
                                                 <label class="form-control-label"><b><?php echo Core::lang('subject')?></b></label>
                                                 <input id="subject" type="text" placeholder="" class="form-control" maxlength="50" required>
@@ -98,8 +66,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"><b><?php echo Core::lang('message')?></b></label>
-                                                <textarea id="message" type="text" style="resize: vertical;" rows="5" placeholder="<?php echo Core::lang('input_message')?>" class="form-control summernote" maxlength="10000"></textarea>
-                                                <span id="summernote_validate" class="help-block text-danger"></span>
+                                                <textarea id="message" type="text" style="resize: vertical;" rows="3" placeholder="" class="form-control summernote" maxlength="10000"></textarea>
+                                                <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('input_message')?></small></span>
                                             </div>
                                             <div id="g-recaptcha" class="g-recaptcha" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
                                             <hr>
@@ -179,12 +147,6 @@
                         $("#reportmsg").html("");
                         e.preventDefault();
 
-                        /* Validate summernote */
-                        if ($(".summernote").summernote("isEmpty")) {
-                            $("#summernote_validate").append(\'<small><i class="ti-info-alt"></i> '.Core::lang('input_message').'</small>\');
-                            return false;
-                        }
-
                         /* Render reCaptcha */
                         var sourceapi = "https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit";
                         var len = $(\'script[src*="\'+sourceapi+\'"]\').length; 
@@ -202,10 +164,8 @@
                             type: "POST",
                             url: "ajax-sendmail.php",
                             data: {
-                                fullname: $("#fullname").val(),
-                                email: $("#email").val(),
-                                phone: $("#phone").val(),
-                                website: $("#website").val(),
+                                fullname: "'.$datalogin['username'].'",
+                                email: $("#my_email_navbar").text(),
                                 subject: $("#subject").val(),
                                 message: $("#message").val(),
                                 captcha: grecaptcha.getResponse()

@@ -18,6 +18,12 @@
     			    	    "link": "modul-user-access.php"
                         }
         		    ]
+                },
+                {
+                    "id":"2",
+                    "title":"contact",
+                    "link": "modul-contact.php",
+                    "icon_class":"mdi mdi-email"
                 }
             ]
 		}

@@ -52,39 +52,46 @@
                     "title":"maintenance",
                     "icon_class":"mdi mdi-settings",
                     "label_class":"",
-                    "menus": [{
-                        "title": "settings",
-                        "link": "modul-settings.php"
-                    },
-                    {   
-                        "title": "error log",
-                        "link": "modul-error-log.php"
-                    },
-                    {   
-                        "title": "cache",
-                        "link": "modul-cache.php"
-                    },
-                    {   
-                        "title": "terminal",
-                        "link": "modul-terminal.php"
-                    },
-                    {   
-                        "title": "phpinfo",
-                        "link": "modul-phpinfo.php"
-                    },
-                    {   
-                        "title": "backup",
-                        "link": "modul-backup-db.php"
-                    },
-                    {   
-                        "title": "packager",
-                        "link": "modul-packager.php"
-                    },
-                    {   
-                        "title": "flexible config",
-                        "link": "modul-flexible-config.php"
-                    }
-                ]
+                    "menus": [
+                        {
+                            "title": "settings",
+                            "link": "modul-settings.php"
+                        },
+                        {   
+                            "title": "error log",
+                            "link": "modul-error-log.php"
+                        },
+                        {   
+                            "title": "cache",
+                            "link": "modul-cache.php"
+                        },
+                        {   
+                            "title": "terminal",
+                            "link": "modul-terminal.php"
+                        },
+                        {   
+                            "title": "phpinfo",
+                            "link": "modul-phpinfo.php"
+                        },
+                        {   
+                            "title": "backup",
+                            "link": "modul-backup-db.php"
+                        },
+                        {   
+                            "title": "packager",
+                            "link": "modul-packager.php"
+                        },
+                        {   
+                            "title": "flexible config",
+                            "link": "modul-flexible-config.php"
+                        }
+                    ]
+                },
+                {
+                    "id":"6",
+                    "title":"contact",
+                    "link": "modul-contact.php",
+                    "icon_class":"mdi mdi-email"
                 }
             ]
 		},
