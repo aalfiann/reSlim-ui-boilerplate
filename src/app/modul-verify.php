@@ -13,7 +13,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);position: fixed !important;">
+        <div class="login-register" style="background-image:url(<?php echo Core::getInstance()->assetspath?>/images/background/login-register.jpg);position: fixed !important;">
             <div class="login-box card">>
                 <?php
                     if (isset($_POST['submitnewpassword'])){

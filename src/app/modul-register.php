@@ -15,7 +15,7 @@ $aaa=rand(0,5);$bbb=rand(3,9);?>
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);position: fixed !important;">
+        <div class="login-register" style="background-image:url(<?php echo Core::getInstance()->assetspath?>/images/background/login-register.jpg);position: fixed !important;">
             <div class="login-box card" id="register">
                 <div id="report-register"></div>
                 <div class="card-body">

@@ -6,7 +6,7 @@ $datalogin = Core::checkSessions();?>
     <?php include_once 'global-meta.php';?>    
     <title><?php echo Core::lang('edit').' '.Core::lang('page')?> - <?php echo Core::getInstance()->title?></title>
     <!-- summernotes CSS -->
-    <link href="../assets/plugins/summernote/dist/summernote.css" rel="stylesheet"/>
+    <link href="<?php echo Core::getInstance()->assetspath?>/plugins/summernote/dist/summernote.css" rel="stylesheet"/>
 </head>
 
 <body class="fix-sidebar fix-header card-no-border">
@@ -128,7 +128,7 @@ $datalogin = Core::checkSessions();?>
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
-    <script src="../assets/plugins/summernote/dist/summernote.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/summernote/dist/summernote.min.js"></script>
     <?php 
         $codelang = "";
         switch(Core::getInstance()->setlang){
@@ -138,7 +138,7 @@ $datalogin = Core::checkSessions();?>
             default:
                 $codelang = "";
         }
-        if (!empty($codelang)) echo '<script src="../assets/plugins/summernote/dist/lang/summernote-'.$codelang.'.min.js"></script>';
+        if (!empty($codelang)) echo '<script src="'.Core::getInstance()->assetspath.'/plugins/summernote/dist/lang/summernote-'.$codelang.'.min.js"></script>';
     ?>
     <script>
         $(function(){

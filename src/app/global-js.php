@@ -5,10 +5,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
@@ -16,14 +16,14 @@
     <!--Menu sidebar -->
     <script src="js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
     <script>
         /* Init theme style */
@@ -134,7 +134,7 @@
             }
         }
         $(function() { 
-            $("head").append("<style>.lazyload {opacity: 0;} .lazyloading {opacity: 1;transition: opacity 300ms;background: #f7f7f7 url(../assets/images/blank.gif) no-repeat center;}</style>");
+            $("head").append("<style>.lazyload {opacity: 0;} .lazyloading {opacity: 1;transition: opacity 300ms;background: #f7f7f7 url(<?php echo Core::getInstance()->assetspath?>/images/blank.gif) no-repeat center;}</style>");
             $('iframe').attr('data-src', function() { return $(this).attr('src'); }).removeAttr('src').addClass("lazyload");
 			$('img').attr('data-src', function() { return $(this).attr('src'); }).removeAttr('src').addClass("lazyload");
             <?php if(!empty($datalogin)) {
@@ -146,9 +146,9 @@
                     success: function(data) {
                         if (data.status == "success"){
                             if (!$.trim(data.result[0].Avatar)){
-                                $("#my_image_navbar").attr("src","../assets/images/users/no-pic.jpg");
-                                $("#my_image_navbar_small").attr("src","../assets/images/users/no-pic.jpg");
-                                $("#my_image_sidebar").attr("src","../assets/images/users/no-pic.jpg");
+                                $("#my_image_navbar").attr("src","'.Core::getInstance()->assetspath.'/images/users/no-pic.jpg");
+                                $("#my_image_navbar_small").attr("src","'.Core::getInstance()->assetspath.'/images/users/no-pic.jpg");
+                                $("#my_image_sidebar").attr("src","'.Core::getInstance()->assetspath.'/images/users/no-pic.jpg");
                             } else {
                                 $("#my_image_navbar").attr("src",data.result[0].Avatar);
                                 $("#my_image_navbar_small").attr("src",data.result[0].Avatar);

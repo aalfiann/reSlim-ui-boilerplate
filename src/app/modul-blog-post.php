@@ -220,7 +220,7 @@ $created = date('Y-m-d',filemtime(basename(__FILE__)));
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
-    <script src="../assets/plugins/tagcloud/jquery.tagcloud.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/tagcloud/jquery.tagcloud.js"></script>
     <?php 
         if (!empty($data) && $data->status = "success"){
             echo '<script>';

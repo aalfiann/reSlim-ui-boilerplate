@@ -1,7 +1,7 @@
 <!-- User profile -->
 <div class="user-profile">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img id="my_image_sidebar" src="../assets/images/users/no-pic.jpg" alt="<?php echo $datalogin['username']?> profile pic" /> 
+                    <div class="profile-img"> <img id="my_image_sidebar" src="<?php echo Core::getInstance()->assetspath?>/images/users/no-pic.jpg" alt="<?php echo $datalogin['username']?> profile pic" /> 
                              <!-- this is blinking heartbit-->
                             <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </div>

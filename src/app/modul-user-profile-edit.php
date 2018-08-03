@@ -93,7 +93,7 @@ $user = (!empty($_GET['username'])?$_GET['username']:'');?>
                                 <div class="col-lg-4 col-xlg-3 col-md-5">
                                     <div class="card">
                                         <div class="card-body">
-                                            <center class="m-t-30"> <img src="'.(empty($data->result[0]->Avatar)?'../assets/images/users/no-pic.jpg':$data->result[0]->Avatar).'" class="img-circle" width="150" />
+                                            <center class="m-t-30"> <img src="'.(empty($data->result[0]->Avatar)?Core::getInstance()->assetspath.'/images/users/no-pic.jpg':$data->result[0]->Avatar).'" class="img-circle" width="150" />
                                                 <h4 class="card-title m-t-10">'.$user.'</h4>
                                                 <h6 class="card-subtitle">'.$data->result[0]->Role.'</h6>
                                             </center>

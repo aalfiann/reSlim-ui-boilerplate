@@ -37,11 +37,11 @@ if (empty($_GET['code'])){
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/bootstrap/js/popper.min.js"></script>
 
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!--Wave Effects -->
     <script src="js/waves.js"></script>
     <script>

@@ -114,7 +114,7 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
     <!-- Edit_area -->
-	<script language="javascript" type="text/javascript" src="../assets/plugins/edit_area/edit_area_full.js"></script>
+	<script language="javascript" type="text/javascript" src="<?php echo Core::getInstance()->assetspath?>/plugins/edit_area/edit_area_full.js"></script>
    <script language="javascript" type="text/javascript">
     editAreaLoader.init({
 	    id : "textarea_1",

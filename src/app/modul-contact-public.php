@@ -5,7 +5,7 @@
     <?php include_once 'global-meta.php';?>    
     <title><?php echo Core::lang('contact_us')?> - <?php echo Core::getInstance()->title?></title>
     <!-- summernotes CSS -->
-    <link href="../assets/plugins/summernote/dist/summernote.css" rel="stylesheet"/>
+    <link href="<?php echo Core::getInstance()->assetspath?>/plugins/summernote/dist/summernote.css" rel="stylesheet"/>
 </head>
 
 <body class="fix-sidebar fix-header card-no-border">
@@ -153,7 +153,7 @@
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
     <!-- Summernote -->
-    <script src="../assets/plugins/summernote/dist/summernote.min.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/summernote/dist/summernote.min.js"></script>
     <?php 
         $codelang = "";
         switch(Core::getInstance()->setlang){
@@ -163,11 +163,11 @@
             default:
                 $codelang = "";
         }
-        if (!empty($codelang)) echo '<script src="../assets/plugins/summernote/dist/lang/summernote-'.$codelang.'.min.js"></script>';
+        if (!empty($codelang)) echo '<script src="'.Core::getInstance()->assetspath.'/plugins/summernote/dist/lang/summernote-'.$codelang.'.min.js"></script>';
     ?>
     <!-- Sweet-Alert  -->
-    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
-    <script>$(function(){$('head').append('<link href="../assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">')});</script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>$(function(){$('head').append('<link href="<?php echo Core::getInstance()->assetspath?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">')});</script>
     <script>
         /* onload event */
         $(function(){

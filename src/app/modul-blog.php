@@ -157,7 +157,7 @@ if (empty($search)){
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <?php include_once 'global-js.php';?>
-    <script src="../assets/plugins/tagcloud/jquery.tagcloud.js"></script>
+    <script src="<?php echo Core::getInstance()->assetspath?>/plugins/tagcloud/jquery.tagcloud.js"></script>
     <script>
         function getTrendingPosts(limits,show='all'){
             if(show != 'all') show = 'seasonal';
