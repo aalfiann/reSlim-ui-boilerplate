@@ -167,14 +167,14 @@ if(Core::getUserGroup() != '1') {Core::goToPage('modul-user-profile.php');exit;}
                                                 <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_assetspath')?></small></span>
                                             </div>
                                             <div class="form-group">
+                                                <label class="form-control-label"><b><?php echo Core::lang('url_api')?></b></label>
+                                                <input name="api" type="text" placeholder="<?php echo Core::lang('input_url_api')?>" class="form-control" value="<?php echo Core::getInstance()->apiconfig?>" required>
+                                                <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_api')?></small></span>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="form-control-label"><b><?php echo Core::lang('fixed_path')?></b></label>
                                                 <input name="fixedpath" type="text" placeholder="<?php echo Core::lang('input_fixed_path')?>" class="form-control" value="<?php echo Core::getInstance()->fixedpath?>">
                                                 <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_fixedpath')?></small></span>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-control-label"><b><?php echo Core::lang('url_api')?></b></label>
-                                                <input name="api" type="text" placeholder="<?php echo Core::lang('input_url_api')?>" class="form-control" value="<?php echo Core::getInstance()->api?>" required>
-                                                <span class="help-block text-muted"><small><i class="ti-info-alt"></i> <?php echo Core::lang('helper_settings_api')?></small></span>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"><b><?php echo Core::lang('api_key')?></b></label>

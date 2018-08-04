@@ -34,7 +34,7 @@
         var $fixedpath;
 
         // Set base api reslim
-        var $api;
+        var $api,$apiconfig;
 
         // Set api keys
         var $apikey;
@@ -110,6 +110,7 @@
             $this->assetspath = $config['assetspath'];
             $this->fixedpath = $config['fixedpath'];
             $this->api = $this->loadBalancerAPI($config['api']);
+            $this->apiconfig = $config['api'];
             $this->apikey = $config['apikey'];
             $this->disqus = $config['disqus'];
             $this->sharethis = $config['sharethis'];
@@ -152,7 +153,7 @@
             }
             return "";
         }
-
+        
         // LIBRARY USER MANAGEMENT AND AUTHENTICATION======================================================================
 
         /**
