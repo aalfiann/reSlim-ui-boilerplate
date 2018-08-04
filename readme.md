@@ -45,3 +45,7 @@ The token is always generated new when You relogin and the token is will expired
 If You logout or change password or delete user, the token will be clear automatically.
 
 For more information about reSlim, you have to visit >> https://github.com/aalfiann/reSlim
+
+Documentation
+-----------------
+reSlim-ui-boilerplate documentation is available on [Wiki](https://github.com/aalfiann/reslim-ui-boilerplate/wiki).
