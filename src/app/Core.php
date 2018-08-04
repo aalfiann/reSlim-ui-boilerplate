@@ -30,6 +30,9 @@
         // Set assets path example project
         var $assetspath;
 
+        // Set fixed path for handle the file cloud if you are running multiple reslim rest api
+        var $fixedpath;
+
         // Set base api reslim
         var $api;
 
@@ -105,7 +108,8 @@
             $this->basepath = $config['basepath'];
             $this->homepath = $config['homepath'];
             $this->assetspath = $config['assetspath'];
-            $this->api = $config['api'];
+            $this->fixedpath = $config['fixedpath'];
+            $this->api = $this->loadBalancerAPI($config['api']);
             $this->apikey = $config['apikey'];
             $this->disqus = $config['disqus'];
             $this->sharethis = $config['sharethis'];
@@ -135,7 +139,20 @@
         public static function lang($key){
             return self::getInstance()->datalang[$key];
         }
-        
+
+        public static function loadBalancerAPI($api) {
+            if(!empty($api)){
+                $api = explode(',',$api);
+                if(!empty($api[1])) {
+                    $numserver = mt_rand(0,(count($api)-1));
+                    return trim($api[$numserver]);
+                } else {
+                    return trim($api[0]);
+                }
+            }
+            return "";
+        }
+
         // LIBRARY USER MANAGEMENT AND AUTHENTICATION======================================================================
 
         /**
@@ -871,7 +888,8 @@
             $config[\'basepath\'] = \''.$post_array['Basepath'].'\'; //Your folder website
             $config[\'homepath\'] = \''.$post_array['Homepath'].'\'; //Your folder frontend website
             $config[\'assetspath\'] = \''.$post_array['Assetspath'].'\'; //Your folder assets website
-            $config[\'api\'] = \''.$post_array['Api'].'\'; //Your folder rest api
+            $config[\'fixedpath\'] = \''.$post_array['Fixedpath'].'\'; //Your path of main rest api, this is required only if you are running multiple reSlim rest api
+            $config[\'api\'] = \''.$post_array['Api'].'\'; //Your path of rest api
             $config[\'apikey\'] = \''.$post_array['ApiKey'].'\'; //Your api key, you can leave this blank and fill this later
             $config[\'disqus\'] = \''.$post_array['Disqus'].'\'; //Your disqus username, you can leave this blank and fill this later
             $config[\'sharethis\'] = \''.$post_array['Sharethis'].'\'; //Your sharethis key, you can leave this blank and fill this later

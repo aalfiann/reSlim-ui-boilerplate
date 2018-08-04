@@ -81,7 +81,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                         'Alternate' => filter_var($_POST['alternate'],FILTER_SANITIZE_STRING),
                                         'External' => filter_var($_POST['external'],FILTER_SANITIZE_URL)
                                     );
-                                    Core::safeUploadFile(Core::getInstance()->api.'/user/upload',$post_array);
+                                    Core::safeUploadFile((!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api).'/user/upload',$post_array);
                                 }
                             ?>
                         <div class="card">
@@ -378,7 +378,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                     },
                     columns: [
                         { "render": function(data,type,row,meta) { /* render event defines the markup of the cell text */
-                                return ((row.Filetype == 'image/png' || row.Filetype == 'image/apng' || row.Filetype == 'image/jpg' || row.Filetype == 'image/jpeg' || row.Filetype == 'image/gif' || row.Filetype == 'image/bmp')?'<a href="#" data-toggle="modal" data-target=".'+row.ItemID+'"><img data-src="<?php echo Core::getInstance()->api?>/'+row.Filepath+'" class="lazyload" style="display:block;max-width:250px;max-height:50px;width:auto;height:auto"></a>':'<a href="#" data-toggle="modal" data-target=".'+row.ItemID+'"><i class="mdi mdi-file" style="font-size: 25px;"></a></i>');
+                                return ((row.Filetype == 'image/png' || row.Filetype == 'image/apng' || row.Filetype == 'image/jpg' || row.Filetype == 'image/jpeg' || row.Filetype == 'image/gif' || row.Filetype == 'image/bmp')?'<a href="#" data-toggle="modal" data-target=".'+row.ItemID+'"><img data-src="<?php echo (!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api)?>/'+row.Filepath+'" class="lazyload" style="display:block;max-width:250px;max-height:50px;width:auto;height:auto"></a>':'<a href="#" data-toggle="modal" data-target=".'+row.ItemID+'"><i class="mdi mdi-file" style="font-size: 25px;"></a></i>');
                             } 
                         },
                         { "render": function(data,type,row,meta) { /* render event defines the markup of the cell text */
@@ -415,14 +415,14 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                                                     <div class="modal-body">\
                                                         <div class="form-group">\
                                                              <div class="col-md-12">\
-                                                                '+((row.Filetype == 'image/png' || row.Filetype == 'image/apng' || row.Filetype == 'image/jpg' || row.Filetype == 'image/jpeg' || row.Filetype == 'image/gif' || row.Filetype == 'image/bmp')?'<a href="#"><img class="lazyload" data-src="<?php echo Core::getInstance()->api?>/'+row.Filepath+'" width="100%"></a>':'')+'\
+                                                                '+((row.Filetype == 'image/png' || row.Filetype == 'image/apng' || row.Filetype == 'image/jpg' || row.Filetype == 'image/jpeg' || row.Filetype == 'image/gif' || row.Filetype == 'image/bmp')?'<a href="#"><img class="lazyload" data-src="<?php echo (!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api)?>/'+row.Filepath+'" width="100%"></a>':'')+'\
                                                             </div>\
                                                         </div>\
                                                         <input id="itemid" type="hidden" class="form-control form-control-line" value="'+row.ItemID+'" readonly>\
                                                         <div class="form-group">\
                                                             <label class="col-md-12"><?php echo Core::lang('tb_direct_link')?></label>\
                                                             <div class="col-md-12">\
-                                                                <textarea id="link" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" readonly><?php echo Core::getInstance()->api?>/'+row.Filepath+'</textarea>\
+                                                                <textarea id="link" type="text" rows="3" style="resize: vertical;" class="form-control form-control-line" readonly><?php echo (!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api)?>/'+row.Filepath+'</textarea>\
                                                             </div>\
                                                         </div>\
                                                         <div class="form-group">\
@@ -587,7 +587,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                 var btn = "updatebtn"+dataid;
                 disableClickButton(btn);
                 $.ajax({
-                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/upload/update')?>"),
+                    url: Crypto.decode("<?php echo base64_encode((!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api).'/user/upload/update')?>"),
                     data : {
                         Username: "<?php echo $datalogin['username']?>",
                         Token: "<?php echo $datalogin['token']?>",
@@ -628,7 +628,7 @@ $datastatus = json_decode(Core::execGetRequest($urlstatus));?>
                 var btn = "deletebtn"+dataid;
                 disableClickButton(btn);
                 $.ajax({
-                    url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/user/upload/delete')?>"),
+                    url: Crypto.decode("<?php echo base64_encode((!empty(Core::getInstance()->fixedpath)?Core::getInstance()->fixedpath:Core::getInstance()->api).'/user/upload/delete')?>"),
                     data : {
                         Username: "<?php echo $datalogin['username']?>",
                         Token: "<?php echo $datalogin['token']?>",
