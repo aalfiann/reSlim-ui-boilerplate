@@ -87,7 +87,7 @@
         var $pathcache = 'cache-files';
         var $minifycache = true;
 
-        var $version = '1.14.1';
+        var $version = '1.14.2';
 
         private static $instance;
         
@@ -143,6 +143,9 @@
 
         public static function loadBalancerAPI($api) {
             if(!empty($api)){
+                $mserver = new MultiServer;
+                $apiserver = $mserver->getServer($api);
+                if (!empty($apiserver)) $api = $apiserver;
                 $api = explode(',',$api);
                 if(!empty($api[1])) {
                     $numserver = mt_rand(0,(count($api)-1));
@@ -153,7 +156,7 @@
             }
             return "";
         }
-        
+
         // LIBRARY USER MANAGEMENT AND AUTHENTICATION======================================================================
 
         /**
@@ -262,7 +265,7 @@
     		curl_close($ch);
 
 	    	return $data;
-    	}
+        }
 
         /**
 		 * Verify API Token
@@ -880,6 +883,8 @@
 		 */
         public static function saveSettings($post_array)
         {
+            $mserver = new MultiServer();
+            $mserver->deleteServerCache();
             $newcontent = '<?php 
             //Configurations
             $config[\'title\'] = \''.$post_array['Title'].'\'; //Your title website
@@ -908,7 +913,7 @@
             $config[\'recaptcha_secretkey\'] = \''.$post_array['Recaptcha_secretkey'].'\'; //This is for verify request reCaptcha on server side, you can leave this blank and fill this later';
             $handle = fopen('config.php','w+'); 
 				fwrite($handle,$newcontent); 
-				fclose($handle); 
+                fclose($handle); 
             echo self::getMessage('success',self::lang('core_settings_changed'),self::lang('core_auto_refresh'));
             echo self::reloadPage();
         }
