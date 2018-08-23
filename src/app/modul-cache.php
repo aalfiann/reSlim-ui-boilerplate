@@ -50,6 +50,18 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                     <!-- Column -->
                     <div class="col-md-4">
                         <div class="card">
+                            <div class="card-header">
+                                <b><?php echo Core::lang('cache_status')?> </b>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted"><?php echo Core::lang('cache_type')?> : <span id="typecache" class="pull-right badge badge-inverse">default</span></p>
+                                <p class="text-muted">AuthCache : <span id="authcachestatus" class="pull-right badge badge-danger"></span></p>
+                                <p class="text-muted">SimpleCache : <span id="simplecachestatus" class="pull-right badge badge-danger"></span></p>
+                                <p class="text-muted">UniversalCache : <span id="universalcachestatus" class="pull-right badge badge-danger"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center flex-row">
                                 <div class="p-2 display-5 text-themecolor"><i class="mdi mdi-database"></i> <span id="hddusepercent">0%</span></div>
@@ -75,12 +87,52 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                             </table>
                             </div>
                         </div>
-                    </div>
+
+                        <div id="redisinfo">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center flex-row">
+                                        <div class="p-2 display-5 text-themecolor"><i class="mdi mdi-memory"></i> <span id="ramusepercent">0%</span></div>
+                                        <div class="p-2">
+                                            <h3 class="m-b-0"><?php echo Core::lang('ram_use_status')?></h3></div>
+                                        </div>
+                                        <hr>
+                                        <table class="table no-border">
+                                            <tbody>
+                                                <tr>
+                                                    <td><?php echo Core::lang('ram_total_size')?></td>
+                                                    <td class="font-medium"><span id="ramtotalsize">0</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo Core::lang('ram_used_size')?></td>
+                                                    <td class="font-medium"><span id="ramusesize">0</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo Core::lang('ram_free_size')?></td>
+                                                    <td class="font-medium"><span id="ramfreesize">0</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <!-- Column -->
                     <div class="col-md-8">
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <b><?php echo Core::lang('description')?> </b>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('cache_title')?></h3>
+                                        <p class="text-muted"><?php echo Core::lang('cache_description')?></p>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Column -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row p-t-10 p-b-10">
@@ -105,7 +157,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                             </div>
                             <!-- Column -->
                             <!-- Column -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row p-t-10 p-b-10">
@@ -129,19 +181,51 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                 </div>
                             </div>
                             <!-- Column -->
-                            <!-- Column Info -->
+                            <!-- Column -->
                             <div class="col-md-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <b><?php echo Core::lang('cache_status')?> <span id="cachestatus" class="pull-right badge badge-success"></span></b>
-                                    </div>
                                     <div class="card-body">
-                                        <h3 class="text-themecolor m-b-0 m-t-0"><?php echo Core::lang('cache_title')?></h3>
-                                        <p class="text-muted"><?php echo Core::lang('cache_description')?></p>
+                                        <div class="row p-t-10 p-b-10">
+                                            <!-- Column -->
+                                            <div class="col p-r-0">
+                                                <h1 id="cacheuniversalsize" class="font-light text-info">0</h1>
+                                                <h6 class="text-muted"><i class="mdi mdi-folder-multiple-outline"></i> <?php echo Core::lang('folder')?> <span id="folderuniversal"></span></h6>
+                                                <h6 class="text-muted"><?php echo Core::lang('total').' '.Core::lang('data')?>: <span id="cacheuniversaltotal">0</span></h6>
+                                            </div>
+                                            <!-- Column -->
+                                            <div class="col text-right align-self-center">
+                                                <h6 id="cacheuniversalpercent" class="font-light">0%</h6>
+                                                <div class="progress">
+                                                    <div id="universalprogress" class="progress-bar bg-success" role="progressbar" style="width: 0%; height: 6px;"></div>
+                                                </div>
+                                                <br>
+                                                <button id="clearuniversalbtn" type="button" class="btn btn-secondary" onclick="clearCacheUniversal()"><?php echo Core::lang('cache_clear')?></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Column Info -->
+                            <!-- Column -->
+                            <!-- Column -->
+                            <div class="col-md-12">
+                                <div id="redisdetail">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row p-t-10 p-b-10">
+                                                <!-- Column -->
+                                                <div class="col p-r-0">
+                                                    <h1 id="keyspacesize" class="font-light text-success">0</h1>
+                                                    <h6 class="text-muted"><i class="mdi mdi-folder-multiple-outline"></i> Keyspace db0 </h6>
+                                                    <h6 class="text-muted"><?php echo Core::lang('total').' '.Core::lang('data').' '.Core::lang('active')?>: <span id="db0">0</span></h6>
+                                                    <h6 class="text-muted"><?php echo Core::lang('total').' '.Core::lang('data').' '.Core::lang('expired')?>: <span id="expires0">0</span></h6>
+                                                    <h6 class="text-muted"><?php echo Core::lang('cache_avg_ttl')?>: <span id="ttl0">0</span></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
                         </div>
                     </div>
                 </div>
@@ -182,6 +266,18 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
             document.getElementById("cachekeypercent").innerHTML="0%";
         }
 
+        function clearValueUniversal(){
+            document.getElementById("cacheuniversalsize").innerHTML="0";
+            document.getElementById("folderuniversal").innerHTML="";
+            document.getElementById("cacheuniversaltotal").innerHTML="0";
+            document.getElementById("cacheuniversalpercent").innerHTML="0%";
+        }
+
+        function ramUsePercent(total,use){
+            var free = (total-use);
+            return (((total-free)/total)*100).toFixed(2);
+        }
+
         function getCacheInfo(){
             $(function(){
                 $.when(
@@ -197,14 +293,34 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                 document.getElementById("hddtotalsize").innerHTML=data.size.hdd.total;
                                 document.getElementById("hddusesize").innerHTML=data.size.hdd.use;
                                 document.getElementById("hddfreesize").innerHTML=data.size.hdd.free;
-                        
+
+                                if (!$.trim(data.redis)) {
+                                    $('#redisinfo').hide();
+                                    $('#redisdetail').hide();
+                                } else {
+                                    if (!$.trim(data.redis.Memory)) {} else {
+                                        $("#ramusepercent").text(ramUsePercent(data.redis.Memory.total_system_memory,data.redis.Memory.used_memory)+'%');
+                                        $("#ramtotalsize").text(humanFileSize(data.redis.Memory.total_system_memory));
+                                        $("#ramusesize").text(humanFileSize(data.redis.Memory.used_memory));
+                                        $("#keyspacesize").text(humanFileSize(data.redis.Memory.used_memory));
+                                        $("#ramfreesize").text(humanFileSize((data.redis.Memory.total_system_memory - data.redis.Memory.used_memory)));
+                                    }
+                                    if (!$.trim(data.redis.Keyspace)) {} else {
+                                        $('#db0').text(data.redis.Keyspace.db0.keys);
+                                        $('#expires0').text(data.redis.Keyspace.db0.expires);
+                                        $('#ttl0').text(data.redis.Keyspace.db0.avg_ttl);
+                                    }
+                                    $("#typecache").text('Redis v4.0.11');
+                                }
+
                                 document.getElementById("cachedatasize").innerHTML=data.size.cache.use;
-                                document.getElementById("cachestatus").innerHTML=ucwords(data.info.status);
+                                document.getElementById("simplecachestatus").innerHTML=ucwords(data.info.status);
                                 document.getElementById("folderdata").innerHTML=data.info.folder;
                                 document.getElementById("cachedatatotal").innerHTML=data.info.files;
                                 document.getElementById("cachedatapercent").innerHTML=data.percent.cache.use;
                                 $('#dataprogress').css('width', data.percent.cache.use);
-		        			} else {
+                                if(data.info.status == 'active') $('#simplecachestatus').removeClass("badge-danger").addClass("badge-success"); 
+                            } else {
 				        	    clearValueData();
         					}
 		        		},
@@ -224,6 +340,8 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
         				    clearValueKey();
 		        			if(data.status=="success"){
 				        	    document.getElementById("cachekeysize").innerHTML=data.size.cache.use;
+                                document.getElementById("authcachestatus").innerHTML=ucwords(data.info.status);
+                                if(data.info.status == 'active') $('#authcachestatus').removeClass("badge-danger").addClass("badge-success"); 
                                 document.getElementById("folderkey").innerHTML=data.info.folder;
                                 document.getElementById("cachekeytotal").innerHTML=data.info.files;
                                 document.getElementById("cachekeypercent").innerHTML=data.percent.cache.use;
@@ -238,8 +356,34 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
 		        			console.log("ERROR: "+error);
 				        	console.log("TRACE: "+xhr.responseText);
         				}
+		        	}),
+                    $.ajax({ /* Get user statistic start */
+		        	    type: "GET",
+        				url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/maintenance/cache/universal/info')?>"),
+		        		dataType: "json",
+                        cache: false,
+				        success: function( data ) {
+        				    clearValueUniversal();
+		        			if(data.status=="success"){
+				        	    document.getElementById("cacheuniversalsize").innerHTML=data.size.cache.use;
+                                document.getElementById("universalcachestatus").innerHTML=ucwords(data.info.status);
+                                if(data.info.status == 'active') $('#universalcachestatus').removeClass("badge-danger").addClass("badge-success"); 
+                                document.getElementById("folderuniversal").innerHTML=data.info.folder;
+                                document.getElementById("cacheuniversaltotal").innerHTML=data.info.files;
+                                document.getElementById("cacheuniversalpercent").innerHTML=data.percent.cache.use;
+                                $('#universalprogress').css('width', data.percent.cache.use);
+        					} else {
+		        			    clearValueUniversal();
+				        	}
+        				},
+		        		error: function( xhr, textStatus, error ) {
+				            console.log("XHR: " + xhr.statusText);
+        					console.log("STATUS: "+textStatus);
+		        			console.log("ERROR: "+error);
+				        	console.log("TRACE: "+xhr.responseText);
+        				}
 		        	})
-        		).then(function( data,api ) {});
+        		).then(function( data,api,universal ) {});
             })
         }
 
@@ -302,6 +446,49 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                     'success',
                                     '<?php echo Core::lang('cache_status_delete_success')?>',
                                     '<br><br><?php echo Core::lang('folder')?>: <b>'+document.getElementById("folderkey").innerHTML+'</b><br>\
+                                    <?php echo Core::lang('total').' '.Core::lang('data')?>: <b>'+data.total_files+'</b><br>\
+                                    <?php echo Core::lang('cache_status_delete_total')?>: <b>'+data.total_deleted+'</b><br><br>\
+                                    <?php echo Core::lang('cache_status_delete_msg_1')?> '+data.age+' <?php echo Core::lang('cache_status_delete_msg_2')?><br>\
+                                    <?php echo Core::lang('cache_status_delete_process')?>: <b>'+data.execution_time+' (microseconds)</b>'
+                                );
+                                getCacheInfo();
+        					} else {
+		        			    document.getElementById("message").innerHTML=messageHtml(
+                                    'danger',
+                                    '<?php echo Core::lang('cache_status_delete_failed')?>',
+                                    data.message
+                                );
+				        	}
+        				},
+                        complete: function(){
+                            disableClickButton(btn,false);
+                        },
+		        		error: function( xhr, textStatus, error ) {
+				            console.log("XHR: " + xhr.statusText);
+        					console.log("STATUS: "+textStatus);
+		        			console.log("ERROR: "+error);
+				        	console.log("TRACE: "+xhr.responseText);
+        				}
+		        	});
+            });
+        }
+
+        function clearCacheUniversal(){
+            $(function(){
+                var btn = "clearuniversalbtn";
+                disableClickButton(btn);
+                $.ajax({ /* Get user statistic start */
+		        	    type: "GET",
+        				url: Crypto.decode("<?php echo base64_encode(Core::getInstance()->api.'/maintenance/cache/universal/delete/'.$datalogin['username'].'/'.$datalogin['token'])?>"),
+		        		dataType: "json",
+                        cache: false,
+				        success: function( data ) {
+        				    document.getElementById("message").innerHTML='';
+		        			if(data.status=="success"){
+				        	    document.getElementById("message").innerHTML=messageHtml(
+                                    'success',
+                                    '<?php echo Core::lang('cache_status_delete_success')?>',
+                                    '<br><br><?php echo Core::lang('folder')?>: <b>'+document.getElementById("folderuniversal").innerHTML+'</b><br>\
                                     <?php echo Core::lang('total').' '.Core::lang('data')?>: <b>'+data.total_files+'</b><br>\
                                     <?php echo Core::lang('cache_status_delete_total')?>: <b>'+data.total_deleted+'</b><br><br>\
                                     <?php echo Core::lang('cache_status_delete_msg_1')?> '+data.age+' <?php echo Core::lang('cache_status_delete_msg_2')?><br>\

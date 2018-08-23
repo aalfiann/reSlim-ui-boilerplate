@@ -77,7 +77,7 @@
         /* Limit round decimal with nearest point */
         function limitRound(a,b=0.5){var c=0;return c=a-Math.floor(a)>=b?1:0,Math.floor(a+c)}
         /* Convert bytes size to human readable */
-        function humanFileSize(a,b='true'){var c=b?1e3:1024;if(Math.abs(a)<c)return a+' B';var d=b?['kB','MB','GB','TB','PB','EB','ZB','YB']:['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'],e=-1;do a/=c,++e;while(Math.abs(a)>=c&&e<d.length-1);return a.toFixed(1)+' '+d[e]}
+        function humanFileSize(a,b='true'){var c=b?1e3:1024;if(Math.abs(a)<c)return a+' B';var d=b?['KB','MB','GB','TB','PB','EB','ZB','YB']:['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'],e=-1;do a/=c,++e;while(Math.abs(a)>=c&&e<d.length-1);return a.toFixed(2)+' '+d[e]}
         /* Get url parameter value by name */
         function getURLParameter(name){return decodeURIComponent((new RegExp('[?|&]'+name+'=([^&;]+?)(&|#|;|$)').exec(location.search)||[null,''])[1].replace(/\+/g,'%20'))||null}
         /* Write message jQuery */

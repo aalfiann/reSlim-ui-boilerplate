@@ -236,13 +236,15 @@ $vocabularies[] = [
     //cache
     'cache' => 'Cache',
     'cache_title' => 'Cache secara default berbasis file dan disimpan dalam HDD',
-    'cache_description' => 'Untuk menonaktifkan sistem cache, Anda harus mengatur <span class="badge badge-inverse">$runcache = false</span> yang di-hardcod pada kelas <span class="badge badge-inverse">Auth</span> dan <span class="badge badge-inverse">SimpleCache</span>.',
+    'cache_description' => 'Redis Cache menggunakan waktu kedaluwarsa secara otomatis, jadi Anda tidak perlu mengelolanya.',
+    'cache_type' => 'Tipe Cache',
     'cache_clear' => 'Hapus Cache',
     'cache_files' => 'File Cache',
     'cache_used' => 'Ruang Terpakai',
     'cache_free' => 'Ruang Tersedia',
     'cache_size' => 'Ukuran Cache',
     'cache_status' => 'Status Cache',
+    'cache_avg_ttl' => 'Rata-rata TTL',
     'cache_status_delete_total'=>'Total Dihapus',
     'cache_status_delete_success' => 'Proses hapus cache berhasil!',
     'cache_status_delete_failed' => 'Proses hapus cache gagal!',
@@ -257,6 +259,11 @@ $vocabularies[] = [
     'hdd_used_size' => 'Ruang Terpakai',
     'hdd_free_size' => 'Ruang Tersedia',
     'hdd_use_status' => 'Status Pemakaian HDD',
+    //ram
+    'ram_total_size' => 'Total Ruang',
+    'ram_used_size' => 'Ruang Terpakai',
+    'ram_free_size' => 'Ruang Tersedia',
+    'ram_use_status' => 'Status Pemakaian RAM',
     //backup-db
     'backup' => 'Backup',
     'backup_db' => 'Backup DB',
@@ -318,6 +325,7 @@ $vocabularies[] = [
     'pages_widget_trendingtags' => 'Trending Tags',
     'pages_widget_sharethis' => 'Share This',
     //general
+    'active' => 'Active',
     'website' => 'Website',
     'placeholder_global_search' => 'Cari & Enter',
     'loadmore' => 'Loadmore',

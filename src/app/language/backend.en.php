@@ -235,14 +235,16 @@ $vocabularies[] = [
     'terminal_notice_message' => 'You can\'t use command like <span class="badge badge-inverse">vi / vim</span>, <span class="badge badge-inverse">nano</span>, <span class="badge badge-inverse">top</span> or <span class="badge badge-inverse">ping</span>.<br>For more information about command and how to use, please read <a href="http://web-console.org" target="_blank">here <i class="fa fa-external-link"></i></a>.',
     //cache
     'cache' => 'Cache',
-    'cache_title' => 'Cache as default is filebased and stored in HDD',
-    'cache_description' => 'To disable cache system, You have to set <span class="badge badge-inverse">$runcache = false</span> which is hardcoded in <span class="badge badge-inverse">Auth</span> and <span class="badge badge-inverse">SimpleCache</span> class.',
+    'cache_title' => 'Cache as default is filebased and stored in HDD.',
+    'cache_description' => 'Redis Cache uses the expiration time automatically, so you don\'t need to manage it.',
+    'cache_type' => 'Type Cache',
     'cache_clear' => 'Clear Cache',
     'cache_files' => 'Cache File',
     'cache_used' => 'Cache Used',
     'cache_free' => 'Free Space',
     'cache_size' => 'Cache Size',
     'cache_status' => 'Cache Status',
+    'cache_avg_ttl' => 'Average TTL',
     'cache_status_delete_total'=>'Total Deleted',
     'cache_status_delete_success' => 'Process delete cache is successfuly!',
     'cache_status_delete_failed' => 'Process delete cache is failed!',
@@ -257,6 +259,11 @@ $vocabularies[] = [
     'hdd_used_size' => 'Used Space',
     'hdd_free_size' => 'Space Available',
     'hdd_use_status' => 'Used HDD Status',
+    //ram
+    'ram_total_size' => 'Total Space',
+    'ram_used_size' => 'Used Space',
+    'ram_free_size' => 'Space Available',
+    'ram_use_status' => 'Used RAM Status',
     //backup-db
     'backup' => 'Backup',
     'backup_db' => 'Backup DB',
@@ -318,6 +325,7 @@ $vocabularies[] = [
     'pages_widget_trendingtags' => 'Trending Tags',
     'pages_widget_sharethis' => 'Share',
     //general
+    'active' => 'Active',
     'website' => 'Website',
     'placeholder_global_search' => 'Search & Enter',
     'loadmore' => 'Loadmore',
