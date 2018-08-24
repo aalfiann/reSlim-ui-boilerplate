@@ -90,7 +90,7 @@ $datalogin = Core::checkSessions();?>
                                     <?php if(Core::getUserGroup()<3){
                                         echo '<div class="form-group">
                                                 <label class="form-control-label"><b>'.Core::lang('status').'</b></label>
-                                                <select id="status" type="text" class="form-control" style="max-height:200px; overflow-y:scroll; overflow-x:hidden; width:100%;background-color:white;">
+                                                <select id="status" type="text" class="form-control" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
                                                 </select>
                                         </div>';
                                     }?>

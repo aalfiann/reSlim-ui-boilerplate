@@ -194,7 +194,7 @@ $user = (!empty($_GET['username'])?$_GET['username']:'');?>
                                             <div class="form-group">
                                                 <label class="col-sm-2">'.Core::lang('tb_role').'</label>
                                                 <div class="col-sm-2">
-                                                    <select name="role" style="max-height:200px; overflow-y:scroll; overflow-x:hidden;" class="form-control form-control-line" required>';
+                                                    <select name="role" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur();" class="form-control form-control-line" required>';
                                                         if (!empty($datarole)) {
                                                             foreach ($datarole->result as $name => $value) {
                                                                 echo '<option value="'.$value->{'RoleID'}.'" '.(($value->{'Role'} == $data->result[0]->{'Role'})?'selected':'').'>'.$value->{'Role'}.'</option>';
@@ -206,7 +206,7 @@ $user = (!empty($_GET['username'])?$_GET['username']:'');?>
                                             <div class="form-group">
                                                 <label class="col-sm-2">'.Core::lang('status').'</label>
                                                 <div class="col-sm-2">
-                                                    <select name="status" style="max-height:200px; overflow-y:scroll; overflow-x:hidden;" class="form-control border-input" required>';
+                                                    <select name="status" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur();" class="form-control border-input" required>';
                                                         if (!empty($datastatus)) {
                                                             foreach ($datastatus->result as $name => $value) {
                                                                 echo '<option value="'.$value->{'StatusID'}.'" '.(($value->{'Status'} == $data->result[0]->{'Status'})?'selected':'').'>'.$value->{'Status'}.'</option>';

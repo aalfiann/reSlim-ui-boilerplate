@@ -111,7 +111,7 @@ if(Core::getUserGroup() > '2') {Core::goToPage('modul-user-profile.php');exit;}?
                                                         <div class="form-group">
                                                             <label class="col-md-12"><?php echo Core::lang('tb_role')?></label>
                                                             <div class="col-md-12">
-                                                            <select id="role" style="max-height:200px; overflow-y:scroll; overflow-x:hidden;" class="form-control form-control-line" required>
+                                                            <select id="role" onfocus="this.size=5;" onblur="this.size=1;" onchange="this.size=1; this.blur();" class="form-control form-control-line" required>
                                                             </select>
                                                             </div>
                                                         </div>
