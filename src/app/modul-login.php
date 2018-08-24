@@ -19,7 +19,7 @@
                     <?php 
                         if (isset($_POST['submitlogin'])){
                             $post_array = array(
-                            	'Username' => $_POST['username'],
+                            	'Username' => strtolower($_POST['username']),
                             	'Password' => $_POST['password'],
                                 'Rememberme' => (!empty($_POST['remember'])?$_POST['remember']:'')
                             );
