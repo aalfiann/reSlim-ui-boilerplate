@@ -138,6 +138,14 @@ $vocabularies[] = [
     //data branch
     'branch' => 'Branch',
     'branchid' => 'Branch ID',
+    //data customer
+    'customer' => 'Customer',
+    'memberid' => 'Member ID',
+    'member' => 'Member',
+    'corporateid' => 'Corporate ID',
+    'corporate' => 'Corporate',
+    'industry' => 'Industry',
+    'salesid' => 'Sales ID',
     //helper page
     'helper_page_image' => 'Image url will be used for SEO Opengraph.',
     'helper_page_tags' => 'Tags is will make easy to reader to read related content.',
@@ -360,6 +368,7 @@ $vocabularies[] = [
     'avatar' => 'Avatar',
     'security_key' => 'Security Key:',
     'name' => 'Name',
+    'name_alias' => 'AKA Name',
     'email_address' => 'Email Address',
     'subject' => 'Subject',
     'message' => 'Message',
@@ -380,6 +389,10 @@ $vocabularies[] = [
     'data' => 'Data',
     'total' => 'Total',
     'percentage' => 'Percentage',
+    'discount' => 'Discount',
+    'tax' => 'Tax',
+    'tax_rate' => 'Tax Rate',
+    'admin_cost' => 'Admin Cost',
     'chart' => 'Chart',
     'shows_no' => 'Shows no:',
     'from_total_data' => 'from total data:',

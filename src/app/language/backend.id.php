@@ -138,6 +138,14 @@ $vocabularies[] = [
     //data branch
     'branch' => 'Cabang',
     'branchid' => 'Cabang ID',
+    //data customer
+    'customer' => 'Pelanggan',
+    'memberid' => 'Member ID',
+    'member' => 'Member',
+    'corporateid' => 'Perusahaan ID',
+    'corporate' => 'Perusahaan',
+    'industry' => 'Industri',
+    'salesid' => 'Sales ID',
     //helper page
     'helper_page_image' => 'Url gambar akan digunakan untuk tujuan SEO Opengraph.',
     'helper_page_tags' => 'Tags berguna untuk memudahkan pembaca dalam membaca konten terkait.',
@@ -360,6 +368,7 @@ $vocabularies[] = [
     'avatar' => 'Avatar',
     'security_key' => 'Kode Keamanan:',
     'name' => 'Nama',
+    'name_alias' => 'Nama Alias',
     'email_address' => 'Alamat Email',
     'subject' => 'Judul',
     'message' => 'Pesan',
@@ -380,6 +389,10 @@ $vocabularies[] = [
     'data' => 'Data',
     'total' => 'Total',
     'percentage' => 'Persentase',
+    'discount' => 'Diskon',
+    'tax' => 'Pajak',
+    'tax_rate' => 'PPn',
+    'admin_cost' => 'Biaya Admin',
     'chart' => 'Grafik',
     'shows_no' => 'Menampilkan no:',
     'from_total_data' => 'dari total data:',
