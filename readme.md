@@ -1,7 +1,7 @@
 reSlim UI Boilerplate
 =======
 [![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
-[![Version](https://img.shields.io/badge/stable-1.15.0-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
+[![Version](https://img.shields.io/badge/stable-1.16.0-brightgreen.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/aalfiann/reSlim-ui-boilerplate/blob/master/license.md)
 
 Basic UI template for production use with [reSlim](https://github.com/aalfiann/reSlim).<br>
