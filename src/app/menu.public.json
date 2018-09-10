@@ -25,7 +25,6 @@
                     "id":"4",
                     "title":"contact",
                     "link": "contact",
-                    "target": "_blank",
                     "icon_class":"mdi mdi-email"
                 }
             ]
