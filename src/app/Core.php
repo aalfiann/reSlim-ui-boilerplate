@@ -87,7 +87,7 @@
         var $pathcache = 'cache-files';
         var $minifycache = true;
 
-        var $version = '1.17.0';
+        var $version = '1.17.1';
 
         private static $instance;
         
@@ -143,15 +143,18 @@
 
         public static function loadBalancerAPI($api) {
             if(!empty($api)){
-                $mserver = new MultiServer;
-                $apiserver = $mserver->getServer($api);
-                if (!empty($apiserver)) $api = $apiserver;
-                $api = explode(',',$api);
-                if(!empty($api[1])) {
-                    $numserver = mt_rand(0,(count($api)-1));
-                    return trim($api[$numserver]);
+                $apicheck = explode(',',$api);
+                if(!empty($apicheck[1])) {
+                    $mserver = new MultiServer;
+                    $apiserver = $mserver->getServer($api);
+                    if (!empty($apiserver)) {
+                        $numserver = mt_rand(0,(count($apicheck)-1));
+                        return trim($apicheck[$numserver]);
+                    } else {
+                        return trim($apicheck[0]);    
+                    }
                 } else {
-                    return trim($api[0]);
+                    return trim($apicheck[0]);
                 }
             }
             return "";
