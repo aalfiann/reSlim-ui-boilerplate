@@ -74,9 +74,11 @@ $vocabularies[] = [
     'val_email_html' => 'Input sesuai dengan format alamat email!',
     'val_asterisk_required' => 'Kolom yang diberi tanda bintang harus diisi!',
     'val_wrong_format' => 'Format Salah!',
+    'val_wrong_format_domain' => 'Format penulisan domain salah!',
+    'val_wrong_format_date' => 'Format penulisan tanggal salah!',
     'val_failed_recaptcha' => 'Gagal verifikasi reCaptcha!',
-    'val_wrong_input_field' => 'Invalid input field detected!',
-    'val_check_field' => 'Please check again your input on some field!',
+    'val_wrong_input_field' => 'Terdeteksi ada kesalahan pada kolom input!',
+    'val_check_field' => 'Harap periksa kembali inputan Anda pada kolom tertentu!',
     //register
     'register' => 'Pendaftaran',
     'form_register' => 'Form Pendaftaran',
