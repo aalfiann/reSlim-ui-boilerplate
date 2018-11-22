@@ -344,7 +344,7 @@ if(Core::getUserGroup() > '4') {Core::goToPage('modul-user-profile.php');exit;}?
                     },
                     columns: [
                         { "render": function(data,type,row,meta) { /* render event defines the markup of the cell text */
-                                var a =  meta.row + meta.settings._iDisplayStart + 1 + ((meta.settings.json.metadata.page_now-1)*meta.settings.json.metadata.items_per_page); /* row object contains the row data */
+                                var a =  meta.row + 1 + ((meta.settings.json.metadata.page_now-1)*meta.settings.json.metadata.items_per_page); /* row object contains the row data */
                                 return a;
                             } 
                         },
